@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peticion;
 use Illuminate\Http\Request;
 
 class PeticionController extends Controller
@@ -27,7 +28,12 @@ class PeticionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $peticion = Peticion::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+        ]);
+
+        return redirect()->route('peticiones.index')->with('success', 'Petición creada con exito');
     }
 
     /**
