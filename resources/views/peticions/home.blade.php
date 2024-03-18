@@ -56,9 +56,6 @@
                                     <button class="bg-lime-600 text-white px-4 py-1 rounded-lg hover:bg-lime-700 duration-500">
                                         <a href="#">Ver</a>
                                     </button>
-                                    <button class="bg-yellow-500 text-white px-4 py-1 rounded-lg hover:bg-yellow-600 duration-500">
-                                        <a href="#">Cambiar Estatus</a>
-                                    </button>
                                     <form action="{{ route('peticions.eliminar', ['peticion' => $peticion->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
