@@ -3,34 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Peticiones</title>
+    <title>Sistema Peticiones | Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <!-- Contenedor Barra y Contenido -->
     <div class="flex flex-col h-screen md:flex-row">
         <!-- Barra Lateral -->
-        <div class="w-full bg-sky-600 text-white md:w-64">
+        <nav class="w-full bg-sky-600 text-white md:w-64">
             <h1 class="p-4 text-2xl font-bold text-center">
                 Panel Administrador
             </h1>
             <ul class="flex flex-row justify-center md:flex-col">
-                <li class="hover:bg-sky-700">
+                <li class="hover:bg-sky-700 duration-500">
                     <a class="block px-4 py-2" href="#">Home</a>
                 </li>                
-                <li class="hover:bg-sky-700">
-                    <a class="block px-4 py-2" href="#">Crear Petición</a>
+                <li class="hover:bg-sky-700 duration-500">
+                    <a class="block px-4 py-2" href="{{ route('peticions.crear-peticion') }}">Crear Petición</a>
                 </li>    
-                <li class="hover:bg-sky-700">
+                <li class="hover:bg-sky-700 duration-500">
+                    <a class="block px-4 py-2" href="{{ route('peticions.crear-usuario') }}">Crear Usuario</a>
+                </li>    
+                <li class="hover:bg-sky-700 duration-500">
                     <a class="block px-4 py-2" href="#">Cerrar Sesión</a>
                 </li>    
             </ul>
-        </div>
+        </nav>
         <!-- Barra Lateral -->
     
         <!-- Contenido Principal -->
         <div class="mx-auto mt-10 mb-10">
-            <div class="m-4">
+            <div class="mx-4">
                 <h1 class="text-2xl mb-4 font-medium">Lista de Peticiones</h1>
                 <!-- Tabla -->
                 <div class="overflow-x-auto">
@@ -49,13 +52,20 @@
                                 <td class="px-4 py-2">{{ $peticion->numero_radicado }}</td>
                                 <td class="px-4 py-2">{{ $peticion->asunto }}</td>
                                 <td class="px-4 py-2">{{ $peticion->estatus ? 'Completa' : 'Incompleta' }}</td>
-                                <td class="flex flex-col px-4 py-2 items-center justify-center space-y-4 md:flex-row md:space-y-0">
-                                    <button class="bg-lime-600 hover:bg-lime-700 text-white px-4 py-1 rounded-lg">
+                                <td class="flex flex-col px-4 py-2 items-center justify-center space-y-2 space-x-0 md:flex-row md:space-y-0 md:space-x-2">
+                                    <button class="bg-lime-600 text-white px-4 py-1 rounded-lg hover:bg-lime-700 duration-500">
                                         <a href="#">Ver</a>
                                     </button>
-                                    <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded-lg ml-2">
-                                        <a href="#">Eliminar</a>
+                                    <button class="bg-yellow-500 text-white px-4 py-1 rounded-lg hover:bg-yellow-600 duration-500">
+                                        <a href="#">Cambiar Estatus</a>
                                     </button>
+                                    <form action="{{ route('peticions.eliminar', ['peticion' => $peticion->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="bg-red-600 text-white px-4 py-1 rounded-lg hover:bg-red-700 duration-500">
+                                            Eliminar
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @empty
@@ -66,6 +76,11 @@
                         </tbody>
                     </table>
                 </div>
+                @if ($peticions->count())
+                <nav class="mt-4">
+                    {{ $peticions->links() }}
+                </nav>
+                @endif
             </div>
         </div>
     </div>

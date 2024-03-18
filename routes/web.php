@@ -23,3 +23,9 @@ Route::get('/', function () {
 Route::get('/peticions', [PeticionController::class, 'homePeticion'])->name('peticions.home');
 
 Route::get("/", fn () => redirect()->route('peticions.home'));
+
+Route::get('/peticions/crear-peticion', [PeticionController::class, 'crearPeticion'])->name('peticions.crear-peticion');
+
+Route::get('/peticions/crear-usuario', [PeticionController::class, 'crearUsuario'])->name('peticions.crear-usuario');
+
+Route::delete('/peticions/{peticion}', [PeticionController::class, 'eliminarPeticion'])->name('peticions.eliminar');
