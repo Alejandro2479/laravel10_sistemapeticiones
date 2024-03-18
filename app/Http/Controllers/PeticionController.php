@@ -10,6 +10,6 @@ class PeticionController extends Controller
 {
     public function homePeticion()
     {
-        return view('peticions.home', ['peticions' => Peticion::latest()->get()]);
+        return view('peticions.home', ['peticions' => Peticion::latest()->paginate(10)]);
     }
 }

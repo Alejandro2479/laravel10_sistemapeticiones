@@ -29,19 +29,42 @@
         <!-- Barra Lateral -->
     
         <!-- Contenido Principal -->
-        <div class="container mx-auto mt-10 mb-10 max-w-lg">
-            <div class="border border-sky-600 rounded-lg">
-                <div class="m-4">
-                    <h1 class="text-2xl mb-4 font-medium">Lista de Peticiones</h1>
-                    @forelse($peticions as $peticion)
-                    <div>
-                        <a href="#">
-                            {{ $peticion->numero_radicado }}
-                        </a>
-                    </div>
-                    @empty
-                        <div>No hay peticiones</div>
-                    @endforelse
+        <div class="mx-auto mt-10 mb-10">
+            <div class="m-4">
+                <h1 class="text-2xl mb-4 font-medium">Lista de Peticiones</h1>
+                <!-- Tabla -->
+                <div class="overflow-x-auto">
+                    <table class="w-full table-auto border border-slate-500">
+                        <thead>
+                            <tr class="border border-slate-600">
+                                <th class="px-4 py-2">Numero de Radicado</th>
+                                <th class="px-4 py-2">Asunto</th>
+                                <th class="px-4 py-2">Estatus</th>
+                                <th class="px-4 py-2">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($peticions as $peticion)
+                            <tr class="border-t border-slate-500">
+                                <td class="px-4 py-2">{{ $peticion->numero_radicado }}</td>
+                                <td class="px-4 py-2">{{ $peticion->asunto }}</td>
+                                <td class="px-4 py-2">{{ $peticion->estatus ? 'Completa' : 'Incompleta' }}</td>
+                                <td class="flex flex-col px-4 py-2 items-center justify-center space-y-4 md:flex-row md:space-y-0">
+                                    <button class="bg-lime-600 hover:bg-lime-700 text-white px-4 py-1 rounded-lg">
+                                        <a href="#">Ver</a>
+                                    </button>
+                                    <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded-lg ml-2">
+                                        <a href="#">Eliminar</a>
+                                    </button>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td class="px-4 py-2" colspan="4">No hay peticiones</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
