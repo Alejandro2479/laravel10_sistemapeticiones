@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
 Route::get('/', function () {
     return view('peticions.home');
 });
+*/
+
+Route::get('/', fn () => view('peticions.home'));

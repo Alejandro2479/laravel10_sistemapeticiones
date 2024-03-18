@@ -9,8 +9,10 @@ class Peticion extends Model
 {
     use HasFactory;
 
+    /*
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);
     }
+    */
 }

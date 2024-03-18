@@ -9,8 +9,10 @@ class Usuario extends Model
 {
     use HasFactory;
 
+    /*
     public function reviews()
     {
         return $this->hasMany(Peticion::class);
     }
+    */
 }
