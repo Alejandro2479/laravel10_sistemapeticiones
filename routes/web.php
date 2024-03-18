@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PeticionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,6 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/', fn () => view('peticions.home'));
+Route::get('/peticions', [PeticionController::class, 'homePeticion'])->name('peticions.home');
+
+Route::get("/", fn () => redirect()->route('peticions.home'));

@@ -17,7 +17,10 @@ class PeticionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'numero_radicado' => fake()->randomNumber(5, true),
+            'asunto' => fake()->sentence(),
+            'descripcion' => fake()->paragraph(),
+            'estatus' => fake()->boolean()
         ];
     }
 }

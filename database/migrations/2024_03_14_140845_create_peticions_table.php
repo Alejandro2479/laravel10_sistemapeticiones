@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             //$table->unsignedBigInteger('usuario_id');
             $table->string('numero_radicado');
-            $table->text('asunto');
+            $table->string('asunto');
+            $table->text('descripcion');
             $table->boolean('estatus')->default(false);
             $table->timestamps();
             //$table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');

@@ -8,12 +8,12 @@
 </head>
 <body>
     <!-- Contenedor Barra y Contenido -->
-    <div class="flex flex-col h-screen bg-gray-100 md:flex-row">
+    <div class="flex flex-col h-screen md:flex-row">
         <!-- Barra Lateral -->
         <div class="w-full bg-sky-600 text-white md:w-64">
-            <div class="p-4 text-2xl font-bold text-center">
+            <h1 class="p-4 text-2xl font-bold text-center">
                 Panel Administrador
-            </div>
+            </h1>
             <ul class="flex flex-row justify-center md:flex-col">
                 <li class="hover:bg-sky-700">
                     <a class="block px-4 py-2" href="#">Home</a>
@@ -29,10 +29,21 @@
         <!-- Barra Lateral -->
     
         <!-- Contenido Principal -->
-        <div>
-
-        </div>
-            
+        <div class="container mx-auto mt-10 mb-10 max-w-lg">
+            <div class="border border-sky-600 rounded-lg">
+                <div class="m-4">
+                    <h1 class="text-2xl mb-4 font-medium">Lista de Peticiones</h1>
+                    @forelse($peticions as $peticion)
+                    <div>
+                        <a href="#">
+                            {{ $peticion->numero_radicado }}
+                        </a>
+                    </div>
+                    @empty
+                        <div>No hay peticiones</div>
+                    @endforelse
+                </div>
+            </div>
         </div>
     </div>
 </body>
