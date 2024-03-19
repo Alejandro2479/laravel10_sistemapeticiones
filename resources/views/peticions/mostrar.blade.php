@@ -63,7 +63,7 @@
             <p class="text-sm text-gray-500 p-4 mb-4">Creada: {{ $peticion->created_at->diffForHumans() }}</p>
 
             <div class="flex mt-4 space-x-2">
-                <a href="#">
+                <a href="{{ route('peticions.editar', ['peticion' => $peticion]) }}">
                     <button class="py-2 px-4 rounded bg-amber-400 text-white font-semibold hover:bg-amber-500 duration-500" type="submit">Editar</button>
                 </a>
                 <form action="{{ route('peticions.eliminar', ['peticion' => $peticion->id]) }}" method="POST">

@@ -28,6 +28,10 @@ Route::get('/peticions/crear', [PeticionController::class, 'crearPeticion'])->na
 
 Route::get('/peticions/{peticion}', [PeticionController::class, 'mostrarPeticion'])->name('peticions.mostrar');
 
+Route::get('/tasks/{peticion}/peticion', [PeticionController::class, 'editarPeticion'])->name('peticions.editar');
+
 Route::post('/peticions', [PeticionController::class, 'guardarPeticion'])->name('peticions.guardar');
+
+Route::put('/peticions/{peticion}', [PeticionController::class, 'actualizarPeticion'])->name('peticions.actualizar');
 
 Route::delete('/peticions/{peticion}', [PeticionController::class, 'eliminarPeticion'])->name('peticions.eliminar');

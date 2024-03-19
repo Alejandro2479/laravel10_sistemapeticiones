@@ -24,11 +24,24 @@ class PeticionController extends Controller
         return view('peticions.mostrar', ['peticion' => $peticion]);
     }
 
+    public function editarPeticion(Peticion $peticion)
+    {
+        return view('peticions.editar', ['peticion' => $peticion]);
+    }
+
     public function guardarPeticion(PeticionRequest $peticionRequest)
     {
         $peticion = Peticion::create($peticionRequest->validated());
 
         return redirect()->route('peticions.home')->with('exito', 'Petición creada con exito');
+    }
+
+    public function actualizarPeticion(Peticion $peticion, PeticionRequest $peticionRequest)
+    {
+        $peticion->update($peticionRequest->validated());
+
+        // return redirect()->route('peticions.mostrar', ['peticion' => $peticion->id])->with('exito', 'Petición editada con exito');
+        return redirect()->route('peticions.home')->with('exito', 'Petición editada con exito');
     }
 
     public function eliminarPeticion(Peticion $peticion)

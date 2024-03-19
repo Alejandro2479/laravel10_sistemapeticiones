@@ -56,7 +56,7 @@
                                 <a href='{{ route('peticions.mostrar', ['peticion' => $peticion->id]) }}' class="block w-full">
                                     <button class="py-2 px-4 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 duration-500 w-full">Ver</button>
                                 </a>                                
-                                <a href="#">
+                                <a href="{{ route('peticions.editar', ['peticion' => $peticion]) }}">
                                     <button class="py-2 px-4 rounded bg-amber-400 text-white font-semibold hover:bg-amber-500 duration-500" type="submit">Editar</button>
                                 </a>
                             </td>
