@@ -24,8 +24,8 @@ Route::get('/peticions', [PeticionController::class, 'homePeticion'])->name('pet
 
 Route::get("/", fn () => redirect()->route('peticions.home'));
 
-Route::get('/peticions/crear-peticion', [PeticionController::class, 'crearPeticion'])->name('peticions.crear-peticion');
+Route::get('/peticions/crear', [PeticionController::class, 'crearPeticion'])->name('peticions.crear');
 
-Route::get('/peticions/crear-usuario', [PeticionController::class, 'crearUsuario'])->name('peticions.crear-usuario');
+Route::post('/peticions', [PeticionController::class, 'guardarPeticion'])->name('peticions.guardar');
 
 Route::delete('/peticions/{peticion}', [PeticionController::class, 'eliminarPeticion'])->name('peticions.eliminar');

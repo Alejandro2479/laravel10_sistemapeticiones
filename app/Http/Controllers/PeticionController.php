@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Peticion;
+use App\Http\Requests\PeticionRequest;
 
 class PeticionController extends Controller
 {
@@ -15,18 +16,20 @@ class PeticionController extends Controller
 
     public function crearPeticion()
     {
-        return view('peticions.crear-peticion');
+        return view('peticions.crear');
     }
 
-    public function crearUsuario()
+    public function guardarPeticion(PeticionRequest $peticionRequest)
     {
-        return view('peticions.crear-usuario');
+        $peticion = Peticion::create($peticionRequest->validated());
+
+        return redirect()->route('peticions.home')->with('exito', 'Petición creada con exito');
     }
 
     public function eliminarPeticion(Peticion $peticion)
     {
         $peticion->delete();
 
-        return redirect()->back()->with('exito', 'Peticion eliminada con exito');
+        return redirect()->back()->with('exito', 'Petición eliminada con exito');
     }
 }

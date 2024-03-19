@@ -15,4 +15,6 @@ class Peticion extends Model
         return $this->belongsTo(Usuario::class);
     }
     */
+
+    protected $fillable = ['numero_radicado', 'asunto', 'descripcion'];
 }
