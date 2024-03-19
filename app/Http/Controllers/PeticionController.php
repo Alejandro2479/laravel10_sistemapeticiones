@@ -19,6 +19,11 @@ class PeticionController extends Controller
         return view('peticions.crear');
     }
 
+    public function mostrarPeticion(Peticion $peticion)
+    {
+        return view('peticions.mostrar', ['peticion' => $peticion]);
+    }
+
     public function guardarPeticion(PeticionRequest $peticionRequest)
     {
         $peticion = Peticion::create($peticionRequest->validated());
@@ -30,6 +35,6 @@ class PeticionController extends Controller
     {
         $peticion->delete();
 
-        return redirect()->back()->with('exito', 'Petición eliminada con exito');
+        return redirect()->route('peticions.home')->with('exito', 'Petición eliminada con exito');
     }
 }

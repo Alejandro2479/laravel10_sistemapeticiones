@@ -52,19 +52,13 @@
                             <td class="px-4 py-2">{{ $peticion->asunto }}</td>
                             <td class="px-4 py-2 text-center">X</td>
                             <td class="px-4 py-2 text-center">{{ $peticion->estatus ? 'Completa' : 'Incompleta' }}</td>
-                            <td class="flex flex-col px-4 py-2 items-center justify-center space-y-2 space-x-0 text-white font-semibold md:flex-row md:space-y-0 md:space-x-2">
-                                <a href="#" class="block w-full">
-                                    <button class="py-2 px-4 rounded bg-sky-500 hover:bg-sky-700 duration-500 w-full">
-                                        Ver
-                                    </button>
+                            <td class="flex flex-col px-4 py-2 items-center justify-center space-y-2 space-x-0 md:flex-row md:space-y-0 md:space-x-2">
+                                <a href='{{ route('peticions.mostrar', ['peticion' => $peticion->id]) }}' class="block w-full">
+                                    <button class="py-2 px-4 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 duration-500 w-full">Ver</button>
                                 </a>                                
-                                <form action="{{ route('peticions.eliminar', ['peticion' => $peticion->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="py-2 px-4 rounded bg-red-500 hover:bg-red-700 duration-500">
-                                        Eliminar
-                                    </button>
-                                </form>
+                                <a href="#">
+                                    <button class="py-2 px-4 rounded bg-amber-400 text-white font-semibold hover:bg-amber-500 duration-500" type="submit">Editar</button>
+                                </a>
                             </td>
                         </tr>
                         @empty
