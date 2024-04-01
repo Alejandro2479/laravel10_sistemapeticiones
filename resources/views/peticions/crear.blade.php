@@ -37,7 +37,7 @@
             <form action="{{ route('peticions.guardar') }}" method="POST">
                 @csrf
                 <div class="mb-4">
-                    <label for="numero_radicado" class="block">Número de Radicado</label>
+                    <label for="numero_radicado" class="block text-lg font-semibold">Número de Radicado</label>
                     <input class="mt-1 block w-full border border-gray-200" type="text" name="numero_radicado" id="numero_radicado" value="{{ $peticion->numero_radicado ?? old('numero_radicado') }}">
                     @error('numero_radicado')
                         <p class="mt-1 text-sm text-red-600">El número de radicado es obligatorio</p>
@@ -45,7 +45,7 @@
                 </div>
     
                 <div class="mb-4">
-                    <label for="asunto" class="block">Asunto</label>
+                    <label for="asunto" class="block text-lg font-semibold">Asunto</label>
                     <textarea class="mt-1 block w-full border border-gray-200" name="asunto" id="asunto" rows="5">{{ $peticion->asunto ?? old('asunto') }}</textarea>
                     @error('asunto')
                         <p class="mt-1 text-sm text-red-600">El asunto es obligatorio</p>
@@ -53,7 +53,7 @@
                 </div>
     
                 <div class="mb-4">
-                    <label for="descripcion" class="block">Descripción</label>
+                    <label for="descripcion" class="block text-lg font-semibold">Descripción</label>
                     <textarea class="mt-1 block w-full border border-gray-200" name="descripcion" id="descripcion" rows="5">{{ $peticion->descripcion ?? old('descripcion') }}</textarea>
                     @error('descripcion')
                         <p class="mt-1 text-sm text-red-600">La descripción es obligatoria</p>
