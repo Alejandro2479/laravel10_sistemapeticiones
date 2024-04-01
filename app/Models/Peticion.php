@@ -17,4 +17,10 @@ class Peticion extends Model
     */
 
     protected $fillable = ['numero_radicado', 'asunto', 'descripcion'];
+
+    public function alternarPeticion()
+    {
+        $this->estatus = !$this->estatus;
+        $this->save();
+    }
 }

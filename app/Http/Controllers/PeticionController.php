@@ -50,4 +50,11 @@ class PeticionController extends Controller
 
         return redirect()->route('peticions.home')->with('exito', 'Petición eliminada con exito');
     }
+
+    public function alternarEstatusPeticion(Peticion $peticion)
+    {
+        $peticion->alternarPeticion();
+
+        return redirect()->back()->with('exito', 'Petición actualizada con exito');
+    }
 }

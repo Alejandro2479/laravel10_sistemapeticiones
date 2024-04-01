@@ -35,3 +35,7 @@ Route::post('/peticions', [PeticionController::class, 'guardarPeticion'])->name(
 Route::put('/peticions/{peticion}', [PeticionController::class, 'actualizarPeticion'])->name('peticions.actualizar');
 
 Route::delete('/peticions/{peticion}', [PeticionController::class, 'eliminarPeticion'])->name('peticions.eliminar');
+
+Route::put('/peticions/{peticion}/alternar-estatus', [PeticionController::class, 'alternarEstatusPeticion'])->name('peticions.alternar-estatus');
+
+Route::fallback(fn () => abort(404));
