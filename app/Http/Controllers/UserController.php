@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 
-class RegistroController extends Controller
+class UserController extends Controller
 {
     public function crearUsuario()
     {

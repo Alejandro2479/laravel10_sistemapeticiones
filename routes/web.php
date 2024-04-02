@@ -42,9 +42,9 @@ Route::delete('/peticions/{peticion}', [PeticionController::class, 'eliminarPeti
 
 Route::put('/peticions/{peticion}/alternar-estatus', [PeticionController::class, 'alternarEstatusPeticion'])->name('peticions.alternar-estatus');
 
-Route::get('/usuarios/crear', [UserController::class, 'crearUsuario'])->name('users.crear');
+Route::get('/user/crear', [UserController::class, 'crearUsuario'])->name('users.crear');
 
-Route::post('/usuarios', [UserController::class, 'guardarUsuario'])->name('users.guardar');
+Route::post('/user', [UserController::class, 'guardarUsuario'])->name('users.guardar');
 
 Route::get('/login', [SesionController::class, 'create'])->middleware('guest')->name('login.index');
 
