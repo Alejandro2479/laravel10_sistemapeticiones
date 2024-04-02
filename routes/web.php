@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\PeticionController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\PeticionController;
+use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\SesionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +40,11 @@ Route::put('/peticions/{peticion}', [PeticionController::class, 'actualizarPetic
 Route::delete('/peticions/{peticion}', [PeticionController::class, 'eliminarPeticion'])->name('peticions.eliminar');
 
 Route::put('/peticions/{peticion}/alternar-estatus', [PeticionController::class, 'alternarEstatusPeticion'])->name('peticions.alternar-estatus');
+
+Route::get('/registro', [RegistroController::class, 'create'])->name('register.index');
+
+Route::post('/registro', [RegistroController::class, 'store'])->name('register.store');
+
+Route::get('/login', [SesionController::class, 'create'])->name('login.index');
 
 Route::fallback(fn () => abort(404));

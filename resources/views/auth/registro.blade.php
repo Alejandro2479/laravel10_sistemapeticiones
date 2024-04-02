@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Peticiones | Crear</title>
+    <title>Sistema Peticiones | Crear Usuario</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -23,6 +23,9 @@
                     <a class="block px-4 py-2" href="{{ route('peticions.crear') }}">Crear Petición</a>
                 </li>
                 <li class="hover:bg-sky-700 duration-500">
+                    <a class="block px-4 py-2" href="{{ route('register.index') }}">Crear Usuario</a>
+                </li>
+                <li class="hover:bg-sky-700 duration-500">
                     <a class="block px-4 py-2" href="#">Cerrar Sesión</a>
                 </li>    
             </ul>
@@ -33,30 +36,30 @@
     <!-- CONTENIDO PRINCIPAL -->
     <div class="md:ml-64">
         <div class="p-4">
-            <h2 class="text-2xl font-semibold mb-4">Crear Petición</h2>
-            <form action="{{ route('peticions.guardar') }}" method="POST">
+            <h2 class="text-2xl font-semibold mb-4">Crear Usuario</h2>
+            <form action="" method="POST">
                 @csrf
                 <div class="mb-4">
-                    <label for="numero_radicado" class="block text-lg font-semibold">Número de Radicado</label>
-                    <input class="mt-1 block w-full border border-gray-200" type="text" name="numero_radicado" id="numero_radicado" value="{{ $peticion->numero_radicado ?? old('numero_radicado') }}">
-                    @error('numero_radicado')
-                        <p class="mt-1 text-sm text-red-600">El número de radicado es obligatorio</p>
+                    <label for="name" class="block text-lg font-semibold">Usuario</label>
+                    <input class="mt-1 block w-full border border-gray-200" type="text" name="name" id="name">
+                    @error('name')
+                        <p class="mt-1 text-sm text-red-600">El nombre de usuario es obligatorio</p>
                     @enderror
                 </div>
     
                 <div class="mb-4">
-                    <label for="asunto" class="block text-lg font-semibold">Asunto</label>
-                    <textarea class="mt-1 block w-full border border-gray-200" name="asunto" id="asunto" rows="5">{{ $peticion->asunto ?? old('asunto') }}</textarea>
-                    @error('asunto')
-                        <p class="mt-1 text-sm text-red-600">El asunto es obligatorio</p>
+                    <label for="email" class="block text-lg font-semibold">Correo Electrónico</label>
+                    <input class="mt-1 block w-full border border-gray-200" type="email" name="email" id="email">
+                    @error('email')
+                        <p class="mt-1 text-sm text-red-600">El correo electrónico es obligatorio</p>
                     @enderror
                 </div>
     
                 <div class="mb-4">
-                    <label for="descripcion" class="block text-lg font-semibold">Descripción</label>
-                    <textarea class="mt-1 block w-full border border-gray-200" name="descripcion" id="descripcion" rows="5">{{ $peticion->descripcion ?? old('descripcion') }}</textarea>
-                    @error('descripcion')
-                        <p class="mt-1 text-sm text-red-600">La descripción es obligatoria</p>
+                    <label for="password" class="block text-lg font-semibold">Contraseña</label>
+                    <input class="mt-1 block w-full border border-gray-200" type="password" name="password" id="password">
+                    @error('password')
+                        <p class="mt-1 text-sm text-red-600">La contraseña es obligatoria</p>
                     @enderror
                 </div>
     
