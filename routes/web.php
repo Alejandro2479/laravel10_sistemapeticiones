@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PeticionController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\SesionController;
@@ -23,9 +24,9 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/peticions', [PeticionController::class, 'homePeticion'])->middleware('auth')->name('peticions.home');
+Route::get('/home', [HomeController::class, 'home'])->middleware('auth')->name('home');
 
-Route::get("/", fn () => redirect()->route('peticions.home'));
+Route::get("/", fn () => redirect()->route('home'));
 
 Route::get('/peticions/crear', [PeticionController::class, 'crearPeticion'])->name('peticions.crear');
 

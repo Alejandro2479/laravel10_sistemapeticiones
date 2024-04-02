@@ -17,7 +17,7 @@
             </h1>
             <ul class="flex flex-row justify-center font-semibold md:flex-col">
                 <li class="hover:bg-sky-700 duration-500">
-                    <a class="block px-4 py-2" href="{{ route('peticions.home') }}">Home</a>
+                    <a class="block px-4 py-2" href="{{ route('home') }}">Home</a>
                 </li>                
                 <li class="hover:bg-sky-700 duration-500">
                     <a class="block px-4 py-2" href="{{ route('peticions.crear') }}">Crear Petición</a>

@@ -17,6 +17,6 @@ class RegistroController extends Controller
     {
         $user = User::create(request(['name', 'email', 'password']));
 
-        return redirect()->route('peticions.home')->with('exito', 'Usuario creado con exito');
+        return redirect()->route('home')->with('exito', 'Usuario creado con exito');
     }
 }

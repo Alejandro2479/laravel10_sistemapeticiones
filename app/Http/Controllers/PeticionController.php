@@ -9,31 +9,26 @@ use App\Http\Requests\PeticionRequest;
 
 class PeticionController extends Controller
 {
-    public function homePeticion()
-    {
-        return view('peticions.home', ['peticions' => Peticion::latest()->paginate(10)]);
-    }
-
     public function crearPeticion()
     {
-        return view('peticions.crear');
+        return view('peticions.crear-peticion');
     }
 
     public function mostrarPeticion(Peticion $peticion)
     {
-        return view('peticions.mostrar', ['peticion' => $peticion]);
+        return view('peticions.mostrar-peticion', ['peticion' => $peticion]);
     }
 
     public function editarPeticion(Peticion $peticion)
     {
-        return view('peticions.editar', ['peticion' => $peticion]);
+        return view('peticions.editar-peticion', ['peticion' => $peticion]);
     }
 
     public function guardarPeticion(PeticionRequest $peticionRequest)
     {
         $peticion = Peticion::create($peticionRequest->validated());
 
-        return redirect()->route('peticions.home')->with('exito', 'Petición creada con exito');
+        return redirect()->route('home')->with('exito', 'Petición creada con exito');
     }
 
     public function actualizarPeticion(Peticion $peticion, PeticionRequest $peticionRequest)
@@ -41,14 +36,14 @@ class PeticionController extends Controller
         $peticion->update($peticionRequest->validated());
 
         // return redirect()->route('peticions.mostrar', ['peticion' => $peticion->id])->with('exito', 'Petición editada con exito');
-        return redirect()->route('peticions.home')->with('exito', 'Petición editada con exito');
+        return redirect()->route('home')->with('exito', 'Petición editada con exito');
     }
 
     public function eliminarPeticion(Peticion $peticion)
     {
         $peticion->delete();
 
-        return redirect()->route('peticions.home')->with('exito', 'Petición eliminada con exito');
+        return redirect()->route('home')->with('exito', 'Petición eliminada con exito');
     }
 
     public function alternarEstatusPeticion(Peticion $peticion)

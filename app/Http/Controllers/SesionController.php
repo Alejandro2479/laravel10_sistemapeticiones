@@ -21,7 +21,7 @@ class SesionController extends Controller
             ]);
         }
 
-        return redirect()->route('peticions.home')->with('exito', 'Usuario inicio sesión con exito');
+        return redirect()->route('home')->with('exito', 'Usuario inicio sesión con exito');
     }
 
     public function destroy()
