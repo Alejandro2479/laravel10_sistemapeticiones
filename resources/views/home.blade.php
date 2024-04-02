@@ -5,7 +5,7 @@
 @section('contenido_principal')
     <div class="md:ml-64">
         <div class="p-4">
-            <h2 class="text-2xl font-semibold mb-4">Lista de Petciones</h2>
+            <h2 class="text-2xl font-semibold mb-4">Lista de Peticiones</h2>
             <div class="overflow-x-auto">
                 <table class="w-full table-auto">
                     <thead>

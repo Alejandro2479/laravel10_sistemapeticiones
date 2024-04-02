@@ -16,16 +16,22 @@
                 Panel Administrador
             </h1>
             <ul class="flex flex-row justify-center font-semibold md:flex-col">
-                <li class="hover:bg-sky-700 duration-500">
+                <li class="hover:bg-sky-600 duration-500">
                     <a class="block px-4 py-2" href="{{ route('home') }}">Home</a>
                 </li>                
-                <li class="hover:bg-sky-700 duration-500">
+                <li class="hover:bg-sky-600 duration-500">
                     <a class="block px-4 py-2" href="{{ route('peticions.crear') }}">Crear Petición</a>
                 </li>
-                <li class="hover:bg-sky-700 duration-500">
+                <li class="hover:bg-sky-600 duration-500">
+                    <a class="block px-4 py-2" href="{{ route('peticions.crear') }}">Ver Peticiones Completas</a>
+                </li>
+                <li class="hover:bg-sky-600 duration-500">
                     <a class="block px-4 py-2" href="{{ route('users.crear') }}">Crear Usuario</a>
                 </li>
-                <li class="hover:bg-sky-700 duration-500">
+                <li class="hover:bg-sky-600 duration-500">
+                    <a class="block px-4 py-2" href="#">Ver Usuarios</a>
+                </li>
+                <li class="hover:bg-sky-600 duration-500">
                     <a class="block px-4 py-2" href="{{ route('login.destroy') }}">Cerrar Sesión</a>
                 </li>    
             </ul>
