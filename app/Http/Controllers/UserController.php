@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 
 use App\Models\User;
 
 class RegistroController extends Controller
 {
-    public function create()
+    public function crearUsuario()
     {
-        return view('auth.registro');
+        return view('users.crear-usuario');
     }
 
-    public function store()
+    public function guardarUsuario(UserRequest $userRequest)
     {
-        $user = User::create(request(['name', 'email', 'password']));
+        $peticion = User::create($userRequest->validated());
 
         return redirect()->route('home')->with('exito', 'Usuario creado con exito');
     }

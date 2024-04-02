@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PeticionController;
-use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\SesionController;
 
 /*
@@ -42,9 +42,9 @@ Route::delete('/peticions/{peticion}', [PeticionController::class, 'eliminarPeti
 
 Route::put('/peticions/{peticion}/alternar-estatus', [PeticionController::class, 'alternarEstatusPeticion'])->name('peticions.alternar-estatus');
 
-Route::get('/registro', [RegistroController::class, 'create'])->name('register.index');
+Route::get('/usuarios/crear', [UserController::class, 'crearUsuario'])->name('users.crear');
 
-Route::post('/registro', [RegistroController::class, 'store'])->name('register.store');
+Route::post('/usuarios', [UserController::class, 'guardarUsuario'])->name('users.guardar');
 
 Route::get('/login', [SesionController::class, 'create'])->middleware('guest')->name('login.index');
 
