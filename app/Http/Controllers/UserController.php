@@ -9,6 +9,11 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function indexUsuario()
+    {
+        return view('users.index-usuario', ['users' => User::latest()->get()]);
+    }
+
     public function crearUsuario()
     {
         return view('users.crear-usuario');

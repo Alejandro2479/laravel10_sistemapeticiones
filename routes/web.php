@@ -42,6 +42,8 @@ Route::delete('/peticions/{peticion}', [PeticionController::class, 'eliminarPeti
 
 Route::put('/peticions/{peticion}/alternar-estatus', [PeticionController::class, 'alternarEstatusPeticion'])->name('peticions.alternar-estatus');
 
+Route::get('/users', [UserController::class, 'indexUsuario'])->middleware('auth')->name('users.index');
+
 Route::get('/users/crear', [UserController::class, 'crearUsuario'])->middleware('auth')->name('users.crear');
 
 Route::post('/users', [UserController::class, 'guardarUsuario'])->name('users.guardar');
