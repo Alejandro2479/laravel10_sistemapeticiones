@@ -23,7 +23,7 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/peticions', [PeticionController::class, 'homePeticion'])->name('peticions.home');
+Route::get('/peticions', [PeticionController::class, 'homePeticion'])->middleware('auth')->name('peticions.home');
 
 Route::get("/", fn () => redirect()->route('peticions.home'));
 
@@ -45,6 +45,10 @@ Route::get('/registro', [RegistroController::class, 'create'])->name('register.i
 
 Route::post('/registro', [RegistroController::class, 'store'])->name('register.store');
 
-Route::get('/login', [SesionController::class, 'create'])->name('login.index');
+Route::get('/login', [SesionController::class, 'create'])->middleware('guest')->name('login.index');
+
+Route::post('/login', [SesionController::class, 'store'])->name('login.store');
+
+Route::get('/logout', [SesionController::class, 'destroy'])->middleware('auth')->name('login.destroy');
 
 Route::fallback(fn () => abort(404));
