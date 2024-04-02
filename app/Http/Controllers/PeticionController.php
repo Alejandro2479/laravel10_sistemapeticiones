@@ -28,7 +28,7 @@ class PeticionController extends Controller
     {
         $peticion = Peticion::create($peticionRequest->validated());
 
-        return redirect()->route('home')->with('exito', 'Petición creada con exito');
+        return redirect()->route('index')->with('exito', 'Petición creada con exito');
     }
 
     public function actualizarPeticion(Peticion $peticion, PeticionRequest $peticionRequest)
@@ -36,14 +36,14 @@ class PeticionController extends Controller
         $peticion->update($peticionRequest->validated());
 
         // return redirect()->route('peticions.mostrar', ['peticion' => $peticion->id])->with('exito', 'Petición editada con exito');
-        return redirect()->route('home')->with('exito', 'Petición editada con exito');
+        return redirect()->route('index')->with('exito', 'Petición editada con exito');
     }
 
     public function eliminarPeticion(Peticion $peticion)
     {
         $peticion->delete();
 
-        return redirect()->route('home')->with('exito', 'Petición eliminada con exito');
+        return redirect()->route('index')->with('exito', 'Petición eliminada con exito');
     }
 
     public function alternarEstatusPeticion(Peticion $peticion)

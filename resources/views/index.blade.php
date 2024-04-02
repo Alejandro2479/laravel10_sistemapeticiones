@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('title', 'Índice')
 
 @section('contenido_principal')
     <div class="md:ml-64">

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PeticionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SesionController;
@@ -24,9 +24,9 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/home', [HomeController::class, 'home'])->middleware('auth')->name('home');
+Route::get('/index', [IndexController::class, 'index'])->middleware('auth')->name('index');
 
-Route::get("/", fn () => redirect()->route('home'));
+Route::get("/", fn () => redirect()->route('index'));
 
 Route::get('/peticions/crear', [PeticionController::class, 'crearPeticion'])->middleware('auth')->name('peticions.crear');
 

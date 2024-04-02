@@ -18,6 +18,6 @@ class UserController extends Controller
     {
         $peticion = User::create($userRequest->validated());
 
-        return redirect()->route('home')->with('exito', 'Usuario creado con exito');
+        return redirect()->route('index')->with('exito', 'Usuario creado con exito');
     }
 }
