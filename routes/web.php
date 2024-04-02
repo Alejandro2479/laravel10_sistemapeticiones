@@ -28,11 +28,11 @@ Route::get('/home', [HomeController::class, 'home'])->middleware('auth')->name('
 
 Route::get("/", fn () => redirect()->route('home'));
 
-Route::get('/peticions/crear', [PeticionController::class, 'crearPeticion'])->name('peticions.crear');
+Route::get('/peticions/crear', [PeticionController::class, 'crearPeticion'])->middleware('auth')->name('peticions.crear');
 
-Route::get('/peticions/{peticion}', [PeticionController::class, 'mostrarPeticion'])->name('peticions.mostrar');
+Route::get('/peticions/{peticion}', [PeticionController::class, 'mostrarPeticion'])->middleware('auth')->name('peticions.mostrar');
 
-Route::get('/tasks/{peticion}/peticion', [PeticionController::class, 'editarPeticion'])->name('peticions.editar');
+Route::get('/tasks/{peticion}/peticion', [PeticionController::class, 'editarPeticion'])->middleware('auth')->name('peticions.editar');
 
 Route::post('/peticions', [PeticionController::class, 'guardarPeticion'])->name('peticions.guardar');
 
@@ -42,7 +42,7 @@ Route::delete('/peticions/{peticion}', [PeticionController::class, 'eliminarPeti
 
 Route::put('/peticions/{peticion}/alternar-estatus', [PeticionController::class, 'alternarEstatusPeticion'])->name('peticions.alternar-estatus');
 
-Route::get('/user/crear', [UserController::class, 'crearUsuario'])->name('users.crear');
+Route::get('/user/crear', [UserController::class, 'crearUsuario'])->middleware('auth')->name('users.crear');
 
 Route::post('/user', [UserController::class, 'guardarUsuario'])->name('users.guardar');
 
