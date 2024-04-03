@@ -19,9 +19,13 @@ class SesionController extends Controller
             return back()->withErrors([
                 'message' => 'El correo electrónico y/o la contraseña son incorrectos'
             ]);
+        } else {
+            if (auth()->user()->role === 'admin') {
+                return redirect()->route('index')->with('exito', 'Usuario inicio sesión con exito');
+            } else {
+                return redirect()->route(abort(404));
+            }
         }
-
-        return redirect()->route('index')->with('exito', 'Usuario inicio sesión con exito');
     }
 
     public function destroy()

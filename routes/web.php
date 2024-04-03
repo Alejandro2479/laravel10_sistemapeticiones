@@ -24,7 +24,7 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/index', [IndexController::class, 'index'])->middleware('auth')->name('index');
+Route::get('/index', [IndexController::class, 'index'])->middleware('auth.admin')->name('index');
 
 Route::get("/", fn () => redirect()->route('index'));
 
@@ -48,7 +48,7 @@ Route::get('/users/crear', [UserController::class, 'crearUsuario'])->middleware(
 
 Route::post('/users', [UserController::class, 'guardarUsuario'])->name('users.guardar');
 
-Route::get('/login', [SesionController::class, 'create'])->middleware('guest')->name('login.index');
+Route::get('/login', [SesionController::class, 'create'])->name('login.index');
 
 Route::post('/login', [SesionController::class, 'store'])->name('login.store');
 
