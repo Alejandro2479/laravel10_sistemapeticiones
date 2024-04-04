@@ -20,6 +20,6 @@ class AdminAuth
             if (auth()->user()->role === 'admin')
                 return $next($request);
         }
-        return redirect()->route('login.index');
+        return redirect(abort(404));
     }
 }
