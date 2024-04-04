@@ -38,6 +38,7 @@ Route::post('/admin/usuario/crear/guardar', [AdminController::class, 'guardarUsu
 
 
 // RUTAS ADMINISTRADOR Y USUARIO
+// Editar rutas
 Route::get('/login', [SesionController::class, 'create'])->name('login.index');
 Route::post('/login', [SesionController::class, 'store'])->name('login.store');
 Route::get('/logout', [SesionController::class, 'destroy'])->middleware('auth')->name('login.destroy');

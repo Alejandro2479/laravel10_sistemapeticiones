@@ -6,7 +6,7 @@
     <div class="md:ml-64">
         <div class="p-4">
             <h2 class="text-2xl font-semibold mb-4">Crear Petición</h2>
-            <form action="{{ route('peticions.guardar') }}" method="POST">
+            <form action="{{ route('admin.peticion-guardar') }}" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="numero_radicado" class="block text-lg font-semibold">Número de Radicado</label>

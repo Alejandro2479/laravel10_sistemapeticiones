@@ -6,7 +6,7 @@
     <div class="md:ml-64">
         <div class="p-4">
             <h2 class="text-2xl font-semibold mb-4">Editar Petición</h2>
-            <form action="{{ route('peticions.actualizar', ['peticion' => $peticion->id]) }}" method="POST">
+            <form action="{{ route('admin.peticion-actualizar', ['peticion' => $peticion->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mb-4">

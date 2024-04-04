@@ -25,10 +25,10 @@
                             <td class="px-4 py-2 text-center">X</td>
                             <td class="px-4 py-2 text-center">{{ $peticion->estatus ? 'Completa' : 'Incompleta' }}</td>
                             <td class="flex flex-col px-4 py-2 items-center justify-center space-y-2 space-x-0 md:flex-row md:space-y-0 md:space-x-2">
-                                <a href='{{ route('peticions.mostrar', ['peticion' => $peticion->id]) }}' class="block w-full">
+                                <a href='{{ route('admin.peticion-mostrar', ['peticion' => $peticion->id]) }}' class="block w-full">
                                     <button class="py-2 px-4 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 duration-500 w-full">Ver</button>
                                 </a>                                
-                                <a href="{{ route('peticions.editar', ['peticion' => $peticion]) }}">
+                                <a href="{{ route('admin.peticion-editar', ['peticion' => $peticion]) }}">
                                     <button class="py-2 px-4 rounded bg-amber-400 text-white font-semibold hover:bg-amber-500 duration-500" type="submit">Editar</button>
                                 </a>
                             </td>
