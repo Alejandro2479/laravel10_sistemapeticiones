@@ -35,18 +35,21 @@
             <p class="text-sm text-gray-500 p-4 mb-4">Creada: {{ $peticion->created_at->diffForHumans() }}</p>
 
             <div class="flex mt-4 space-x-2">
-                <a href="{{ route('admin.peticion-editar', ['peticion' => $peticion]) }}">
-                    <button class="py-2 px-4 rounded bg-amber-400 text-white font-semibold hover:bg-amber-500 duration-500" type="submit">Editar</button>
-                </a>
+                @if($peticion->estatus !== 1)
+                    <a href="{{ route('admin.peticion-editar', ['peticion' => $peticion]) }}">
+                        <button class="py-2 px-4 rounded bg-amber-400 text-white font-semibold hover:bg-amber-500 duration-500" type="submit">Editar</button>
+                    </a>
+                    <form action="{{ route('admin.peticion-eliminar', ['peticion' => $peticion->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="py-2 px-4 rounded bg-red-500 text-white font-semibold hover:bg-red-600 duration-500">Eliminar</button>
+                    </form>
+                @endif
+
                 <form action="{{ route('peticions.alternar-estatus', ['peticion' => $peticion]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500">Cambiar Estatus</button>
-                </form>
-                <form action="{{ route('admin.peticion-eliminar', ['peticion' => $peticion->id]) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="py-2 px-4 rounded bg-red-500 text-white font-semibold hover:bg-red-600 duration-500">Eliminar</button>
                 </form>
             </div>
         </div>
