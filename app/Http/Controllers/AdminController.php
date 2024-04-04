@@ -6,22 +6,38 @@ use Illuminate\Http\Request;
 
 use App\Models\Peticion;
 use App\Http\Requests\PeticionRequest;
+use App\Models\User;
+use App\Http\Requests\UserRequest;
 
-class PeticionController extends Controller
+class AdminController extends Controller
 {
+    public function indexPeticion()
+    {
+        return view('admin.index-peticion-admin', ['peticions' => Peticion::latest()->paginate(10)]);
+    }
+
+    /*
+    public function indexPeticion()
+    {
+        $peticionesIncompletas = Peticion::where('estatus', false)->latest()->paginate(10);
+
+        return view('index', ['peticions' => $peticionesIncompletas]);
+    }
+    */
+
     public function crearPeticion()
     {
-        return view('peticions.crear-peticion');
+        return view('admin.crear-peticion-admin');
     }
 
     public function mostrarPeticion(Peticion $peticion)
     {
-        return view('peticions.mostrar-peticion', ['peticion' => $peticion]);
+        return view('admin.mostrar-peticion-admin', ['peticion' => $peticion]);
     }
 
     public function editarPeticion(Peticion $peticion)
     {
-        return view('peticions.editar-peticion', ['peticion' => $peticion]);
+        return view('admin.editar-peticion-admin', ['peticion' => $peticion]);
     }
 
     public function guardarPeticion(PeticionRequest $peticionRequest)
@@ -45,6 +61,26 @@ class PeticionController extends Controller
 
         return redirect()->route('index')->with('exito', 'Petición eliminada con exito');
     }
+
+    public function indexUsuario()
+    {
+        return view('users.index-usuario', ['users' => User::latest()->get()]);
+    }
+
+    public function crearUsuario()
+    {
+        return view('users.crear-usuario');
+    }
+
+    public function guardarUsuario(UserRequest $userRequest)
+    {
+        $peticion = User::create($userRequest->validated());
+
+        return redirect()->route('index')->with('exito', 'Usuario creado con exito');
+    }
+
+    //
+    //
 
     public function alternarEstatusPeticion(Peticion $peticion)
     {
