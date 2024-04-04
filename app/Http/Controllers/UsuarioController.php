@@ -12,4 +12,9 @@ class UsuarioController extends Controller
     {
         return view('usuario.index-peticion-usuario', ['peticions' => Peticion::latest()->paginate(10)]);
     }
+
+    public function mostrarPeticion(Peticion $peticion)
+    {
+        return view('usuario.mostrar-peticion-usuario', ['peticion' => $peticion]);
+    }
 }

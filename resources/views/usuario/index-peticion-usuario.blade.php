@@ -25,7 +25,7 @@
                             <td class="px-4 py-2 text-center">X</td>
                             <td class="px-4 py-2 text-center">{{ $peticion->estatus ? 'Completa' : 'Incompleta' }}</td>
                             <td class="flex flex-col px-4 py-2 items-center justify-center space-y-2 space-x-0 md:flex-row md:space-y-0 md:space-x-2">
-                                <a href='#'>
+                                <a href='{{ route('usuario.peticion-mostrar', ['peticion' => $peticion->id]) }}'>
                                     <button class="py-2 px-4 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 duration-500 w-full">Ver</button>
                                 </a>
                             </td>
