@@ -44,7 +44,7 @@ class AdminController extends Controller
     {
         $peticion = Peticion::create($peticionRequest->validated());
 
-        return redirect()->route('index')->with('exito', 'Petición creada con exito');
+        return redirect()->route('admin.peticion-index')->with('exito', 'Petición creada con exito');
     }
 
     public function actualizarPeticion(Peticion $peticion, PeticionRequest $peticionRequest)
@@ -52,31 +52,31 @@ class AdminController extends Controller
         $peticion->update($peticionRequest->validated());
 
         // return redirect()->route('peticions.mostrar', ['peticion' => $peticion->id])->with('exito', 'Petición editada con exito');
-        return redirect()->route('index')->with('exito', 'Petición editada con exito');
+        return redirect()->route('admin.peticion-index')->with('exito', 'Petición editada con exito');
     }
 
     public function eliminarPeticion(Peticion $peticion)
     {
         $peticion->delete();
 
-        return redirect()->route('index')->with('exito', 'Petición eliminada con exito');
+        return redirect()->route('admin.peticion-index')->with('exito', 'Petición eliminada con exito');
     }
 
     public function indexUsuario()
     {
-        return view('users.index-usuario', ['users' => User::latest()->get()]);
+        return view('admin.index-usuario-admin', ['users' => User::latest()->get()]);
     }
 
     public function crearUsuario()
     {
-        return view('users.crear-usuario');
+        return view('admin.crear-usuario-admin');
     }
 
     public function guardarUsuario(UserRequest $userRequest)
     {
         $peticion = User::create($userRequest->validated());
 
-        return redirect()->route('index')->with('exito', 'Usuario creado con exito');
+        return redirect()->route('admin.peticion-index')->with('exito', 'Usuario creado con exito');
     }
 
     //

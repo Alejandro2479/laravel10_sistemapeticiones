@@ -24,14 +24,23 @@ Route::get('/', function () {
 
 // RUTAS ADMNISTRADOR
 Route::get('/admin/peticion/index', [AdminController::class, 'indexPeticion'])->middleware('auth.admin')->name('admin.peticion-index');
+
 Route::get('/admin/peticion/crear', [AdminController::class, 'crearPeticion'])->middleware('auth.admin')->name('admin.peticion-crear');
+
 Route::get('/admin/peticion/{peticion}/mostrar', [AdminController::class, 'mostrarPeticion'])->middleware('auth.admin')->name('admin.peticion-mostrar');
+
 Route::get('/admin/peticion/{peticion}/editar', [AdminController::class, 'editarPeticion'])->middleware('auth.admin')->name('admin.peticion-editar');
+
 Route::post('/admin/peticion/crear/guardar', [AdminController::class, 'guardarPeticion'])->middleware('auth.admin')->name('admin.peticion-guardar');
+
 Route::put('/admin/peticion/{peticion}/editar/actualizar', [AdminController::class, 'actualizarPeticion'])->middleware('auth.admin')->name('admin.peticion-actualizar');
+
 Route::delete('/admin/peticion/{peticion}/editar/eliminar', [AdminController::class, 'eliminarPeticion'])->middleware('auth.admin')->name('admin.peticion-eliminar');
+
 Route::get('/admin/usuario/index', [AdminController::class, 'indexUsuario'])->middleware('auth.admin')->name('admin.usuario-index');
+
 Route::get('/admin/usuario/crear', [AdminController::class, 'crearUsuario'])->middleware('auth.admin')->name('admin.usuario-crear');
+
 Route::post('/admin/usuario/crear/guardar', [AdminController::class, 'guardarUsuario'])->middleware('auth.admin')->name('admin.usuario-guardar');
 
 // RUTAS USUARIO
@@ -47,7 +56,7 @@ Route::get('/logout', [SesionController::class, 'destroy'])->middleware('auth')-
 Route::put('/peticions/{peticion}/alternar-estatus', [AdminController::class, 'alternarEstatusPeticion'])->middleware('auth')->name('peticions.alternar-estatus');
 
 // Modificar esta ruta por si es admin o user
-Route::get("/", fn () => redirect()->route('index'));
+Route::get("/", fn () => redirect()->route('admin.peticion-index'));
 
 Route::fallback(fn () => abort(404));
 
