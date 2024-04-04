@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\SesionController;
 
 /*
@@ -44,7 +45,7 @@ Route::get('/admin/usuario/crear', [AdminController::class, 'crearUsuario'])->mi
 Route::post('/admin/usuario/crear/guardar', [AdminController::class, 'guardarUsuario'])->middleware('auth.admin')->name('admin.usuario-guardar');
 
 // RUTAS USUARIO
-
+Route::get('/usuario/peticion/index', [UsuarioController::class, 'indexPeticion'])->middleware('auth')->name('usuario.peticion-index');
 
 // RUTAS ADMINISTRADOR Y USUARIO
 // Editar rutas

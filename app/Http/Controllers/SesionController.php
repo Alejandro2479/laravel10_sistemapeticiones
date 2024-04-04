@@ -21,7 +21,7 @@ class SesionController extends Controller
             if (auth()->user()->role === 'admin') {
                 return redirect()->route('admin.peticion-index')->with('exito', 'Administrador inicio sesión con exito');
             } else {
-                return redirect()->route(abort(404));
+                return redirect()->route('usuario.peticion-index')->with('exito', 'Usuario inicio sesión con exito');
             }
         }
     }
