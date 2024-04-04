@@ -82,6 +82,7 @@ class AdminController extends Controller
     //
     //
 
+    // Este metodo debe ir en otro controlador compartido
     public function alternarEstatusPeticion(Peticion $peticion)
     {
         $peticion->alternarPeticion();
