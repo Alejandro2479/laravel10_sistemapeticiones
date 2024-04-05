@@ -9,14 +9,11 @@ class Peticion extends Model
 {
     use HasFactory;
 
-    /*
-    public function usuario()
-    {
-        return $this->belongsTo(Usuario::class);
-    }
-    */
-
-    protected $fillable = ['numero_radicado', 'asunto', 'descripcion'];
+    protected $fillable = [
+        'numero_radicado', 
+        'asunto', 
+        'descripcion'
+    ];
 
     public function alternarPeticion()
     {
