@@ -59,7 +59,16 @@ Route::get('/logout', [SesionController::class, 'destroy'])->middleware('auth')-
 Route::put('/peticions/{peticion}/alternar-estatus', [AdminController::class, 'alternarEstatusPeticion'])->middleware('auth')->name('peticions.alternar-estatus');
 
 // Modificar esta ruta por si es admin o user
-Route::get("/", fn () => redirect()->route('admin.peticion-index'));
+Route::get("/", function () {
+    if (Auth()->check()) {
+        if (auth()->user()->role === 'admin') {
+            return redirect()->route('admin.peticion-index');
+        } elseif (auth()->user()->role === 'user') {
+            return redirect()->route('usuario.peticion-index');
+        }
+    }
+    return redirect()->route('login.index');
+});
 
 Route::fallback(fn () => abort(404));
 
