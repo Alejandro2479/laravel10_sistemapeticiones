@@ -32,6 +32,19 @@
                         <p class="mt-1 text-sm text-red-600">La descripción es obligatoria</p>
                     @enderror
                 </div>
+
+                <div class="mb-4">
+                    <label for="user_id" class="block text-lg font-semibold">Usuario</label>
+                    <select name="user_id" id="user_id" class="mt-1 block w-full border border-gray-200">
+                        <option>Selecciona un correo electrónico</option>
+                        @foreach($users as $user)
+                            <option value="{{ $user->id }}" {{ $peticion->user_id == $user->id ? 'selected' : '' }}>{{ $user->email }}</option>
+                        @endforeach
+                    </select>
+                    @error('user_id')
+                        <p class="mt-1 text-sm text-red-600">Debes seleccionar un usuario</p>
+                    @enderror
+                </div>  
     
                 <div class="mt-4">
                     <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500" type="submit">Editar</button>

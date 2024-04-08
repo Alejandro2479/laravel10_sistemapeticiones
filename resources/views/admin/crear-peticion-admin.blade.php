@@ -35,7 +35,7 @@
                 <div class="mb-4">
                     <label for="user_id" class="block text-lg font-semibold">Usuario</label>
                     <select name="user_id" id="user_id" class="mt-1 block w-full border border-gray-200">
-                        <option value="">Selecciona un correo electrónico</option> <!-- Opción vacía -->
+                        <option>Selecciona un correo electrónico</option>
                         @foreach($users as $user)
                             <option value="{{ $user->id }}">{{ $user->email }}</option>
                         @endforeach
