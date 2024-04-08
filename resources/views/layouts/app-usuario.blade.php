@@ -23,7 +23,7 @@
                     <a class="block px-4 py-2" href="#">Ver Peticiones Completas</a>
                 </li>
                 <li class="hover:bg-sky-600 duration-500">
-                    <a class="block px-4 py-2" href="{{ route('login.destroy') }}">Cerrar Sesión</a>
+                    <a class="block px-4 py-2" href="{{ route('login.eliminar') }}">Cerrar Sesión</a>
                 </li>    
             </ul>
         </nav>
