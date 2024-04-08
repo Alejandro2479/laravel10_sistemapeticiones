@@ -6,12 +6,19 @@ use Illuminate\Http\Request;
 
 class SesionController extends Controller
 {
-    public function create()
+    public function homeLogin()
     {
+        if (Auth()->check()) {
+            if (auth()->user()->role === 'admin') {
+                return redirect()->route('admin.peticion-index');
+            } elseif (auth()->user()->role === 'user') {
+                return redirect()->route('usuario.peticion-index');
+            }
+        }
         return view('auth.login');
     }
 
-    public function store()
+    public function guardarSesion()
     {
         if (auth()->attempt(request(['name', 'password'])) == false) {
             return back()->withErrors([
@@ -26,10 +33,10 @@ class SesionController extends Controller
         }
     }
 
-    public function destroy()
+    public function eliminarSesion()
     {
         auth()->logout();
 
-        return redirect()->to('/login');
+        return redirect()->route('login.home');
     }
 }

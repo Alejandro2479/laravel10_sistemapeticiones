@@ -23,6 +23,13 @@ Route::get('/', function () {
 });
 */
 
+// RUTAS LOGIN
+Route::get('/login', [SesionController::class, 'homeLogin'])->name('login.home');
+
+Route::post('/login/guardar', [SesionController::class, 'guardarSesion'])->name('login.guardar');
+
+Route::get('/logout', [SesionController::class, 'eliminarSesion'])->middleware('auth')->name('login.eliminar');
+
 // RUTAS ADMNISTRADOR
 Route::get('/admin/peticion/index', [AdminController::class, 'indexPeticion'])->middleware('auth.admin')->name('admin.peticion-index');
 
@@ -50,15 +57,6 @@ Route::get('/usuario/peticion/index', [UsuarioController::class, 'indexPeticion'
 Route::get('/usuario/peticion/{peticion}/mostrar', [UsuarioController::class, 'mostrarPeticion'])->middleware('auth.user')->name('usuario.peticion-mostrar');
 
 // RUTAS ADMINISTRADOR Y USUARIO
-// Editar rutas
-Route::get('/login', [SesionController::class, 'create'])->name('login.index');
-Route::post('/login', [SesionController::class, 'store'])->name('login.store');
-Route::get('/logout', [SesionController::class, 'destroy'])->middleware('auth')->name('login.destroy');
-
-// Modificar esta ruta ya que es de admin y user
-Route::put('/peticions/{peticion}/alternar-estatus', [AdminController::class, 'alternarEstatusPeticion'])->middleware('auth')->name('peticions.alternar-estatus');
-
-// Modificar esta ruta por si es admin o user
 Route::get("/", function () {
     if (Auth()->check()) {
         if (auth()->user()->role === 'admin') {
@@ -69,6 +67,8 @@ Route::get("/", function () {
     }
     return redirect()->route('login.index');
 });
+
+Route::put('/peticions/{peticion}/alternar-estatus', [AdminController::class, 'alternarEstatusPeticion'])->middleware('auth')->name('peticions.alternar-estatus');
 
 Route::fallback(fn () => abort(404));
 
