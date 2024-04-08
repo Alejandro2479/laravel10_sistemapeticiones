@@ -25,6 +25,13 @@ class AddAdminUser extends Migration
             'password' => bcrypt('contraseña'),
             'role' => 'user',
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'usuario2',
+            'email' => 'usuario2@test.com',
+            'password' => bcrypt('contraseña'),
+            'role' => 'user',
+        ]);
     }
 
     /**
