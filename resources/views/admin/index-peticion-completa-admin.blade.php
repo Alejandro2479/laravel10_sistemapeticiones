@@ -37,7 +37,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td class="border px-4 py-2" colspan="5">No hay peticiones</td>
+                            <td class="border px-4 py-2" colspan="6">No hay peticiones</td>
                         </tr>
                         @endforelse
                     </tbody>
