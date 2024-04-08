@@ -78,15 +78,4 @@ class AdminController extends Controller
 
         return redirect()->route('admin.peticion-index')->with('exito', 'Usuario creado con exito');
     }
-
-    //
-    //
-
-    // Este metodo debe ir en otro controlador compartido
-    public function alternarEstatusPeticion(Peticion $peticion)
-    {
-        $peticion->alternarPeticion();
-
-        return redirect()->back()->with('exito', 'Petición actualizada con exito');
-    }
 }

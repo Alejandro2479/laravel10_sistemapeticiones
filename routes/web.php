@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\AdminUsuarioController;
 use App\Http\Controllers\SesionController;
 
 /*
@@ -68,7 +69,7 @@ Route::get("/", function () {
     return redirect()->route('login.index');
 });
 
-Route::put('/peticions/{peticion}/alternar-estatus', [AdminController::class, 'alternarEstatusPeticion'])->middleware('auth')->name('peticions.alternar-estatus');
+Route::put('/peticion/{peticion}/alternar-estatus', [AdminUsuarioController::class, 'alternarEstatusPeticion'])->middleware('auth')->name('peticion.alternar-estatus');
 
 Route::fallback(fn () => abort(404));
 
