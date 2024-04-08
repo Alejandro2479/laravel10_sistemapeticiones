@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('peticions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('usuario_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('numero_radicado');
             $table->string('asunto');
             $table->text('descripcion');
             $table->boolean('estatus')->default(false);
             $table->timestamps();
-            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -21,7 +21,7 @@ class PeticionFactory extends Factory
             'asunto' => fake()->sentence(),
             'descripcion' => fake()->paragraph(),
             'estatus' => fake()->boolean(),
-            'usuario_id' => fake()->randomElement([2, 3]),
+            'user_id' => fake()->randomElement([2, 3]),
         ];
     }
 }

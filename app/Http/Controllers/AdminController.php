@@ -13,17 +13,18 @@ class AdminController extends Controller
 {
     public function indexPeticion()
     {
-        return view('admin.index-peticion-admin', ['peticions' => Peticion::latest()->paginate(10)]);
+        $peticiones = Peticion::with('user')->where('estatus', false)->latest()->paginate(10);
+        
+        return view('admin.index-peticion-admin', ['peticiones' => $peticiones]);
     }
 
-    /*
-    public function indexPeticion()
+    public function indexPeticionCompleta()
     {
-        $peticionesIncompletas = Peticion::where('estatus', false)->latest()->paginate(10);
-
-        return view('index', ['peticions' => $peticionesIncompletas]);
+        $peticionesCompletas = Peticion::where('estatus', true)->latest()->paginate(10);
+        
+        return view('admin.index-peticion-completa-admin', ['peticiones' => $peticionesCompletas]);
     }
-    */
+
 
     public function crearPeticion(User $user)
     {

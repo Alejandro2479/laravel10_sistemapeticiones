@@ -34,6 +34,8 @@ Route::get('/logout', [SesionController::class, 'eliminarSesion'])->middleware('
 // RUTAS ADMNISTRADOR
 Route::get('/admin/peticion/index', [AdminController::class, 'indexPeticion'])->middleware('auth.admin')->name('admin.peticion-index');
 
+Route::get('/admin/peticion/index-completas', [AdminController::class, 'indexPeticionCompleta'])->middleware('auth.admin')->name('admin.peticion-completa-index');
+
 Route::get('/admin/peticion/crear', [AdminController::class, 'crearPeticion'])->middleware('auth.admin')->name('admin.peticion-crear');
 
 Route::get('/admin/peticion/{peticion}/mostrar', [AdminController::class, 'mostrarPeticion'])->middleware('auth.admin')->name('admin.peticion-mostrar');
