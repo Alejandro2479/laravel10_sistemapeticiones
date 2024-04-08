@@ -13,10 +13,7 @@ class UsuarioController extends Controller
     {
         $userId = Auth::id();
         
-        $peticiones = Peticion::where([
-            ['user_id', $userId],
-            ['estatus', false]
-        ])->latest()->paginate(10);
+        $peticiones = Peticion::where([['user_id', $userId],['estatus', false]])->oldest()->paginate(10);
     
         return view('usuario.index-peticion-usuario', ['peticiones' => $peticiones]);
     }
@@ -26,10 +23,7 @@ class UsuarioController extends Controller
     {
         $userId = Auth::id();
         
-        $peticiones = Peticion::where([
-            ['user_id', $userId],
-            ['estatus', true]
-        ])->latest()->paginate(10);
+        $peticiones = Peticion::where([['user_id', $userId],['estatus', true]])->oldest()->paginate(10);
     
         return view('usuario.index-peticion-usuario', ['peticiones' => $peticiones]);
     }
