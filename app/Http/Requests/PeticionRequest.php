@@ -24,7 +24,8 @@ class PeticionRequest extends FormRequest
         return [
             'numero_radicado' => 'required',
             'asunto' => 'required',
-            'descripcion' => 'required'
+            'descripcion' => 'required',
+            'usuario_id' => 'required'
         ];
     }
 }

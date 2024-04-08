@@ -25,9 +25,11 @@ class AdminController extends Controller
     }
     */
 
-    public function crearPeticion()
+    public function crearPeticion(User $user)
     {
-        return view('admin.crear-peticion-admin');
+        $usuarios = User::where('role', 'user')->get();
+        
+        return view('admin.crear-peticion-admin', ['usuarios' => $usuarios]);
     }
 
     public function mostrarPeticion(Peticion $peticion)

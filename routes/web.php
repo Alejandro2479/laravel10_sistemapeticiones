@@ -27,7 +27,7 @@ Route::get('/', function () {
 // RUTAS LOGIN
 Route::get('/login', [SesionController::class, 'homeLogin'])->name('login.home');
 
-Route::post('/login/guardar', [SesionController::class, 'guardarSesion'])->name('login.guardar');
+Route::post('/login', [SesionController::class, 'guardarSesion'])->name('login.guardar');
 
 Route::get('/logout', [SesionController::class, 'eliminarSesion'])->middleware('auth')->name('login.eliminar');
 
