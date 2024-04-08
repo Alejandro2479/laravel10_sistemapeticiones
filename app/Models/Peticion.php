@@ -15,6 +15,11 @@ class Peticion extends Model
         'descripcion'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function alternarPeticion()
     {
         $this->estatus = !$this->estatus;
