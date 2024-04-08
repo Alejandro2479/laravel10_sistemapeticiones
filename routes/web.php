@@ -57,6 +57,8 @@ Route::post('/admin/usuario/crear/guardar', [AdminController::class, 'guardarUsu
 // RUTAS USUARIO
 Route::get('/usuario/peticion/index', [UsuarioController::class, 'indexPeticion'])->middleware('auth.user')->name('usuario.peticion-index');
 
+Route::get('/usuario/peticion/index-completas', [UsuarioController::class, 'indexPeticionCompleta'])->middleware('auth.user')->name('user.peticion-completa-index');
+
 Route::get('/usuario/peticion/{peticion}/mostrar', [UsuarioController::class, 'mostrarPeticion'])->middleware('auth.user')->name('usuario.peticion-mostrar');
 
 // RUTAS ADMINISTRADOR Y USUARIO
