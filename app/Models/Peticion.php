@@ -13,7 +13,7 @@ class Peticion extends Model
         'numero_radicado', 
         'asunto', 
         'descripcion',
-        'usuario_id'
+        'user_id'
     ];
 
     public function user()

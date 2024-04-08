@@ -33,14 +33,14 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="usuario_id" class="block text-lg font-semibold">Usuario</label>
-                    <select name="usuario_id" id="usuario_id" class="mt-1 block w-full border border-gray-200">
+                    <label for="user_id" class="block text-lg font-semibold">Usuario</label>
+                    <select name="user_id" id="user_id" class="mt-1 block w-full border border-gray-200">
                         <option value="">Selecciona un correo electrónico</option> <!-- Opción vacía -->
-                        @foreach($usuarios as $usuario)
-                            <option value="{{ $usuario->id }}">{{ $usuario->email }}</option>
+                        @foreach($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->email }}</option>
                         @endforeach
                     </select>
-                    @error('usuario_id')
+                    @error('user_id')
                         <p class="mt-1 text-sm text-red-600">Debes seleccionar un usuario</p>
                     @enderror
                 </div>                
