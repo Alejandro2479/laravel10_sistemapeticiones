@@ -33,16 +33,16 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="dias" class="block text-lg font-semibold">Días para Vencer</label>
-                    <input class="mt-1 block w-full border border-gray-200" type="text" name="dias" id="dias" value="{{ $peticion->dias ?? old('dias') }}">
-                    @error('dias')
-                        <p class="mt-1 text-sm text-red-600">El número de días es obligatorio y debe ser numérico</p>
+                    <label for="fecha_vencimiento" class="block text-lg font-semibold">Fecha de Vencimiento</label>
+                    <input class="mt-1 w-46 border border-gray-200" type="date" name="fecha_vencimiento" id="fecha_vencimiento" value="{{ $peticion->fecha_vencimiento ?? old('fecha_vencimiento') }}">
+                    @error('fecha_vencimiento')
+                        <p class="mt-1 text-sm text-red-600">La fecha de vencimiento es obligaoria y debe ser una fecha posterior al día actual</p>
                     @enderror
                 </div>
 
                 <div class="mb-4">
                     <label for="user_id" class="block text-lg font-semibold">Usuario</label>
-                    <select name="user_id" id="user_id" class="mt-1 block w-full border border-gray-200">
+                    <select name="user_id" id="user_id" class="mt-1 w-96 border border-gray-200">
                         <option>Selecciona un correo electrónico</option>
                         @foreach($users as $user)
                             <option value="{{ $user->id }}">{{ $user->email }}</option>

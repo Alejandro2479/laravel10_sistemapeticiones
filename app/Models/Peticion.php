@@ -16,8 +16,12 @@ class Peticion extends Model
         'numero_radicado', 
         'asunto', 
         'descripcion',
-        'dias',
+        'fecha_vencimiento',
         'user_id'
+    ];
+
+    protected $casts = [
+        'fecha_vencimiento',
     ];
 
     public function user()

@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('numero_radicado');
             $table->string('asunto');
             $table->text('descripcion');
-            $table->unsignedTinyInteger('dias');
             $table->boolean('estatus')->default(false);
             $table->timestamps();
+            $table->timestamp('fecha_vencimiento')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

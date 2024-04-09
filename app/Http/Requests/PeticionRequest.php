@@ -25,7 +25,7 @@ class PeticionRequest extends FormRequest
             'numero_radicado' => 'required',
             'asunto' => 'required',
             'descripcion' => 'required',
-            'dias' => 'required|numeric',
+            'fecha_vencimiento' => 'required|date|after:today',
             'user_id' => 'required|numeric'
         ];
     }
