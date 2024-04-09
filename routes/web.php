@@ -82,4 +82,3 @@ Route::get("/", function () {
 Route::put('/peticion/{peticion}/alternar-estatus', [AdminUsuarioController::class, 'alternarEstatusPeticion'])->middleware('auth')->name('peticion.alternar-estatus');
 
 Route::fallback(fn () => abort(404));
-
