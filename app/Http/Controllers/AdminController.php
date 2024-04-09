@@ -11,18 +11,28 @@ use App\Http\Requests\UserRequest;
 
 class AdminController extends Controller
 {
-    public function indexPeticion()
+    public function indexPeticion(Request $request)
     {
-        $peticiones = Peticion::with('user')->where('estatus', false)->oldest()->paginate(10);
+        $numeroRadicado = $request->input('numero_radicado');
+        
+        $peticiones = Peticion::when(
+            $numeroRadicado,
+            fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
+        )->where('estatus', false)->oldest()->paginate(10);
         
         return view('admin.index-peticion-admin', ['peticiones' => $peticiones]);
     }
 
-    public function indexPeticionCompleta()
+    public function indexPeticionCompleta(Request $request)
     {
-        $peticionesCompletas = Peticion::where('estatus', true)->oldest()->paginate(10);
+        $numeroRadicado = $request->input('numero_radicado');
         
-        return view('admin.index-peticion-completa-admin', ['peticiones' => $peticionesCompletas]);
+        $peticiones = Peticion::when(
+            $numeroRadicado,
+            fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
+        )->where('estatus', true)->oldest()->paginate(10);
+        
+        return view('admin.index-peticion-completa-admin', ['peticiones' => $peticiones]);
     }
 
 

@@ -5,7 +5,15 @@
 @section('contenido_principal')
     <div class="md:ml-64">
         <div class="p-4">
-            <h2 class="text-2xl font-semibold mb-4">Lista de Peticiones</h2>
+            <div class="flex flex-col md:flex-row md:justify-between">
+                <h2 class="text-2xl font-semibold mb-4">Lista de Peticiones</h2>
+            
+                <form class="flex items-center space-x-2 mb-4 md:mb-0" method="GET" action="{{ route('admin.peticion-index') }}">
+                    <input class="w-60 border rounded-md border-slate-300 py-1 px-2 leading-tight focus:outline-none" type="text" name="numero_radicado" placeholder="Buscar por número de radicado" value="{{ request('numero_radicado') }}">
+                    <button class="rounded py-1 px-2 text-sm font-semibold text-slate-500 ring-1 ring-slate-500 hover:bg-slate-50 duration-500" type="submit">Buscar</button>
+                    <a class="rounded py-1 px-2 text-sm font-semibold text-slate-500 ring-1 ring-slate-500 hover:bg-slate-50 duration-500" href="{{ route('admin.peticion-index') }}">Limpiar</a>
+                </form>
+            </div>
             <div class="overflow-x-auto">
                 <table class="w-full table-auto">
                     <thead>
