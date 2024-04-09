@@ -9,23 +9,32 @@ use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
-    public function indexPeticion()
+    public function indexPeticion(Request $request)
     {
         $userId = Auth::id();
-        
-        $peticiones = Peticion::where([['user_id', $userId],['estatus', false]])->oldest()->paginate(10);
+        $numeroRadicado = $request->input('numero_radicado');
+
+        $peticiones = Peticion::when(
+            $numeroRadicado,
+            fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
+        )->where([['user_id', $userId],['estatus', false]])->oldest()->paginate(10);
     
         return view('usuario.index-peticion-usuario', ['peticiones' => $peticiones]);
     }
     
 
-    public function indexPeticionCompleta()
+    public function indexPeticionCompleta(Request $request)
     {
         $userId = Auth::id();
         
-        $peticiones = Peticion::where([['user_id', $userId],['estatus', true]])->oldest()->paginate(10);
+        $numeroRadicado = $request->input('numero_radicado');
+
+        $peticiones = Peticion::when(
+            $numeroRadicado,
+            fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
+        )->where([['user_id', $userId],['estatus', true]])->oldest()->paginate(10);
     
-        return view('usuario.index-peticion-usuario', ['peticiones' => $peticiones]);
+        return view('usuario.index-peticion-completa-usuario', ['peticiones' => $peticiones]);
     }
 
     public function mostrarPeticion(Peticion $peticion)
