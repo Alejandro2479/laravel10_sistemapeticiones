@@ -16,6 +16,7 @@ class Peticion extends Model
         'numero_radicado', 
         'asunto', 
         'descripcion',
+        'dias',
         'user_id'
     ];
 

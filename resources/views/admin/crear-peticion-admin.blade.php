@@ -33,6 +33,14 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="dias" class="block text-lg font-semibold">Días para Vencer</label>
+                    <input class="mt-1 block w-full border border-gray-200" type="text" name="dias" id="dias" value="{{ $peticion->dias ?? old('dias') }}">
+                    @error('dias')
+                        <p class="mt-1 text-sm text-red-600">El número de días es obligatorio y debe ser numérico</p>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
                     <label for="user_id" class="block text-lg font-semibold">Usuario</label>
                     <select name="user_id" id="user_id" class="mt-1 block w-full border border-gray-200">
                         <option>Selecciona un correo electrónico</option>

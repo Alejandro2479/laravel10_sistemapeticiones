@@ -20,6 +20,7 @@ class PeticionFactory extends Factory
             'numero_radicado' => fake()->randomNumber(5, true),
             'asunto' => fake()->sentence(),
             'descripcion' => fake()->paragraph(),
+            'dias' => fake()->numberBetween(1, 30),
             'estatus' => fake()->boolean(),
             'user_id' => fake()->randomElement([2, 3]),
         ];

@@ -31,7 +31,20 @@
                         <tr class="border-t">
                             <td class="px-4 py-2 text-center">{{ $peticion->numero_radicado }}</td>
                             <td class="px-4 py-2">{{ $peticion->asunto }}</td>
-                            <td class="px-4 py-2 text-center">X</td>
+                            <td class="px-4 py-2 text-center font-semibold">
+                                <span class="
+                                    inline-block align-middle
+                                    @if ($peticion->dias >= 1 && $peticion->dias <= 5)
+                                        bg-red-500 text-white
+                                    @elseif ($peticion->dias >= 6 && $peticion->dias <= 15)
+                                        bg-orange-500 text-white
+                                    @elseif ($peticion->dias >= 16 && $peticion->dias <= 30)
+                                        bg-green-500 text-white
+                                    @endif
+                                        rounded py-1 px-2 h-8 w-8">
+                                    {{ $peticion->dias }}
+                                </span>
+                            </td>    
                             <td class="px-4 py-2 text-center">{{ $peticion->estatus ? 'Completa' : 'Incompleta' }}</td>
                             <td class="px-4 py-2 text-center">{{ $peticion->created_at->format('d/m/Y') }}</td>
                             <td class="flex flex-col px-4 py-2 items-center justify-center space-y-2 space-x-0 md:flex-row md:space-y-0 md:space-x-2">
