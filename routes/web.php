@@ -70,7 +70,7 @@ Route::get("/", function () {
             return redirect()->route('usuario.peticion-index');
         }
     }
-    return redirect()->route('login.index');
+    return redirect()->route('login.home');
 });
 
 Route::put('/peticion/{peticion}/alternar-estatus', [AdminUsuarioController::class, 'alternarEstatusPeticion'])->middleware('auth')->name('peticion.alternar-estatus');

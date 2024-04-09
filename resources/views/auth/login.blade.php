@@ -24,7 +24,7 @@
                 </h2>
                 <form class="flex flex-col space-y-4" action="" method="POST">
                     @csrf
-                    <input class="py-2 px-4 text-center placeholder:text-sm placeholder:text-center" type="text" name="name" id="name" placeholder="Ingresa tu usuario">
+                    <input class="py-2 px-4 text-center placeholder:text-sm placeholder:text-center" type="text" name="username" id="username" placeholder="Ingresa tu usuario">
                     @error('name')
                     <p class="mt-1 text-sm text-red-600">El usuario es incorrecto</p>
                     @enderror

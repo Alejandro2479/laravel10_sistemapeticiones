@@ -20,7 +20,7 @@ class SesionController extends Controller
 
     public function guardarSesion()
     {
-        if (auth()->attempt(request(['name', 'password'])) == false) {
+        if (auth()->attempt(request(['username', 'password'])) == false) {
             return back()->withErrors([
                 'message' => 'El correo electrónico y/o la contraseña son incorrectos'
             ]);

@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\Builder;
+
+
 class Peticion extends Model
 {
     use HasFactory;
@@ -25,5 +28,10 @@ class Peticion extends Model
     {
         $this->estatus = !$this->estatus;
         $this->save();
+    }
+
+    public function scopeNumeroRadicado(Builder $query, string $numeroRadicado): Builder
+    {
+        return $query->where('numero_radicado', 'LIKE', '%' . $numeroRadicado . '%');
     }
 }
