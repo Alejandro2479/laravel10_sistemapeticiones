@@ -24,11 +24,11 @@
                 </h2>
                 <form class="flex flex-col space-y-4" action="" method="POST">
                     @csrf
-                    <input class="py-2 px-4 text-center placeholder:text-sm placeholder:text-center" type="text" name="username" id="username" placeholder="Ingresa tu usuario">
+                    <input class="py-2 px-4 rounded text-center placeholder:text-sm placeholder:text-center" type="text" name="username" id="username" placeholder="Ingresa tu usuario">
                     @error('name')
                     <p class="mt-1 text-sm text-red-600">El usuario es incorrecto</p>
                     @enderror
-                    <input class="py-2 px-4 text-center placeholder:text-sm placeholder:text-center" type="password" name="password" id="password" placeholder="Ingresa tu contraseña">
+                    <input class="py-2 px-4 rounded text-center placeholder:text-sm placeholder:text-center" type="password" name="password" id="password" placeholder="Ingresa tu contraseña">
                     @error('password')
                     <p class="mt-1 text-sm text-red-600">La contraseña es incorrecta</p>
                     @enderror
