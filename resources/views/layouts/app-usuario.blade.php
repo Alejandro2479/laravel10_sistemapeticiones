@@ -15,7 +15,7 @@
             <h1 class="p-4 text-2xl font-bold text-center">
                 Panel Usuario
             </h1>
-            <ul class="flex flex-row justify-center font-semibold md:flex-col">
+            <ul class="flex flex-row justify-center font-semibold pb-2 md:flex-col">
                 <li class="hover:bg-sky-600 duration-500">
                     <a class="block px-4 py-2" href="{{ route('usuario.peticion-index') }}">Índice</a>
                 </li>
