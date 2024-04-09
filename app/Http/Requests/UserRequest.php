@@ -21,11 +21,24 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        // Obtener el usuario actual
+        $user = $this->route('user');
+
+        // Definir las reglas básicas
+        $rules = [
             'name' => 'required',
-            'username' => 'required|unique:users,username',
-            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6'
         ];
+
+        // Agregar reglas para username y email solo si han sido modificados
+        if ($user) {
+            $rules['username'] = 'required|unique:users,username,' . $user->id;
+            $rules['email'] = 'required|email|unique:users,email,' . $user->id;
+        } else {
+            $rules['username'] = 'required|unique:users,username';
+            $rules['email'] = 'required|email|unique:users,email';
+        }
+
+        return $rules;
     }
 }

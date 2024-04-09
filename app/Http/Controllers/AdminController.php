@@ -66,7 +66,6 @@ class AdminController extends Controller
     {
         $peticion->update($peticionRequest->validated());
 
-        // return redirect()->route('peticions.mostrar', ['peticion' => $peticion->id])->with('exito', 'Petición editada con exito');
         return redirect()->route('admin.peticion-index')->with('exito', 'Petición editada con exito');
     }
 
@@ -87,10 +86,32 @@ class AdminController extends Controller
         return view('admin.crear-usuario-admin');
     }
 
+    public function editarUsuario(User $user)
+    {
+        return view('admin.editar-usuario-admin', ['user' => $user]);
+    }
+
     public function guardarUsuario(UserRequest $userRequest)
     {
         $peticion = User::create($userRequest->validated());
 
-        return redirect()->route('admin.peticion-index')->with('exito', 'Usuario creado con exito');
+        return redirect()->route('admin.usuario-index')->with('exito', 'Usuario creado con exito');
+    }
+
+    public function actualizarUsuario(User $user, UserRequest $userRequest)
+    {
+        $user->update($userRequest->validated());
+
+        return redirect()->route('admin.usuario-index')->with('exito', 'Usuario editado con exito');
+    }
+
+    public function eliminarUsuario(User $user)
+    {
+        if ($user->role !== 'admin') {
+            $user->delete();
+            return redirect()->route('admin.usuario-index')->with('exito', 'Usuario eliminado con éxito');
+        } else {
+            return redirect()->route('admin.usuario-index')->with('error', 'No se puede eliminar un administrador');
+        }
     }
 }

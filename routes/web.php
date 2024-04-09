@@ -52,7 +52,13 @@ Route::get('/admin/usuario/index', [AdminController::class, 'indexUsuario'])->mi
 
 Route::get('/admin/usuario/crear', [AdminController::class, 'crearUsuario'])->middleware('auth.admin')->name('admin.usuario-crear');
 
+Route::get('/admin/usuario/{user}/editar', [AdminController::class, 'editarUsuario'])->middleware('auth.admin')->name('admin.usuario-editar');
+
 Route::post('/admin/usuario/crear/guardar', [AdminController::class, 'guardarUsuario'])->middleware('auth.admin')->name('admin.usuario-guardar');
+
+Route::put('/admin/usuario/{user}/editar/actualizar', [AdminController::class, 'actualizarUsuario'])->middleware('auth.admin')->name('admin.usuario-actualizar');
+
+Route::delete('/admin/usuario/{user}/eliminar', [AdminController::class, 'eliminarUsuario'])->middleware('auth.admin')->name('admin.usuario-eliminar');
 
 // RUTAS USUARIO
 Route::get('/usuario/peticion/index', [UsuarioController::class, 'indexPeticion'])->middleware('auth.user')->name('usuario.peticion-index');
