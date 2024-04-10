@@ -19,7 +19,7 @@ class UserController extends Controller
             fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
         )->where([['user_id', $userId],['estatus', false]])->oldest()->paginate(10);
     
-        return view('usuario.index-peticion-usuario', ['peticiones' => $peticiones]);
+        return view('user.index-peticion-user', ['peticiones' => $peticiones]);
     }
     
 
@@ -34,11 +34,11 @@ class UserController extends Controller
             fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
         )->where([['user_id', $userId],['estatus', true]])->oldest()->paginate(10);
     
-        return view('usuario.index-peticion-completa-usuario', ['peticiones' => $peticiones]);
+        return view('user.index-peticion-completa-user', ['peticiones' => $peticiones]);
     }
 
     public function mostrarPeticion(Peticion $peticion)
     {
-        return view('usuario.mostrar-peticion-usuario', ['peticion' => $peticion]);
+        return view('user.mostrar-peticion-user', ['peticion' => $peticion]);
     }
 }
