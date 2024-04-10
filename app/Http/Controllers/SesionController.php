@@ -12,7 +12,7 @@ class SesionController extends Controller
             if (auth()->user()->role === 'admin') {
                 return redirect()->route('admin.peticion-index');
             } elseif (auth()->user()->role === 'user') {
-                return redirect()->route('usuario.peticion-index');
+                return redirect()->route('user.peticion-index');
             }
         }
         return view('auth.login');
@@ -28,7 +28,7 @@ class SesionController extends Controller
             if (auth()->user()->role === 'admin') {
                 return redirect()->route('admin.peticion-index')->with('exito', 'Administrador inicio sesión con exito');
             } else {
-                return redirect()->route('usuario.peticion-index')->with('exito', 'Usuario inicio sesión con exito');
+                return redirect()->route('user.peticion-index')->with('exito', 'Usuario inicio sesión con exito');
             }
         }
     }

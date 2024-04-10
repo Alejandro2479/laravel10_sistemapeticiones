@@ -82,42 +82,42 @@ class AdminController extends Controller
         return redirect()->route('admin.peticion-index')->with('exito', 'Petición eliminada con exito');
     }
 
-    public function indexUsuario()
+    public function indexUser()
     {
-        return view('admin.index-usuario-admin', ['users' => User::latest()->get()]);
+        return view('admin.index-user-admin', ['users' => User::latest()->get()]);
     }
 
-    public function crearUsuario()
+    public function crearUser()
     {
-        return view('admin.crear-usuario-admin');
+        return view('admin.crear-user-admin');
     }
 
-    public function editarUsuario(User $user)
+    public function editarUser(User $user)
     {
-        return view('admin.editar-usuario-admin', ['user' => $user]);
+        return view('admin.editar-user-admin', ['user' => $user]);
     }
 
-    public function guardarUsuario(UserRequest $userRequest)
+    public function guardarUser(UserRequest $userRequest)
     {
         $peticion = User::create($userRequest->validated());
 
-        return redirect()->route('admin.usuario-index')->with('exito', 'Usuario creado con exito');
+        return redirect()->route('admin.user-index')->with('exito', 'Usuario creado con exito');
     }
 
-    public function actualizarUsuario(User $user, UserRequest $userRequest)
+    public function actualizarUser(User $user, UserRequest $userRequest)
     {
         $user->update($userRequest->validated());
 
-        return redirect()->route('admin.usuario-index')->with('exito', 'Usuario editado con exito');
+        return redirect()->route('admin.user-index')->with('exito', 'Usuario editado con exito');
     }
 
-    public function eliminarUsuario(User $user)
+    public function eliminarUser(User $user)
     {
         if ($user->role !== 'admin') {
             $user->delete();
-            return redirect()->route('admin.usuario-index')->with('exito', 'Usuario eliminado con éxito');
+            return redirect()->route('admin.user-index')->with('exito', 'Usuario eliminado con éxito');
         } else {
-            return redirect()->route('admin.usuario-index')->with('error', 'No se puede eliminar un administrador');
+            return redirect()->route('admin.user-index')->with('error', 'No se puede eliminar un administrador');
         }
     }
 }

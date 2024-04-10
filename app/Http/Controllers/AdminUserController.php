@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Peticion;
 
-class AdminUsuarioController extends Controller
+class AdminUserController extends Controller
 {
     public function alternarEstatusPeticion(Peticion $peticion)
     {

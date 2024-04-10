@@ -26,10 +26,10 @@
                     <a class="block px-4 py-2" href="{{ route('admin.peticion-completa-index') }}">Ver Peticiones Completas</a>
                 </li>
                 <li class="hover:bg-sky-600 duration-500">
-                    <a class="block px-4 py-2" href="{{ route('admin.usuario-crear') }}">Crear Usuario</a>
+                    <a class="block px-4 py-2" href="{{ route('admin.user-crear') }}">Crear Usuario</a>
                 </li>
                 <li class="hover:bg-sky-600 duration-500">
-                    <a class="block px-4 py-2" href="{{ route('admin.usuario-index') }}">Ver Usuarios</a>
+                    <a class="block px-4 py-2" href="{{ route('admin.user-index') }}">Ver Usuarios</a>
                 </li>
                 <li class="hover:bg-sky-600 duration-500">
                     <a class="block px-4 py-2" href="{{ route('login.eliminar') }}">Cerrar Sesión</a>

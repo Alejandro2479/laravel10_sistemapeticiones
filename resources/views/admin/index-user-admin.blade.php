@@ -23,11 +23,11 @@
                             <td class="px-4 py-2">{{ $user->username }}</td>
                             <td class="px-4 py-2">{{ $user->email }}</td>
                             <td class="flex flex-col px-4 py-2 items-center justify-center space-y-2 space-x-0 md:flex-row md:space-y-0 md:space-x-2">                            
-                                <a href="{{ route('admin.usuario-editar', ['user' => $user]) }}">
+                                <a href="{{ route('admin.user-editar', ['user' => $user]) }}">
                                     <button class="py-2 px-4 rounded bg-amber-400 text-white font-semibold hover:bg-amber-500 duration-500" type="submit">Editar</button>
                                 </a>
                                 @if($user->role !== 'admin')
-                                <form action="{{ route('admin.usuario-eliminar', ['user' => $user]) }}" method="POST">
+                                <form action="{{ route('admin.user-eliminar', ['user' => $user]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="py-2 px-4 rounded bg-red-500 text-white font-semibold hover:bg-red-600 duration-500">Eliminar</button>

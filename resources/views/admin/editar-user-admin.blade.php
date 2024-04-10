@@ -6,7 +6,7 @@
     <div class="md:ml-64">
         <div class="p-4">
             <h2 class="text-2xl font-semibold mb-4">Editar Usuario</h2>
-            <form action="{{ route('admin.usuario-actualizar', ['user' => $user->id]) }}" method="POST">
+            <form action="{{ route('admin.user-actualizar', ['user' => $user->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mb-4">

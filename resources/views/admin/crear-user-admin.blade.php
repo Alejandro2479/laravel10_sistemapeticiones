@@ -6,7 +6,7 @@
     <div class="md:ml-64">
         <div class="p-4">
             <h2 class="text-2xl font-semibold mb-4">Crear Usuario</h2>
-            <form action="{{ route('admin.usuario-guardar') }}" method="POST">
+            <form action="{{ route('admin.user-guardar') }}" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="name" class="block text-lg font-semibold">Nombre</label>

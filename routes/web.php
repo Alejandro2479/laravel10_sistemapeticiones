@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\AdminUsuarioController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\SesionController;
 
 /*
@@ -48,24 +48,24 @@ Route::put('/admin/peticion/{peticion}/editar/actualizar', [AdminController::cla
 
 Route::delete('/admin/peticion/{peticion}/editar/eliminar', [AdminController::class, 'eliminarPeticion'])->middleware('auth.admin')->name('admin.peticion-eliminar');
 
-Route::get('/admin/usuario/index', [AdminController::class, 'indexUsuario'])->middleware('auth.admin')->name('admin.usuario-index');
+Route::get('/admin/user/index', [AdminController::class, 'indexUser'])->middleware('auth.admin')->name('admin.user-index');
 
-Route::get('/admin/usuario/crear', [AdminController::class, 'crearUsuario'])->middleware('auth.admin')->name('admin.usuario-crear');
+Route::get('/admin/user/crear', [AdminController::class, 'crearUser'])->middleware('auth.admin')->name('admin.user-crear');
 
-Route::get('/admin/usuario/{user}/editar', [AdminController::class, 'editarUsuario'])->middleware('auth.admin')->name('admin.usuario-editar');
+Route::get('/admin/user/{user}/editar', [AdminController::class, 'editarUser'])->middleware('auth.admin')->name('admin.user-editar');
 
-Route::post('/admin/usuario/crear/guardar', [AdminController::class, 'guardarUsuario'])->middleware('auth.admin')->name('admin.usuario-guardar');
+Route::post('/admin/user/crear/guardar', [AdminController::class, 'guardarUser'])->middleware('auth.admin')->name('admin.user-guardar');
 
-Route::put('/admin/usuario/{user}/editar/actualizar', [AdminController::class, 'actualizarUsuario'])->middleware('auth.admin')->name('admin.usuario-actualizar');
+Route::put('/admin/user/{user}/editar/actualizar', [AdminController::class, 'actualizarUser'])->middleware('auth.admin')->name('admin.user-actualizar');
 
-Route::delete('/admin/usuario/{user}/eliminar', [AdminController::class, 'eliminarUsuario'])->middleware('auth.admin')->name('admin.usuario-eliminar');
+Route::delete('/admin/user/{user}/eliminar', [AdminController::class, 'eliminarUser'])->middleware('auth.admin')->name('admin.user-eliminar');
 
 // RUTAS USUARIO
-Route::get('/usuario/peticion/index', [UsuarioController::class, 'indexPeticion'])->middleware('auth.user')->name('usuario.peticion-index');
+Route::get('/user/peticion/index', [UserController::class, 'indexPeticion'])->middleware('auth.user')->name('user.peticion-index');
 
-Route::get('/usuario/peticion/index-completas', [UsuarioController::class, 'indexPeticionCompleta'])->middleware('auth.user')->name('user.peticion-completa-index');
+Route::get('/user/peticion/index-completas', [UserController::class, 'indexPeticionCompleta'])->middleware('auth.user')->name('user.peticion-completa-index');
 
-Route::get('/usuario/peticion/{peticion}/mostrar', [UsuarioController::class, 'mostrarPeticion'])->middleware('auth.user')->name('usuario.peticion-mostrar');
+Route::get('/user/peticion/{peticion}/mostrar', [UserController::class, 'mostrarPeticion'])->middleware('auth.user')->name('user.peticion-mostrar');
 
 // RUTAS ADMINISTRADOR Y USUARIO
 Route::get("/", function () {
@@ -73,12 +73,12 @@ Route::get("/", function () {
         if (auth()->user()->role === 'admin') {
             return redirect()->route('admin.peticion-index');
         } elseif (auth()->user()->role === 'user') {
-            return redirect()->route('usuario.peticion-index');
+            return redirect()->route('user.peticion-index');
         }
     }
     return redirect()->route('login.home');
 });
 
-Route::put('/peticion/{peticion}/alternar-estatus', [AdminUsuarioController::class, 'alternarEstatusPeticion'])->middleware('auth')->name('peticion.alternar-estatus');
+Route::put('/peticion/{peticion}/alternar-estatus', [AdminUserController::class, 'alternarEstatusPeticion'])->middleware('auth')->name('peticion.alternar-estatus');
 
 Route::fallback(fn () => abort(404));

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Peticion;
 use Illuminate\Support\Facades\Auth;
 
-class UsuarioController extends Controller
+class UserController extends Controller
 {
     public function indexPeticion(Request $request)
     {

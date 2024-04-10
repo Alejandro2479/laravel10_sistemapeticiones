@@ -17,7 +17,7 @@
             </h1>
             <ul class="flex flex-row justify-center font-semibold pb-2 md:flex-col">
                 <li class="hover:bg-sky-600 duration-500">
-                    <a class="block px-4 py-2" href="{{ route('usuario.peticion-index') }}">Índice</a>
+                    <a class="block px-4 py-2" href="{{ route('user.peticion-index') }}">Índice</a>
                 </li>
                 <li class="hover:bg-sky-600 duration-500">
                     <a class="block px-4 py-2" href="{{ route('user.peticion-completa-index') }}">Ver Peticiones Completas</a>

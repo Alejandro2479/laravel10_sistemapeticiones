@@ -1,4 +1,4 @@
-@extends('layouts.app-usuario')
+@extends('layouts.app-user')
 
 @section('title', 'Mostrar Petición')
 
