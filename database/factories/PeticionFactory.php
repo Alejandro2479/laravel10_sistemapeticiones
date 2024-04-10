@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use Carbon\Carbon;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Peticion>
  */
@@ -16,13 +18,21 @@ class PeticionFactory extends Factory
      */
     public function definition(): array
     {
+        // Fecha actual
+        $now = Carbon::now();
+    
+        $fechaVencimiento = $now->copy()->addDays(rand(1, 40));
+
+        $dias = $now->diffInDays($fechaVencimiento);
+    
         return [
             'numero_radicado' => fake()->randomNumber(5, true),
             'asunto' => fake()->sentence(),
             'descripcion' => fake()->paragraph(),
-            'dias' => fake()->numberBetween(1, 30),
             'estatus' => fake()->boolean(),
-            'user_id' => fake()->randomElement([2, 3]),
+            'fecha_vencimiento' => $fechaVencimiento,
+            'dias' => $dias,
+            'user_id' => fake()->randomElement([2, 3])
         ];
     }
 }

@@ -17,6 +17,7 @@ class Peticion extends Model
         'asunto', 
         'descripcion',
         'fecha_vencimiento',
+        'dias',
         'user_id'
     ];
 

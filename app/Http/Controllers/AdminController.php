@@ -57,16 +57,22 @@ class AdminController extends Controller
 
     public function guardarPeticion(PeticionRequest $peticionRequest)
     {
-        $peticion = Peticion::create($peticionRequest->validated());
-
-        return redirect()->route('admin.peticion-index')->with('exito', 'Petición creada con exito');
+        $data = $peticionRequest->validated();
+        $data['dias'] = now()->diffInDays($data['fecha_vencimiento']);
+        
+        $peticion = Peticion::create($data);
+    
+        return redirect()->route('admin.peticion-index')->with('exito', 'Petición creada con éxito');
     }
-
+    
     public function actualizarPeticion(Peticion $peticion, PeticionRequest $peticionRequest)
     {
-        $peticion->update($peticionRequest->validated());
-
-        return redirect()->route('admin.peticion-index')->with('exito', 'Petición editada con exito');
+        $data = $peticionRequest->validated();
+        $data['dias'] = now()->diffInDays($data['fecha_vencimiento']);
+        
+        $peticion->update($data);
+    
+        return redirect()->route('admin.peticion-index')->with('exito', 'Petición editada con éxito');
     }
 
     public function eliminarPeticion(Peticion $peticion)
