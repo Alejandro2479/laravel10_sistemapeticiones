@@ -21,7 +21,7 @@ class Peticion extends Model
     ];
 
     protected $casts = [
-        'fecha_vencimiento',
+        'fecha_vencimiento' => 'datetime',
     ];
 
     public function user()
