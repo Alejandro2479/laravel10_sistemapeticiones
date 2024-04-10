@@ -20,10 +20,11 @@
                         <tr class="bg-gray-200">
                             <th class="px-4 py-2">Número de Radicado</th>
                             <th class="px-4 py-2">Asunto</th>
-                            <th class="px-4 py-2">Dias Vencimiento</th>
-                            <th class="px-4 py-2">Estatus</th>
                             <th class="px-4 py-2">Usuario</th>
-                            <th class="px-4 py-2">Fecha Ingreso</th>
+                            <th class="px-4 py-2">Estatus</th>
+                            <th class="px-4 py-2">Fecha de Ingreso</th>
+                            <th class="px-4 py-2">Fecha de Vencimiento</th>
+                            <th class="px-4 py-2">Días Restantes</th>
                             <th class="px-4 py-2">Acciones</th>
                         </tr>
                     </thead>
@@ -32,6 +33,10 @@
                         <tr class="border-t">
                             <td class="px-4 py-2 text-center">{{ $peticion->numero_radicado }}</td>
                             <td class="px-4 py-2">{{ $peticion->asunto }}</td>
+                            <td class="px-4 py-2 text-center">{{ $peticion->user->name }}</td>
+                            <td class="px-4 py-2 text-center">{{ $peticion->estatus ? 'Completa' : 'Incompleta' }}</td>
+                            <td class="px-4 py-2 text-center">{{ $peticion->created_at->format('d/m/Y') }}</td>
+                            <td class="px-4 py-2 text-center">{{ $peticion->fecha_vencimiento->format('d/m/Y') }}</td>
                             <td class="px-4 py-2 text-center font-semibold">
                                 <span class="
                                     inline-block align-middle
@@ -39,16 +44,13 @@
                                         bg-red-500 text-white
                                     @elseif ($peticion->dias >= 6 && $peticion->dias <= 15)
                                         bg-orange-500 text-white
-                                    @elseif ($peticion->dias >= 16 && $peticion->dias <= 30)
+                                    @elseif ($peticion->dias >= 16)
                                         bg-green-500 text-white
                                     @endif
                                         rounded py-1 px-2 h-8 w-8">
                                     {{ $peticion->dias }}
                                 </span>
-                            </td>                    
-                            <td class="px-4 py-2 text-center">{{ $peticion->estatus ? 'Completa' : 'Incompleta' }}</td>
-                            <td class="px-4 py-2 text-center">{{ $peticion->user->name }}</td>
-                            <td class="px-4 py-2 text-center">{{ $peticion->created_at->format('d/m/Y') }}</td>
+                            </td>
                             <td class="flex flex-col px-4 py-2 items-center justify-center space-y-2 space-x-0 md:flex-row md:space-y-0 md:space-x-2">
                                 <a href='{{ route('admin.peticion-mostrar', ['peticion' => $peticion->id]) }}' class="w-full">
                                     <button class="py-2 px-4 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 duration-500 w-full">Ver</button>
@@ -57,7 +59,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td class="border px-4 py-2" colspan="7">No hay peticiones</td>
+                            <td class="border px-4 py-2" colspan="8">No hay peticiones</td>
                         </tr>
                         @endforelse
                     </tbody>

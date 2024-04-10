@@ -22,18 +22,9 @@
             </div>
 
             <div class="border border-gray-200 p-2 mb-4">
-                <h3 class="text-lg font-semibold mb-2">Días para Vencer:</h3>
-                <p class="inline-block align-middle text-center font-semibold
-                    @if ($peticion->dias >= 1 && $peticion->dias <= 5)
-                        bg-red-500 text-white
-                    @elseif ($peticion->dias >= 6 && $peticion->dias <= 15)
-                        bg-orange-500 text-white
-                    @elseif ($peticion->dias >= 16 && $peticion->dias <= 30)
-                        bg-green-500 text-white
-                    @endif
-                        rounded py-1 px-2 h-8 w-8">
-                    {{ $peticion->dias }}
-                </p>
+                <h3 class="text-lg font-semibold mb-2">Usuario Asignado:</h3>
+                <p>{{ $peticion->user->name }}</p>
+                <p>{{ $peticion->user->email }}</p>
             </div>
     
             <div class="border border-gray-200 p-2 mb-4">
@@ -48,9 +39,18 @@
             </div>
 
             <div class="border border-gray-200 p-2 mb-4">
-                <h3 class="text-lg font-semibold mb-2">Usuario Asignado:</h3>
-                <p>{{ $peticion->user->name }}</p>
-                <p>{{ $peticion->user->email }}</p>
+                <h3 class="text-lg font-semibold mb-2">Días para Vencer:</h3>
+                <p class="inline-block align-middle text-center font-semibold
+                    @if ($peticion->dias >= 1 && $peticion->dias <= 5)
+                        bg-red-500 text-white
+                    @elseif ($peticion->dias >= 6 && $peticion->dias <= 15)
+                        bg-orange-500 text-white
+                    @elseif ($peticion->dias >= 16)
+                        bg-green-500 text-white
+                    @endif
+                        rounded py-1 px-2 h-8 w-8">
+                    {{ $peticion->dias }}
+                </p>
             </div>
 
             <div class="text-sm">

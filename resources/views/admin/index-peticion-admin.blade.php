@@ -22,8 +22,8 @@
                             <th class="px-4 py-2">Asunto</th>
                             <th class="px-4 py-2">Usuario</th>
                             <th class="px-4 py-2">Estatus</th>
-                            <th class="px-4 py-2">Fecha Ingreso</th>
-                            <th class="px-4 py-2">Fecha Vencimiento</th>
+                            <th class="px-4 py-2">Fecha de Ingreso</th>
+                            <th class="px-4 py-2">Fecha de Vencimiento</th>
                             <th class="px-4 py-2">Días Restantes</th>
                             <th class="px-4 py-2">Acciones</th>
                         </tr>
