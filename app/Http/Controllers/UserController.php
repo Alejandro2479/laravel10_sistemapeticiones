@@ -50,15 +50,18 @@ class UserController extends Controller
     
     public function actualizarPeticion(Request $request, Peticion $peticion)
     {
-         $request->validate([
+        $request->validate([
             'nota_devolucion' => 'required|string',
         ]);
     
         $user = User::where('role', 'admin')->first();
     
-        $peticion->nota_devolucion = $request->input('nota_devolucion');
-        $peticion->user()->associate($user);
-        $peticion->save();
+        $data = [
+            'nota_devolucion' => $request->input('nota_devolucion'),
+            'user_id' => $user->id,
+        ];
+    
+        $peticion->update($data);
     
         return redirect()->route('user.peticion-index')->with('exito', 'Petición devuelta con éxito');
     }
