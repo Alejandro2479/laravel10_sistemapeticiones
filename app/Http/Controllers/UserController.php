@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Peticion;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -40,5 +41,25 @@ class UserController extends Controller
     public function mostrarPeticion(Peticion $peticion)
     {
         return view('user.mostrar-peticion-user', ['peticion' => $peticion]);
+    }
+
+    public function devolverPeticion(Peticion $peticion)
+    {
+        return view('user.devolver-peticion-user', ['peticion' => $peticion]);
+    }
+    
+    public function actualizarPeticion(Request $request, Peticion $peticion)
+    {
+         $request->validate([
+            'nota_devolucion' => 'required|string',
+        ]);
+    
+        $user = User::where('role', 'admin')->first();
+    
+        $peticion->nota_devolucion = $request->input('nota_devolucion');
+        $peticion->user()->associate($user);
+        $peticion->save();
+    
+        return redirect()->route('user.peticion-index')->with('exito', 'Petición devuelta con éxito');
     }
 }
