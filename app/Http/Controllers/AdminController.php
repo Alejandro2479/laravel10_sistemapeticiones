@@ -91,6 +91,10 @@ class AdminController extends Controller
     {
         $data = $peticionRequest->validated();
         $data['dias'] = now()->diffInDays($data['fecha_vencimiento']);
+
+        $data['nota_devolucion'] = null;
+        $data['nombre_devolucion'] = null;
+        $data['email_devolucion'] = null;
         
         $peticion->update($data);
     

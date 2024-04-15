@@ -33,6 +33,20 @@
                     @enderror
                 </div>
 
+                @if($peticion->nota_devolucion || $peticion->nombre_devolucion || $peticion->email_devolucion)
+                <div class="border border-gray-200 p-2 mb-4">
+                    <h3 class="text-lg font-semibold mb-2">Devolución:</h3>
+                    @if($peticion->nota_devolucion)
+                        <h4><strong style="font-weight: 600;">Nota:</strong></h4>
+                        <p class="mb-2">{{ $peticion->nota_devolucion }}</p>
+                    @endif
+    
+                    <h4><strong style="font-weight: 600;">Usuario que hizo la devolución:</strong></h4>
+                    <p>{{ $peticion->nombre_devolucion }}</p>
+                    <p>{{ $peticion->email_devolucion }}<p>
+                </div>
+                @endif
+
                 <div class="mb-4">
                     <label for="dias" class="block text-lg font-semibold">Días para Vencer</label>
                     <input class="mt-1 block w-full border border-gray-200" type="text" name="dias" id="dias" value="{{ $peticion->dias ?? old('dias') }}">

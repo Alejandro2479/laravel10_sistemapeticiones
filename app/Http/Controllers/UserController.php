@@ -54,11 +54,14 @@ class UserController extends Controller
             'nota_devolucion' => 'required|string',
         ]);
     
-        $user = User::where('role', 'admin')->first();
+        $admin = User::where('role', 'admin')->first();
+        $user = auth()->user();
     
         $data = [
             'nota_devolucion' => $request->input('nota_devolucion'),
-            'user_id' => $user->id,
+            'nombre_devolucion' => $user->name,
+            'email_devolucion' => $user->email,
+            'user_id' => $admin->id
         ];
     
         $peticion->update($data);
