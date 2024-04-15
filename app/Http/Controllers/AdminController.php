@@ -19,10 +19,14 @@ class AdminController extends Controller
         $peticiones = Peticion::when(
             $numeroRadicado,
             fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
-        )->where('estatus', false)->oldest()->paginate(10);
+        )->where('estatus', false)
+        ->whereHas('user', function ($query) {
+            $query->where('role', '!=', 'admin');
+        })
+        ->oldest()->paginate(10);
         
         return view('admin.index-peticion-admin', ['peticiones' => $peticiones]);
-    }
+    }    
 
     public function indexPeticionCompleta(Request $request)
     {
@@ -31,9 +35,13 @@ class AdminController extends Controller
         $peticiones = Peticion::when(
             $numeroRadicado,
             fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
-        )->where('estatus', true)->oldest()->paginate(10);
+        )->where('estatus', true)
+        ->whereHas('user', function ($query) {
+            $query->where('role', '!=', 'admin');
+        })
+        ->oldest()->paginate(10);
         
-        return view('admin.index-peticion-completa-admin', ['peticiones' => $peticiones]);
+        return view('admin.index-peticion-admin', ['peticiones' => $peticiones]);
     }
 
     public function indexPeticionDevuelta(Request $request)
