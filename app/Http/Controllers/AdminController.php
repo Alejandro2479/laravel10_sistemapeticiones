@@ -8,7 +8,6 @@ use App\Models\Peticion;
 use App\Http\Requests\PeticionRequest;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
-use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -19,14 +18,10 @@ class AdminController extends Controller
         $peticiones = Peticion::when(
             $numeroRadicado,
             fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
-        )->where('estatus', false)
-        ->whereHas('user', function ($query) {
-            $query->where('role', '!=', 'admin');
-        })
-        ->oldest()->paginate(10);
+        )->where('estatus', false)->oldest()->paginate(10);
         
         return view('admin.index-peticion-admin', ['peticiones' => $peticiones]);
-    }    
+    }
 
     public function indexPeticionCompleta(Request $request)
     {
@@ -35,26 +30,9 @@ class AdminController extends Controller
         $peticiones = Peticion::when(
             $numeroRadicado,
             fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
-        )->where('estatus', true)
-        ->whereHas('user', function ($query) {
-            $query->where('role', '!=', 'admin');
-        })
-        ->oldest()->paginate(10);
+        )->where('estatus', true)->oldest()->paginate(10);
         
-        return view('admin.index-peticion-admin', ['peticiones' => $peticiones]);
-    }
-
-    public function indexPeticionDevuelta(Request $request)
-    {
-        $userId = Auth::id();
-        $numeroRadicado = $request->input('numero_radicado');
-
-        $peticiones = Peticion::when(
-            $numeroRadicado,
-            fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
-        )->where([['user_id', $userId],['estatus', false]])->oldest()->paginate(10);
-    
-        return view('admin.index-peticion-devuelta-admin', ['peticiones' => $peticiones]);
+        return view('admin.index-peticion-completa-admin', ['peticiones' => $peticiones]);
     }
 
 
@@ -91,10 +69,6 @@ class AdminController extends Controller
     {
         $data = $peticionRequest->validated();
         $data['dias'] = now()->diffInDays($data['fecha_vencimiento']);
-
-        $data['nota_devolucion'] = null;
-        $data['nombre_devolucion'] = null;
-        $data['email_devolucion'] = null;
         
         $peticion->update($data);
     

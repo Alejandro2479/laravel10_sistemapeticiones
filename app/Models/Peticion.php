@@ -16,9 +16,6 @@ class Peticion extends Model
         'numero_radicado', 
         'asunto', 
         'descripcion',
-        'nota_devolucion',
-        'nombre_devolucion',
-        'email_devolucion',
         'fecha_vencimiento',
         'dias',
         'user_id'
