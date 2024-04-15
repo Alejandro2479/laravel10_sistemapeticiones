@@ -49,7 +49,7 @@
 
                 <div class="mb-4">
                     <label for="fecha_vencimiento" class="block text-lg font-semibold">Fecha de Vencimiento</label>
-                    <input class="mt-1 w-46 border border-gray-200" type="date" name="fecha_vencimiento" id="fecha_vencimiento" value="{{ $peticion->fecha_vencimiento ?? old('fecha_vencimiento') }}">
+                    <input class="mt-1 w-46 border border-gray-200" type="date" name="fecha_vencimiento" id="fecha_vencimiento" value="{{ $peticion->fecha_vencimiento ? \Carbon\Carbon::parse($peticion->fecha_vencimiento)->format('Y-m-d') : old('fecha_vencimiento') }}">
                     @error('fecha_vencimiento')
                         <p class="mt-1 text-sm text-red-600">La fecha de vencimiento es obligaoria y debe ser una fecha posterior al día actual</p>
                     @enderror
