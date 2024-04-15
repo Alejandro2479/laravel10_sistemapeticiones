@@ -8,6 +8,7 @@ use App\Models\Peticion;
 use App\Http\Requests\PeticionRequest;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -33,6 +34,19 @@ class AdminController extends Controller
         )->where('estatus', true)->oldest()->paginate(10);
         
         return view('admin.index-peticion-completa-admin', ['peticiones' => $peticiones]);
+    }
+
+    public function indexPeticionDevuelta(Request $request)
+    {
+        $userId = Auth::id();
+        $numeroRadicado = $request->input('numero_radicado');
+
+        $peticiones = Peticion::when(
+            $numeroRadicado,
+            fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
+        )->where([['user_id', $userId],['estatus', false]])->oldest()->paginate(10);
+    
+        return view('admin.index-peticion-devuelta-admin', ['peticiones' => $peticiones]);
     }
 
 
