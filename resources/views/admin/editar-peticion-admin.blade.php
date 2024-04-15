@@ -33,11 +33,25 @@
                     @enderror
                 </div>
 
+                @if($peticion->nota_devolucion || $peticion->nombre_devolucion || $peticion->email_devolucion)
+                <div class="border border-gray-200 p-2 mb-4">
+                    <h3 class="text-lg font-semibold mb-2">Devolución:</h3>
+                    @if($peticion->nota_devolucion)
+                        <h4><strong style="font-weight: 600;">Nota:</strong></h4>
+                        <p class="mb-2">{{ $peticion->nota_devolucion }}</p>
+                    @endif
+    
+                    <h4><strong style="font-weight: 600;">Usuario que hizo la devolución:</strong></h4>
+                    <p>{{ $peticion->nombre_devolucion }}</p>
+                    <p>{{ $peticion->email_devolucion }}<p>
+                </div>
+                @endif
+
                 <div class="mb-4">
-                    <label for="dias" class="block text-lg font-semibold">Días para Vencer</label>
-                    <input class="mt-1 block w-full border border-gray-200" type="text" name="dias" id="dias" value="{{ $peticion->dias ?? old('dias') }}">
-                    @error('dias')
-                        <p class="mt-1 text-sm text-red-600">El número de días es obligatorio y debe ser numérico</p>
+                    <label for="fecha_vencimiento" class="block text-lg font-semibold">Fecha de Vencimiento</label>
+                    <input class="mt-1 w-46 border border-gray-200" type="date" name="fecha_vencimiento" id="fecha_vencimiento" value="{{ $peticion->fecha_vencimiento ?? old('fecha_vencimiento') }}">
+                    @error('fecha_vencimiento')
+                        <p class="mt-1 text-sm text-red-600">La fecha de vencimiento es obligaoria y debe ser una fecha posterior al día actual</p>
                     @enderror
                 </div>
 

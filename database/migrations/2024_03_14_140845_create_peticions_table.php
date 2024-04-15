@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('numero_radicado');
             $table->string('asunto');
             $table->text('descripcion');
+            $table->string('nota_devolucion')->nullable();
+            $table->string('nombre_devolucion')->nullable();
+            $table->string('email_devolucion')->nullable();
             $table->boolean('estatus')->default(false);
             $table->timestamps();
             $table->timestamp('fecha_vencimiento')->nullable();

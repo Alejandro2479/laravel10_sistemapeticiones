@@ -26,6 +26,9 @@ class PeticionRequest extends FormRequest
             'asunto' => 'required',
             'descripcion' => 'required',
             'fecha_vencimiento' => 'required|date|after:today',
+            'nota_devolucion' => 'nullable',
+            'nombre_devolucion' => 'nullable',
+            'email_devolucion' => 'nullable',
             'user_id' => 'required|numeric'
         ];
     }
