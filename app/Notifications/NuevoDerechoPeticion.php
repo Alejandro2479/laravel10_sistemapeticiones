@@ -48,7 +48,7 @@ class NuevoDerechoPeticion extends Notification
         $fechaVencimientoFormateada = Carbon::parse($this->fechaVencimiento)->format('d/m/Y');
 
         return (new MailMessage)
-            ->subject('Nuevo Derecho de Petición Asignado' . $this->numeroRadicado)
+            ->subject('Nuevo Derecho de Petición Asignado ' . $this->numeroRadicado)
             ->line('Se le asignó un derecho de petición con número de radicado ' . $this->numeroRadicado . ' el cual vence el día ' . $fechaVencimientoFormateada);
     }
 
