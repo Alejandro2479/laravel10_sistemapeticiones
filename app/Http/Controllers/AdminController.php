@@ -9,6 +9,7 @@ use App\Http\Requests\PeticionRequest;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\NuevoDerechoPeticion;
 
 class AdminController extends Controller
 {
@@ -83,6 +84,10 @@ class AdminController extends Controller
         $data['dias'] = now()->diffInDays($data['fecha_vencimiento']);
 
         $peticion = Peticion::create($data);
+
+        $usuario = $peticion->user;
+
+        $usuario->notify(new NuevoDerechoPeticion($peticion->numero_radicado, $peticion->fecha_vencimiento));
 
         return redirect()->route('admin.peticion-index')->with('exito', 'Petición creada con éxito');
     }
