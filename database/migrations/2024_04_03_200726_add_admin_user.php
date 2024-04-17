@@ -22,8 +22,8 @@ class AddAdminUser extends Migration
 
         DB::table('users')->insert([
             'name' => 'Pepe Otalvaro',
-            'username' => 'usuario1',
-            'email' => 'usuario1@test.com',
+            'username' => 'jusuario1',
+            'email' => 'jaom2479@gmail.com',
             'password' => bcrypt('contraseña'),
             'role' => 'user',
         ]);
@@ -31,7 +31,7 @@ class AddAdminUser extends Migration
         DB::table('users')->insert([
             'name' => 'Pepe Murillo',
             'username' => 'usuario2',
-            'email' => 'usuario2@test.com',
+            'email' => 'alejandro.otalvaro22@gmail.com',
             'password' => bcrypt('contraseña'),
             'role' => 'user',
         ]);
