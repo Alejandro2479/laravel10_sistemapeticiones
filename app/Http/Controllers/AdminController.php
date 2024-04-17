@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\NuevoDerechoPeticion;
+use App\Notifications\CambioCorreoElectronico;
 
 class AdminController extends Controller
 {
@@ -94,6 +95,8 @@ class AdminController extends Controller
 
     public function actualizarPeticion(Peticion $peticion, PeticionRequest $peticionRequest)
     {
+        $correoAnterior = $peticion->user->email;
+
         $data = $peticionRequest->validated();
         $data['dias'] = now()->diffInDays($data['fecha_vencimiento']);
 
@@ -102,6 +105,13 @@ class AdminController extends Controller
         $data['email_devolucion'] = null;
 
         $peticion->update($data);
+
+        $usuarioNuevo = User::findOrFail($data['user_id']);
+        $correoNuevo = $usuarioNuevo->email;
+
+        if ($correoAnterior !== $correoNuevo) {
+            $usuarioNuevo->notify(new CambioCorreoElectronico($peticion->numero_radicado, $peticion->fecha_vencimiento));
+        }
 
         return redirect()->route('admin.peticion-index')->with('exito', 'Petición editada con éxito');
     }

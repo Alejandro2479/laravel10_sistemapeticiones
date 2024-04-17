@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 
 use Carbon\Carbon;
 
-class NuevoDerechoPeticion extends Notification
+class CambioCorreoElectronico extends Notification
 {
     use Queueable;
 
@@ -50,7 +50,8 @@ class NuevoDerechoPeticion extends Notification
 
         return (new MailMessage)
             ->subject('Nuevo Derecho de Petición Asignado ' . $this->numeroRadicado)
-            ->line('Se le asignó un derecho de petición con número de radicado ' . $this->numeroRadicado . ' el cual vence el día ' . $fechaVencimientoFormateada);
+            ->line('Se le asignó un derecho de petición con número de radicado ' . $this->numeroRadicado . ' el cual vence el día ' . $fechaVencimientoFormateada)
+            ->line('Este derecho de petición es una reasignación');
     }
 
     /**
