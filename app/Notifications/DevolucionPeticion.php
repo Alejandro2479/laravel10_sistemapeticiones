@@ -51,7 +51,7 @@ class DevolucionPeticion extends Notification
         return (new MailMessage)
             ->subject('Derecho de Petición Devuelto ' . $this->numeroRadicado)
             ->line('Se le fue devuelto un derecho de petición con número de radicado ' . $this->numeroRadicado . ' el cual vence el día ' . $fechaVencimientoFormateada)
-            ->line('Por favor reasignelo lo antes posible');
+            ->line('Por favor reasigne el derecho de petición lo antes posible');
     }
 
     /**
