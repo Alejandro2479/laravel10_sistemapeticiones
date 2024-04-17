@@ -95,6 +95,8 @@ class AdminController extends Controller
 
     public function actualizarPeticion(Peticion $peticion, PeticionRequest $peticionRequest)
     {
+        $correoAnterior = $peticion->user->email;
+
         $data = $peticionRequest->validated();
 
         $data['dias'] = now()->diffInDays($data['fecha_vencimiento']);
@@ -104,7 +106,6 @@ class AdminController extends Controller
 
         $peticion->update($data);
 
-        $correoAnterior = $peticion->user->email;
         $usuarioNuevo = User::findOrFail($data['user_id']);
         $correoNuevo = $usuarioNuevo->email;
 

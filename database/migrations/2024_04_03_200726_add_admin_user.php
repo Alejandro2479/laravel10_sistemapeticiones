@@ -15,7 +15,7 @@ class AddAdminUser extends Migration
         DB::table('users')->insert([
             'name' => 'Alejandro Otalvaro',
             'username' => 'admin',
-            'email' => 'admin@test.com',
+            'email' => 'skyman2479@gmail.com',
             'password' => bcrypt('contraseña'),
             'role' => 'admin',
         ]);
