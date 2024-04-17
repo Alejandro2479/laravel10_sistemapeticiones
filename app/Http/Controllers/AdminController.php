@@ -9,38 +9,39 @@ use App\Http\Requests\PeticionRequest;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\NuevoDerechoPeticion;
 
 class AdminController extends Controller
 {
     public function indexPeticion(Request $request)
     {
         $numeroRadicado = $request->input('numero_radicado');
-        
+
         $peticiones = Peticion::when(
             $numeroRadicado,
-            fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
+            fn ($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
         )->where('estatus', false)
-        ->whereHas('user', function ($query) {
-            $query->where('role', '!=', 'admin');
-        })
-        ->oldest()->paginate(10);
-        
+            ->whereHas('user', function ($query) {
+                $query->where('role', '!=', 'admin');
+            })
+            ->oldest()->paginate(10);
+
         return view('admin.index-peticion-admin', ['peticiones' => $peticiones]);
-    }    
+    }
 
     public function indexPeticionCompleta(Request $request)
     {
         $numeroRadicado = $request->input('numero_radicado');
-        
+
         $peticiones = Peticion::when(
             $numeroRadicado,
-            fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
+            fn ($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
         )->where('estatus', true)
-        ->whereHas('user', function ($query) {
-            $query->where('role', '!=', 'admin');
-        })
-        ->oldest()->paginate(10);
-        
+            ->whereHas('user', function ($query) {
+                $query->where('role', '!=', 'admin');
+            })
+            ->oldest()->paginate(10);
+
         return view('admin.index-peticion-admin', ['peticiones' => $peticiones]);
     }
 
@@ -51,9 +52,9 @@ class AdminController extends Controller
 
         $peticiones = Peticion::when(
             $numeroRadicado,
-            fn($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
-        )->where([['user_id', $userId],['estatus', false]])->oldest()->paginate(10);
-    
+            fn ($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
+        )->where([['user_id', $userId], ['estatus', false]])->oldest()->paginate(10);
+
         return view('admin.index-peticion-devuelta-admin', ['peticiones' => $peticiones]);
     }
 
@@ -61,7 +62,7 @@ class AdminController extends Controller
     public function crearPeticion()
     {
         $users = User::where('role', 'user')->get();
-        
+
         return view('admin.crear-peticion-admin', ['users' => $users]);
     }
 
@@ -81,12 +82,16 @@ class AdminController extends Controller
     {
         $data = $peticionRequest->validated();
         $data['dias'] = now()->diffInDays($data['fecha_vencimiento']);
-        
+
         $peticion = Peticion::create($data);
-    
+
+        $usuario = $peticion->user;
+
+        $usuario->notify(new NuevoDerechoPeticion($peticion->numero_radicado, $peticion->fecha_vencimiento));
+
         return redirect()->route('admin.peticion-index')->with('exito', 'Petición creada con éxito');
     }
-    
+
     public function actualizarPeticion(Peticion $peticion, PeticionRequest $peticionRequest)
     {
         $data = $peticionRequest->validated();
@@ -95,9 +100,9 @@ class AdminController extends Controller
         $data['nota_devolucion'] = null;
         $data['nombre_devolucion'] = null;
         $data['email_devolucion'] = null;
-        
+
         $peticion->update($data);
-    
+
         return redirect()->route('admin.peticion-index')->with('exito', 'Petición editada con éxito');
     }
 
