@@ -13,8 +13,8 @@ class Peticion extends Model
     use HasFactory;
 
     protected $fillable = [
-        'numero_radicado', 
-        'asunto', 
+        'numero_radicado',
+        'asunto',
         'descripcion',
         'nota_devolucion',
         'nombre_devolucion',
