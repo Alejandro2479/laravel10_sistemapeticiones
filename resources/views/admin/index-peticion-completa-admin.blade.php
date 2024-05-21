@@ -20,11 +20,10 @@
                         <tr class="bg-gray-200">
                             <th class="px-4 py-2">Número de Radicado</th>
                             <th class="px-4 py-2">Asunto</th>
-                            <th class="px-4 py-2">Usuario</th>
                             <th class="px-4 py-2">Estatus</th>
                             <th class="px-4 py-2">Fecha de Ingreso</th>
                             <th class="px-4 py-2">Fecha de Vencimiento</th>
-                            <th class="px-4 py-2">Días Restantes</th>
+                            <th class="px-4 py-2">Días Habiles Restantes</th>
                             <th class="px-4 py-2">Acciones</th>
                         </tr>
                     </thead>
@@ -33,7 +32,6 @@
                         <tr class="border-t">
                             <td class="px-4 py-2 text-center">{{ $peticion->numero_radicado }}</td>
                             <td class="px-4 py-2">{{ $peticion->asunto }}</td>
-                            <td class="px-4 py-2 text-center">{{ $peticion->user->name }}</td>
                             <td class="px-4 py-2 text-center">{{ $peticion->estatus ? 'Completa' : 'Incompleta' }}</td>
                             <td class="px-4 py-2 text-center">{{ $peticion->created_at->format('d/m/Y') }}</td>
                             <td class="px-4 py-2 text-center">{{ $peticion->fecha_vencimiento->format('d/m/Y') }}</td>

@@ -6,7 +6,7 @@
     <div class="md:ml-64">
         <div class="p-4">
             <h2 class="text-2xl font-semibold mb-4">Ver Petición</h2>
-            <div class="border border-gray-200 p-2 mb-4">
+            <div class="border border-gray-800 p-2 mb-4">
                 <h3 class="text-lg font-semibold mb-2">Número de Radicado:</h3>
                 <p>{{ $peticion->numero_radicado }}</p>
             </div>
@@ -21,12 +21,24 @@
                 <p>{{ $peticion->descripcion }}</p>
             </div>
 
-            @if($peticion->user->role !== 'admin')
-                <div class="border border-gray-200 p-2 mb-4">
-                    <h3 class="text-lg font-semibold mb-2">Usuario Asignado:</h3>
-                    <p>{{ $peticion->user->name }}</p>
-                    <p>{{ $peticion->user->email }}</p>
-                </div>
+            <!-- Nueva sección para mostrar la categoría -->
+            <div class="border border-gray-200 p-2 mb-4">
+                <h3 class="text-lg font-semibold mb-2">Categoría:</h3>
+                <p>{{ ucfirst($peticion->categoria) }}</p>
+            </div>
+
+            @if($peticion->users->isNotEmpty())
+            <div class="border border-gray-200 p-2 mb-4">
+                <h3 class="text-lg font-semibold mb-2">Usuarios Asignados:</h3>
+                @foreach($peticion->users as $user)
+                    @if($user->role !== 'admin')
+                        <div class="{{ !$loop->last ? 'mb-4' : '' }}">
+                            <p><strong>Nombre:</strong> {{ $user->name }}</p>
+                            <p><strong>Email:</strong> {{ $user->email }}</p>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
             @endif
 
             @if($peticion->nota_devolucion || $peticion->nombre_devolucion || $peticion->email_devolucion)
@@ -52,6 +64,11 @@
                         <span class="font-medium text-red-500">Incompleta</span>
                     @endif
                 </p>
+            </div>
+
+            <div class="border border-gray-200 p-2 mb-4">
+                <h3 class="text-lg font-semibold mb-2">Fecha de Vencimineto</h3>
+                <p>{{ $peticion->fecha_vencimiento->format('d/m/Y') }}</p>
             </div>
 
             <div class="border border-gray-200 p-2 mb-4">

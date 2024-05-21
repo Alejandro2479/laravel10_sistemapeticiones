@@ -25,11 +25,9 @@ class PeticionRequest extends FormRequest
             'numero_radicado' => 'required',
             'asunto' => 'required',
             'descripcion' => 'required',
-            'fecha_vencimiento' => 'required|date|after:today',
-            'nota_devolucion' => 'nullable',
-            'nombre_devolucion' => 'nullable',
-            'email_devolucion' => 'nullable',
-            'user_id' => 'required|numeric'
+            'categoria' => 'required|in:especial,informacion,general,consulta',
+            'user_id' => 'required|array',
+            'user_id.*' => 'exists:users,id'
         ];
     }
 }

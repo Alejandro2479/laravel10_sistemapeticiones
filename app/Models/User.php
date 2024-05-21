@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function peticions()
     {
-        return $this->hasMany(Peticion::class);
+        return $this->belongsToMany(Peticion::class);
     }
 }

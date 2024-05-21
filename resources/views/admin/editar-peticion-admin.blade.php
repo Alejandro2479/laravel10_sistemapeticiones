@@ -33,40 +33,31 @@
                     @enderror
                 </div>
 
-                @if($peticion->nota_devolucion || $peticion->nombre_devolucion || $peticion->email_devolucion)
-                <div class="border border-gray-200 p-2 mb-4">
-                    <h3 class="text-lg font-semibold mb-2">Devolución:</h3>
-                    @if($peticion->nota_devolucion)
-                        <h4><strong style="font-weight: 600;">Nota:</strong></h4>
-                        <p class="mb-2">{{ $peticion->nota_devolucion }}</p>
-                    @endif
-    
-                    <h4><strong style="font-weight: 600;">Usuario que hizo la devolución:</strong></h4>
-                    <p>{{ $peticion->nombre_devolucion }}</p>
-                    <p>{{ $peticion->email_devolucion }}<p>
-                </div>
-                @endif
-
                 <div class="mb-4">
-                    <label for="fecha_vencimiento" class="block text-lg font-semibold">Fecha de Vencimiento</label>
-                    <input class="mt-1 w-46 border border-gray-200" type="date" name="fecha_vencimiento" id="fecha_vencimiento" value="{{ $peticion->fecha_vencimiento ? \Carbon\Carbon::parse($peticion->fecha_vencimiento)->format('Y-m-d') : old('fecha_vencimiento') }}">
-                    @error('fecha_vencimiento')
-                        <p class="mt-1 text-sm text-red-600">La fecha de vencimiento es obligaoria y debe ser una fecha posterior al día actual</p>
+                    <label for="categoria" class="block text-lg font-semibold">Categoría</label>
+                    <select name="categoria" id="categoria" class="mt-1 w-full border border-gray-200">
+                        <option value="">Selecciona una categoría</option>
+                        <option value="especial" {{ $peticion->categoria == 'especial' ? 'selected' : '' }}>Derecho de Petición Especial - 5 días</option>
+                        <option value="informacion" {{ $peticion->categoria == 'informacion' ? 'selected' : '' }}>Derecho de Petición de Información - 10 días</option>
+                        <option value="general" {{ $peticion->categoria == 'general' ? 'selected' : '' }}>Derecho de Petición General - 15 días</option>
+                        <option value="consulta" {{ $peticion->categoria == 'consulta' ? 'selected' : '' }}>Derecho de Petición de Consulta - 30 días</option>
+                    </select>
+                    @error('categoria')
+                        <p class="mt-1 text-sm text-red-600">Debes seleccionar una categoría</p>
                     @enderror
                 </div>
 
                 <div class="mb-4">
-                    <label for="user_id" class="block text-lg font-semibold">Usuario</label>
-                    <select name="user_id" id="user_id" class="mt-1 block w-full border border-gray-200">
-                        <option>Selecciona un correo electrónico</option>
+                    <label for="user_id" class="block text-lg font-semibold">Usuarios</label>
+                    <select name="user_id[]" id="user_id" class="mt-1 w-96 border border-gray-200" multiple>
                         @foreach($users as $user)
-                            <option value="{{ $user->id }}" {{ $peticion->user_id == $user->id ? 'selected' : '' }}>{{ $user->email }}</option>
+                            <option value="{{ $user->id }}" {{ in_array($user->id, $usuariosAsignados) ? 'selected' : '' }}>{{ $user->email }}</option>
                         @endforeach
                     </select>
                     @error('user_id')
-                        <p class="mt-1 text-sm text-red-600">Debes seleccionar un usuario</p>
+                        <p class="mt-1 text-sm text-red-600">Debes seleccionar al menos un usuario</p>
                     @enderror
-                </div>  
+                </div>
     
                 <div class="mt-4">
                     <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500" type="submit">Editar</button>

@@ -10,10 +10,18 @@ use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\NuevoDerechoPeticion;
-use App\Notifications\CambioCorreoElectronico;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
+    protected $festivos = [
+        '2024-01-01', '2024-01-08', '2024-03-25', '2024-03-28',
+        '2024-03-29', '2024-05-01', '2024-05-13', '2024-06-03',
+        '2024-06-10', '2024-07-01', '2024-07-20', '2024-08-07',
+        '2024-08-19', '2024-10-14', '2024-11-04', '2024-11-11',
+        '2024-12-08', '2024-12-25'
+    ];
+
     public function indexPeticion(Request $request)
     {
         $numeroRadicado = $request->input('numero_radicado');
@@ -22,7 +30,7 @@ class AdminController extends Controller
             $numeroRadicado,
             fn ($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
         )->where('estatus', false)
-            ->whereHas('user', function ($query) {
+            ->whereHas('users', function ($query) {
                 $query->where('role', '!=', 'admin');
             })
             ->oldest()->paginate(10);
@@ -38,7 +46,7 @@ class AdminController extends Controller
             $numeroRadicado,
             fn ($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
         )->where('estatus', true)
-            ->whereHas('user', function ($query) {
+            ->whereHas('users', function ($query) {
                 $query->where('role', '!=', 'admin');
             })
             ->oldest()->paginate(10);
@@ -75,43 +83,96 @@ class AdminController extends Controller
     public function editarPeticion(Peticion $peticion)
     {
         $users = User::where('role', 'user')->get();
+        $usuariosAsignados = $peticion->users->pluck('id')->toArray();
 
-        return view('admin.editar-peticion-admin', ['peticion' => $peticion, 'users' => $users]);
+        return view('admin.editar-peticion-admin', ['peticion' => $peticion, 'users' => $users, 'usuariosAsignados' => $usuariosAsignados]);
     }
 
     public function guardarPeticion(PeticionRequest $peticionRequest)
     {
         $data = $peticionRequest->validated();
-        $data['dias'] = now()->diffInDays($data['fecha_vencimiento']);
 
+        // Definir los días según la categoría
+        $diasPorCategoria = [
+            'especial' => 5,
+            'informacion' => 10,
+            'general' => 15,
+            'consulta' => 30,
+        ];
+
+        // Calcular la fecha de vencimiento
+        $categoria = $data['categoria'];
+        $dias = $diasPorCategoria[$categoria];
+
+        // Obtener la fecha de creación
+        $fechaVencimiento = Carbon::now();
+
+        // Ajustar la fecha de vencimiento considerando fines de semana y días festivos
+        for ($i = 0; $i < $dias; $i++) {
+            $fechaVencimiento->addDay();
+            while ($fechaVencimiento->isWeekend() || in_array($fechaVencimiento->toDateString(), $this->festivos)) {
+                $fechaVencimiento->addDay();
+            }
+        }
+
+        $data['fecha_vencimiento'] = $fechaVencimiento;
+        $data['dias'] = $dias;
+
+        // Crear la petición
         $peticion = Peticion::create($data);
 
-        $usuario = $peticion->user;
+        // Obtener los usuarios seleccionados
+        $usuariosSeleccionados = $peticionRequest->input('user_id', []);
 
-        $usuario->notify(new NuevoDerechoPeticion($peticion->numero_radicado, $peticion->fecha_vencimiento));
+        // Asignar la petición a los usuarios seleccionados
+        $peticion->users()->sync($usuariosSeleccionados);
+
+        // Enviar notificación a cada usuario asignado
+        foreach ($peticion->users as $user) {
+            $user->notify(new NuevoDerechoPeticion($peticion->numero_radicado, $peticion->fecha_vencimiento));
+        }
 
         return redirect()->route('admin.peticion-index')->with('exito', 'Petición creada con éxito');
     }
 
     public function actualizarPeticion(Peticion $peticion, PeticionRequest $peticionRequest)
     {
-        $correoAnterior = $peticion->user->email;
-
         $data = $peticionRequest->validated();
 
-        $data['dias'] = now()->diffInDays($data['fecha_vencimiento']);
-        $data['nota_devolucion'] = null;
-        $data['nombre_devolucion'] = null;
-        $data['email_devolucion'] = null;
+        // Definir los días según la categoría
+        $diasPorCategoria = [
+            'especial' => 5,
+            'informacion' => 10,
+            'general' => 15,
+            'consulta' => 30,
+        ];
 
+        // Calcular la fecha de vencimiento
+        $categoria = $data['categoria'];
+        $dias = $diasPorCategoria[$categoria];
+
+        // Obtener la fecha de creación
+        $fechaVencimiento = Carbon::now();
+
+        // Ajustar la fecha de vencimiento considerando fines de semana y días festivos
+        for ($i = 0; $i < $dias; $i++) {
+            $fechaVencimiento->addDay();
+            while ($fechaVencimiento->isWeekend() || in_array($fechaVencimiento->toDateString(), $this->festivos)) {
+                $fechaVencimiento->addDay();
+            }
+        }
+
+        $data['fecha_vencimiento'] = $fechaVencimiento;
+        $data['dias'] = $dias;
+
+        // Actualizar los datos de la petición
         $peticion->update($data);
 
-        $usuarioNuevo = User::findOrFail($data['user_id']);
-        $correoNuevo = $usuarioNuevo->email;
+        // Obtener los usuarios seleccionados
+        $usuariosSeleccionados = $peticionRequest->input('user_id', []);
 
-        if ($correoAnterior !== $correoNuevo) {
-            $usuarioNuevo->notify(new CambioCorreoElectronico($peticion->numero_radicado, $peticion->fecha_vencimiento));
-        }
+        // Sincronizar los usuarios asignados a la petición
+        $peticion->users()->sync($usuariosSeleccionados);
 
         return redirect()->route('admin.peticion-index')->with('exito', 'Petición editada con éxito');
     }

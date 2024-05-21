@@ -16,21 +16,18 @@ class Peticion extends Model
         'numero_radicado',
         'asunto',
         'descripcion',
-        'nota_devolucion',
-        'nombre_devolucion',
-        'email_devolucion',
+        'categoria',
         'fecha_vencimiento',
         'dias',
-        'user_id'
     ];
 
     protected $casts = [
         'fecha_vencimiento' => 'datetime',
     ];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsToMany(User::class);
     }
 
     public function alternarPeticion()
