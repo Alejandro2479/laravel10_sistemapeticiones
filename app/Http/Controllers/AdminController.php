@@ -139,7 +139,7 @@ class AdminController extends Controller
     {
         $data = $peticionRequest->validated();
 
-        // Definir los días según la categoría
+        // Obtener la categoría actual y los días de la categoría actual
         $diasPorCategoria = [
             'especial' => 5,
             'informacion' => 10,
@@ -147,23 +147,27 @@ class AdminController extends Controller
             'consulta' => 30,
         ];
 
-        // Calcular la fecha de vencimiento
-        $categoria = $data['categoria'];
-        $dias = $diasPorCategoria[$categoria];
-
         // Obtener la fecha de creación
-        $fechaVencimiento = Carbon::now();
+        $fechaCreacion = $peticion->created_at;
+
+        // Obtener la nueva categoría y los días de la nueva categoría
+        $nuevaCategoria = $data['categoria'];
+        $diasNuevaCategoria = $diasPorCategoria[$nuevaCategoria];
+
+        // Calcular la nueva fecha de vencimiento basada en la fecha de creación
+        $fechaVencimientoNueva = $fechaCreacion->copy();
 
         // Ajustar la fecha de vencimiento considerando fines de semana y días festivos
-        for ($i = 0; $i < $dias; $i++) {
-            $fechaVencimiento->addDay();
-            while ($fechaVencimiento->isWeekend() || in_array($fechaVencimiento->toDateString(), $this->festivos)) {
-                $fechaVencimiento->addDay();
+        for ($i = 0; $i < $diasNuevaCategoria; $i++) {
+            $fechaVencimientoNueva->addDay();
+            while ($fechaVencimientoNueva->isWeekend() || in_array($fechaVencimientoNueva->toDateString(), $this->festivos)) {
+                $fechaVencimientoNueva->addDay();
             }
         }
 
-        $data['fecha_vencimiento'] = $fechaVencimiento;
-        $data['dias'] = $dias;
+        // Actualizar la fecha de vencimiento y los días en el array de datos
+        $data['fecha_vencimiento'] = $fechaVencimientoNueva;
+        $data['dias'] = $diasNuevaCategoria;
 
         // Actualizar los datos de la petición
         $peticion->update($data);
