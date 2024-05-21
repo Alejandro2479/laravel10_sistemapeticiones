@@ -28,12 +28,6 @@
                         <span class="font-medium text-green-500">Completa</span>
                     @else
                         <span class="font-medium text-red-500">Incompleta</span>
-                        @php
-                            $usuariosFaltantes = $peticion->users()->wherePivot('completa', false)->count();
-                        @endphp
-                        @if($usuariosFaltantes > 0)
-                            <span class="text-gray-700">({{ $usuariosFaltantes }} de {{ $peticion->users()->count() }} usuarios faltan para completar el derecho de petición)</span>
-                        @endif
                     @endif
                 </p>
             </div>
