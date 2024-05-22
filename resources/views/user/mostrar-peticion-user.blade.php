@@ -29,7 +29,13 @@
                     @else
                         <span class="font-medium text-red-500">Incompleta</span>
                     @endif
-                    ({{ $peticion->users()->wherePivot('completado', true)->count() }} de {{ $peticion->users()->count() }} han completado el derecho de petición)
+                    (
+                    @if($peticion->users()->wherePivot('completado', true)->count() == 1)
+                        1 usuario ha completado el derecho de petición
+                    @else
+                        {{ $peticion->users()->wherePivot('completado', true)->count() }} de {{ $peticion->users()->count() }} usuarios han completado el derecho de petición
+                    @endif
+                    )
                 </p>
             </div>
 
