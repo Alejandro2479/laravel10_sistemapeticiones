@@ -58,7 +58,6 @@ class AdminController extends Controller
         return view('admin.index-peticion-devuelta-admin', ['peticiones' => $peticiones]);
     }
 
-
     public function crearPeticion()
     {
         $users = User::where('role', 'user')->get();
