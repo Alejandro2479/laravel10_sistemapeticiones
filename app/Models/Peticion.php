@@ -67,11 +67,6 @@ class Peticion extends Model
         $this->save();
     }
 
-    public function alternarPeticionUser()
-    {
-        return $this->users()->wherePivot('completado', false)->doesntExist();
-    }
-
     public function scopeNumeroRadicado(Builder $query, string $numeroRadicado): Builder
     {
         return $query->where('numero_radicado', 'LIKE', '%' . $numeroRadicado . '%');

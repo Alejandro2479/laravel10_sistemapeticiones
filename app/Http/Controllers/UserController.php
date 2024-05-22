@@ -50,17 +50,4 @@ class UserController extends Controller
     {
         return view('user.mostrar-peticion-user', ['peticion' => $peticion]);
     }
-
-    public function completarPeticion(Peticion $peticion)
-    {
-        $userId = Auth::id();
-        $peticion->users()->updateExistingPivot($userId, ['completado' => true]);
-
-        if ($peticion->alternarPeticionUser()) {
-            $peticion->estatus = true;
-            $peticion->save();
-        }
-
-        return redirect()->back()->with('exito', 'Petición marcada como completa');
-    }
 }

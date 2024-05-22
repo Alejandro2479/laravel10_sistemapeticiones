@@ -36,8 +36,6 @@ Route::get('/admin/peticion/index', [AdminController::class, 'indexPeticion'])->
 
 Route::get('/admin/peticion/index-completas', [AdminController::class, 'indexPeticionCompleta'])->middleware('auth.admin')->name('admin.peticion-completa-index');
 
-Route::get('/admin/peticion/index-devueltas', [AdminController::class, 'indexPeticionDevuelta'])->middleware('auth.admin')->name('admin.peticion-devuelta-index');
-
 Route::get('/admin/peticion/crear', [AdminController::class, 'crearPeticion'])->middleware('auth.admin')->name('admin.peticion-crear');
 
 Route::get('/admin/peticion/{peticion}/mostrar', [AdminController::class, 'mostrarPeticion'])->middleware('auth.admin')->name('admin.peticion-mostrar');
@@ -70,12 +68,6 @@ Route::get('/user/peticion/index', [UserController::class, 'indexPeticion'])->mi
 Route::get('/user/peticion/index-completas', [UserController::class, 'indexPeticionCompleta'])->middleware('auth.user')->name('user.peticion-completa-index');
 
 Route::get('/user/peticion/{peticion}/mostrar', [UserController::class, 'mostrarPeticion'])->middleware('auth.user')->name('user.peticion-mostrar');
-
-Route::get('/user/peticion/{peticion}/devolver', [UserController::class, 'devolverPeticion'])->middleware('auth.user')->name('user.peticion-devolver');
-
-Route::put('/user/peticion/{peticion}/devolver/actualizar', [UserController::class, 'actualizarPeticion'])->middleware('auth.user')->name('user.peticion-actualizar');
-
-Route::put('/peticiones/{peticion}/completar-peticion', [UserController::class, 'completarPeticion'])->name('user.peticion-completar-peticion');
 
 // RUTAS ADMINISTRADOR Y USUARIO
 Route::get("/", function () {

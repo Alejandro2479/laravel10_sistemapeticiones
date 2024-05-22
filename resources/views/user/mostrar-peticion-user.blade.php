@@ -29,13 +29,6 @@
                     @else
                         <span class="font-medium text-red-500">Incompleta</span>
                     @endif
-                    (
-                    @if($peticion->users()->wherePivot('completado', true)->count() == 1)
-                        1 usuario ha completado el derecho de petición
-                    @else
-                        {{ $peticion->users()->wherePivot('completado', true)->count() }} de {{ $peticion->users()->count() }} usuarios han completado el derecho de petición
-                    @endif
-                    )
                 </p>
             </div>
 
@@ -60,11 +53,13 @@
             </div>   
 
             <div class="flex mt-4 space-x-2">
-                <form action="{{ route('user.peticion-completar-peticion', ['peticion' => $peticion]) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500">Cambiar Estatus</button>
-                </form>
+                @if(!$peticion->estatus)
+                    <form action="#" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500">Cambiar Estatus</button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>
