@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('peticion_id');
             $table->unsignedBigInteger('user_id');
+            $table->boolean('completado')->default(false);
             $table->timestamps();
 
             $table->foreign('peticion_id')->references('id')->on('peticions')->onDelete('cascade');

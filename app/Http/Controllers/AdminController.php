@@ -158,7 +158,7 @@ class AdminController extends Controller
 
     public function alternarEstatusPeticionAdmin(Peticion $peticion)
     {
-        $peticion->alternarPeticion();
+        $peticion->alternarPeticionAdmin();
 
         return redirect()->back()->with('exito', 'Petición actualizada con exito');
     }

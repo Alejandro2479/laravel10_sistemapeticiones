@@ -44,12 +44,6 @@ class Peticion extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function alternarPeticion()
-    {
-        $this->estatus = !$this->estatus;
-        $this->save();
-    }
-
     public function calcularFechaVencimiento(Carbon $fechaInicio = null)
     {
         $fechaInicio = $fechaInicio ?? Carbon::now();
@@ -65,6 +59,17 @@ class Peticion extends Model
 
         $this->fecha_vencimiento = $fechaVencimiento;
         $this->dias = $dias;
+    }
+
+    public function alternarPeticionAdmin()
+    {
+        $this->estatus = !$this->estatus;
+        $this->save();
+    }
+
+    public function alternarPeticionUser()
+    {
+        return $this->users()->wherePivot('completado', false)->doesntExist();
     }
 
     public function scopeNumeroRadicado(Builder $query, string $numeroRadicado): Builder

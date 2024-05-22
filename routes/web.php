@@ -75,6 +75,8 @@ Route::get('/user/peticion/{peticion}/devolver', [UserController::class, 'devolv
 
 Route::put('/user/peticion/{peticion}/devolver/actualizar', [UserController::class, 'actualizarPeticion'])->middleware('auth.user')->name('user.peticion-actualizar');
 
+Route::put('/peticiones/{peticion}/completar-peticion', [UserController::class, 'completarPeticion'])->name('user.peticion-completar-peticion');
+
 // RUTAS ADMINISTRADOR Y USUARIO
 Route::get("/", function () {
     if (Auth()->check()) {
