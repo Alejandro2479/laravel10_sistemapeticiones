@@ -14,14 +14,6 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
-    protected $festivos = [
-        '2024-01-01', '2024-01-08', '2024-03-25', '2024-03-28',
-        '2024-03-29', '2024-05-01', '2024-05-13', '2024-06-03',
-        '2024-06-10', '2024-07-01', '2024-07-20', '2024-08-07',
-        '2024-08-19', '2024-10-14', '2024-11-04', '2024-11-11',
-        '2024-12-08', '2024-12-25'
-    ];
-
     public function indexPeticion(Request $request)
     {
         $numeroRadicado = $request->input('numero_radicado');
@@ -92,42 +84,13 @@ class AdminController extends Controller
     {
         $data = $peticionRequest->validated();
 
-        // Definir los días según la categoría
-        $diasPorCategoria = [
-            'especial' => 5,
-            'informacion' => 10,
-            'general' => 15,
-            'consulta' => 30,
-        ];
+        $peticion = new Peticion($data);
+        $peticion->calcularFechaVencimiento();
+        $peticion->save();
 
-        // Calcular la fecha de vencimiento
-        $categoria = $data['categoria'];
-        $dias = $diasPorCategoria[$categoria];
-
-        // Obtener la fecha de creación
-        $fechaVencimiento = Carbon::now();
-
-        // Ajustar la fecha de vencimiento considerando fines de semana y días festivos
-        for ($i = 0; $i < $dias; $i++) {
-            $fechaVencimiento->addDay();
-            while ($fechaVencimiento->isWeekend() || in_array($fechaVencimiento->toDateString(), $this->festivos)) {
-                $fechaVencimiento->addDay();
-            }
-        }
-
-        $data['fecha_vencimiento'] = $fechaVencimiento;
-        $data['dias'] = $dias;
-
-        // Crear la petición
-        $peticion = Peticion::create($data);
-
-        // Obtener los usuarios seleccionados
         $usuariosSeleccionados = $peticionRequest->input('user_id', []);
-
-        // Asignar la petición a los usuarios seleccionados
         $peticion->users()->sync($usuariosSeleccionados);
 
-        // Enviar notificación a cada usuario asignado
         foreach ($peticion->users as $user) {
             $user->notify(new NuevoDerechoPeticion($peticion->numero_radicado, $peticion->fecha_vencimiento));
         }
@@ -139,43 +102,11 @@ class AdminController extends Controller
     {
         $data = $peticionRequest->validated();
 
-        // Obtener la categoría actual y los días de la categoría actual
-        $diasPorCategoria = [
-            'especial' => 5,
-            'informacion' => 10,
-            'general' => 15,
-            'consulta' => 30,
-        ];
-
-        // Obtener la fecha de creación
-        $fechaCreacion = $peticion->created_at;
-
-        // Obtener la nueva categoría y los días de la nueva categoría
-        $nuevaCategoria = $data['categoria'];
-        $diasNuevaCategoria = $diasPorCategoria[$nuevaCategoria];
-
-        // Calcular la nueva fecha de vencimiento basada en la fecha de creación
-        $fechaVencimientoNueva = $fechaCreacion->copy();
-
-        // Ajustar la fecha de vencimiento considerando fines de semana y días festivos
-        for ($i = 0; $i < $diasNuevaCategoria; $i++) {
-            $fechaVencimientoNueva->addDay();
-            while ($fechaVencimientoNueva->isWeekend() || in_array($fechaVencimientoNueva->toDateString(), $this->festivos)) {
-                $fechaVencimientoNueva->addDay();
-            }
-        }
-
-        // Actualizar la fecha de vencimiento y los días en el array de datos
-        $data['fecha_vencimiento'] = $fechaVencimientoNueva;
-        $data['dias'] = $diasNuevaCategoria;
-
-        // Actualizar los datos de la petición
         $peticion->update($data);
+        $peticion->calcularFechaVencimiento($peticion->created_at);
+        $peticion->save();
 
-        // Obtener los usuarios seleccionados
         $usuariosSeleccionados = $peticionRequest->input('user_id', []);
-
-        // Sincronizar los usuarios asignados a la petición
         $peticion->users()->sync($usuariosSeleccionados);
 
         return redirect()->route('admin.peticion-index')->with('exito', 'Petición editada con éxito');
