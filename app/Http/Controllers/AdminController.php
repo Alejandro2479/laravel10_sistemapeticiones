@@ -157,4 +157,11 @@ class AdminController extends Controller
             return redirect()->route('admin.user-index')->with('error', 'No se puede eliminar un administrador');
         }
     }
+
+    public function alternarEstatusPeticionAdmin(Peticion $peticion)
+    {
+        $peticion->alternarPeticion();
+
+        return redirect()->back()->with('exito', 'Petición actualizada con exito');
+    }
 }

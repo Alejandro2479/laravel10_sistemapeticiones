@@ -62,6 +62,8 @@ Route::put('/admin/user/{user}/editar/actualizar', [AdminController::class, 'act
 
 Route::delete('/admin/user/{user}/eliminar', [AdminController::class, 'eliminarUser'])->middleware('auth.admin')->name('admin.user-eliminar');
 
+Route::put('/peticion/{peticion}/alternar-estatus', [AdminController::class, 'alternarEstatusPeticionAdmin'])->middleware('auth.admin')->name('peticion.alternar-estatus-admin');
+
 // RUTAS USUARIO
 Route::get('/user/peticion/index', [UserController::class, 'indexPeticion'])->middleware('auth.user')->name('user.peticion-index');
 
@@ -84,7 +86,5 @@ Route::get("/", function () {
     }
     return redirect()->route('login.home');
 });
-
-Route::put('/peticion/{peticion}/alternar-estatus', [AdminUserController::class, 'alternarEstatusPeticion'])->middleware('auth')->name('peticion.alternar-estatus');
 
 Route::fallback(fn () => abort(404));
