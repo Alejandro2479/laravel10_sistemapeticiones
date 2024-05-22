@@ -60,7 +60,7 @@ Route::put('/admin/user/{user}/editar/actualizar', [AdminController::class, 'act
 
 Route::delete('/admin/user/{user}/eliminar', [AdminController::class, 'eliminarUser'])->middleware('auth.admin')->name('admin.user-eliminar');
 
-Route::put('/peticion/{peticion}/alternar-estatus', [AdminController::class, 'alternarEstatusPeticionAdmin'])->middleware('auth.admin')->name('peticion.alternar-estatus-admin');
+Route::put('/admin/peticion/{peticion}/alternar-estatus', [AdminController::class, 'alternarEstatusPeticionAdmin'])->middleware('auth.admin')->name('peticion.alternar-estatus-admin');
 
 // RUTAS USUARIO
 Route::get('/user/peticion/index', [UserController::class, 'indexPeticion'])->middleware('auth.user')->name('user.peticion-index');
@@ -69,7 +69,7 @@ Route::get('/user/peticion/index-completas', [UserController::class, 'indexPetic
 
 Route::get('/user/peticion/{peticion}/mostrar', [UserController::class, 'mostrarPeticion'])->middleware('auth.user')->name('user.peticion-mostrar');
 
-Route::put('/peticion/{peticion}/alternar-estatus', [UserController::class, 'alternarEstatusPeticionUser'])->middleware('auth.user')->name('peticion.alternar-estatus-user');
+Route::put('/user/peticion/{peticion}/alternar-estatus', [UserController::class, 'alternarEstatusPeticionUser'])->middleware('auth.user')->name('peticion.alternar-estatus-user');
 
 // RUTAS ADMINISTRADOR Y USUARIO
 Route::get("/", function () {

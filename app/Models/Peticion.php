@@ -61,15 +61,22 @@ class Peticion extends Model
         $this->dias = $dias;
     }
 
-    public function alternarPeticionAdmin()
+    public function completarPeticionAdmin()
     {
         $this->estatus = !$this->estatus;
         $this->save();
     }
 
-    public function alternarPeticionUser($userId)
+    public function completarPeticionUser($userId)
     {
-        $this->users()->updateExistingPivot($userId, ['completado' => !$this->users()->find($userId)->pivot->completado]);
+        $usuarioPeticion = $this->users()->find($userId);
+        $nuevoEstatus = !$usuarioPeticion->pivot->completado;
+        $this->users()->updateExistingPivot($userId, ['completado' => $nuevoEstatus]);
+
+        $todosCompletos = $this->users()->wherePivot('completado', false)->doesntExist();
+
+        $this->estatus = $todosCompletos;
+        $this->save();
     }
 
     public function scopeNumeroRadicado(Builder $query, string $numeroRadicado): Builder
