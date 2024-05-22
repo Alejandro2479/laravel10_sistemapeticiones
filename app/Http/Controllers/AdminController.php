@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Peticion;
-use App\Http\Requests\PeticionRequest;
-use App\Models\User;
-use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Peticion;
+use App\Models\User;
+use App\Http\Requests\PeticionRequest;
+use App\Http\Requests\UserRequest;
 use App\Notifications\NuevoDerechoPeticion;
-use Carbon\Carbon;
 
 class AdminController extends Controller
 {
