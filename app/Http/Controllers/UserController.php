@@ -50,4 +50,12 @@ class UserController extends Controller
     {
         return view('user.mostrar-peticion-user', ['peticion' => $peticion]);
     }
+
+    public function alternarEstatusPeticionUser(Peticion $peticion)
+    {
+        $user = Auth::user();
+        $peticion->alternarPeticionUser($user->id);
+
+        return redirect()->back()->with('exito', 'Petición actualizada con exito');
+    }
 }

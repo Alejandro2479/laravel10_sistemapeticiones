@@ -54,7 +54,7 @@
 
             <div class="flex mt-4 space-x-2">
                 @if(!$peticion->estatus)
-                    <form action="#" method="POST">
+                    <form action="{{ route('peticion.alternar-estatus-user', ['peticion' => $peticion]) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500">Cambiar Estatus</button>

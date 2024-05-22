@@ -41,7 +41,7 @@ class Peticion extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('completado');
     }
 
     public function calcularFechaVencimiento(Carbon $fechaInicio = null)
@@ -65,6 +65,11 @@ class Peticion extends Model
     {
         $this->estatus = !$this->estatus;
         $this->save();
+    }
+
+    public function alternarPeticionUser($userId)
+    {
+        $this->users()->updateExistingPivot($userId, ['completado' => !$this->users()->find($userId)->pivot->completado]);
     }
 
     public function scopeNumeroRadicado(Builder $query, string $numeroRadicado): Builder
