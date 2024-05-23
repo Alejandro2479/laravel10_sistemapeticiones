@@ -54,7 +54,7 @@ class UserController extends Controller
     public function alternarEstatusPeticionUser(Peticion $peticion)
     {
         $user = Auth::user();
-        $peticion->completarrPeticionUser($user->id);
+        $peticion->completarPeticionUser($user->id);
 
         return redirect()->back()->with('exito', 'Petición actualizada con exito');
     }
