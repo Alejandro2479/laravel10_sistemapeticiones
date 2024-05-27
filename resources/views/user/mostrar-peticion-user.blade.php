@@ -22,6 +22,16 @@
             </div>
 
             <div class="border border-gray-200 p-2 mb-4">
+                <h3 class="text-lg font-semibold mb-2">Usuarios Asignados:</h3>
+                @foreach($peticion->users as $user)
+                    <div class="{{ !$loop->last ? 'mb-4' : '' }}">
+                        <p>Nombre: {{ $user->name }}</p>
+                        <p>Correo Electrónico: {{ $user->email }}</p>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="border border-gray-200 p-2 mb-4">
                 <h3 class="text-lg font-semibold mb-2">Estatus:</h3>
                 <p>
                     @if($peticion->estatus)
@@ -31,6 +41,18 @@
                     @endif
                     ({{ $peticion->users()->wherePivot('completado', true)->count() }} de {{ $peticion->users()->count() }} usuarios han completado el derecho de petición)
                 </p>
+            </div>
+
+            <div class="border border-gray-200 p-2 mb-4">
+                <h3 class="text-lg font-semibold mb-2">Respuestas de Completado:</h3>
+                @forelse ($peticion->users->reject(function ($user) { return is_null($user->pivot->resumen); }) as $user)
+                    <div class="{{ !$loop->last ? 'border-b border-gray-200 mb-2' : '' }}">
+                        <p>Usuario: {{ $user->name }}</p>
+                        <p>Respuesta: {{ $user->pivot->resumen }}</p>
+                    </div>
+                @empty
+                    <p>No hay respuestas</p>
+                @endforelse
             </div>
 
             <div class="border border-gray-200 p-2 mb-4">
@@ -54,9 +76,11 @@
             </div>   
 
             <div class="flex mt-4 space-x-2">
+                @if (!$peticion->users()->where('user_id', auth()->user()->id)->wherePivot('completado', true)->exists())
                 <a href="{{ route('user.peticion-completar', ['peticion' => $peticion]) }}">
                     <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500" type="submit">Completar Petición</button>
                 </a>
+                @endif
             </div>
         </div>
     </div>
