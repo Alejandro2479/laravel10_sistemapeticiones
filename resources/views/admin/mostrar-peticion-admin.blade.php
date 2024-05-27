@@ -29,12 +29,10 @@
             <div class="border border-gray-200 p-2 mb-4">
                 <h3 class="text-lg font-semibold mb-2">Usuarios Asignados:</h3>
                 @foreach($peticion->users as $user)
-                    @if($user->role !== 'admin')
-                        <div class="{{ !$loop->last ? 'mb-4' : '' }}">
-                            <p>Nombre: {{ $user->name }}</p>
-                            <p>Correo Electrónico: {{ $user->email }}</p>
-                        </div>
-                    @endif
+                    <div class="{{ !$loop->last ? 'mb-4' : '' }}">
+                        <p>Nombre: {{ $user->name }}</p>
+                        <p>Correo Electrónico: {{ $user->email }}</p>
+                    </div>
                 @endforeach
             </div>
     
@@ -48,6 +46,18 @@
                     @endif
                     ({{ $peticion->users()->wherePivot('completado', true)->count() }} de {{ $peticion->users()->count() }} usuarios han completado el derecho de petición)
                 </p>
+            </div>
+
+            <div class="border border-gray-200 p-2 mb-4">
+                <h3 class="text-lg font-semibold mb-2">Respuestas de Completado:</h3>
+                @forelse ($peticion->users->reject(function ($user) { return is_null($user->pivot->resumen); }) as $user)
+                    <div class="{{ !$loop->last ? 'border-b border-gray-200 mb-2' : '' }}">
+                        <p>Usuario: {{ $user->name }}</p>
+                        <p>Respuesta: {{ $user->pivot->resumen }}</p>
+                    </div>
+                @empty
+                    <p>No hay respuestas</p>
+                @endforelse
             </div>
 
             <div class="border border-gray-200 p-2 mb-4">
