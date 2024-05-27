@@ -5,7 +5,7 @@
 @section('contenido_principal')
     <div class="md:ml-64">
         <div class="p-4">
-            <h2 class="text-2xl font-semibold mb-4">Completar Petición</h2>
+            <h2 class="text-2xl font-semibold mb-4">Completar Derecho de Petición</h2>
             <form action="{{ route('peticion.alternar-estatus-user', ['peticion' => $peticion]) }}" method="POST">
                 @csrf
                 @method('PUT')    
@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="flex mt-4 space-x-2">
-                    <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500">Completar Petición</button>
+                    <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500">Completar</button>
                 </div>
             </form>
         </div>

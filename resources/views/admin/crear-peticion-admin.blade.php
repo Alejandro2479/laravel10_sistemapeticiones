@@ -5,7 +5,7 @@
 @section('contenido_principal')
     <div class="md:ml-64">
         <div class="p-4">
-            <h2 class="text-2xl font-semibold mb-4">Crear Petición</h2>
+            <h2 class="text-2xl font-semibold mb-4">Crear Derecho de Petición</h2>
             <form action="{{ route('admin.peticion-guardar') }}" method="POST">
                 @csrf
                 <div class="mb-4">

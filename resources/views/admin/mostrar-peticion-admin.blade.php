@@ -1,11 +1,11 @@
 @extends('layouts.app-admin')
 
-@section('title', 'Mostrar Petición')
+@section('title', 'Ver Petición')
 
 @section('contenido_principal')
     <div class="md:ml-64">
         <div class="p-4">
-            <h2 class="text-2xl font-semibold mb-4">Ver Petición</h2>
+            <h2 class="text-2xl font-semibold mb-4">Ver Derecho de Petición</h2>
             <div class="border border-gray-800 p-2 mb-4">
                 <h3 class="text-lg font-semibold mb-2">Número de Radicado:</h3>
                 <p>{{ $peticion->numero_radicado }}</p>
@@ -21,39 +21,22 @@
                 <p>{{ $peticion->descripcion }}</p>
             </div>
 
-            <!-- Nueva sección para mostrar la categoría -->
             <div class="border border-gray-200 p-2 mb-4">
                 <h3 class="text-lg font-semibold mb-2">Categoría:</h3>
                 <p>{{ ucfirst($peticion->categoria) }}</p>
             </div>
 
-            @if($peticion->users->isNotEmpty())
             <div class="border border-gray-200 p-2 mb-4">
                 <h3 class="text-lg font-semibold mb-2">Usuarios Asignados:</h3>
                 @foreach($peticion->users as $user)
                     @if($user->role !== 'admin')
                         <div class="{{ !$loop->last ? 'mb-4' : '' }}">
-                            <p><strong>Nombre:</strong> {{ $user->name }}</p>
-                            <p><strong>Email:</strong> {{ $user->email }}</p>
+                            <p>Nombre: {{ $user->name }}</p>
+                            <p>Correo Electrónico: {{ $user->email }}</p>
                         </div>
                     @endif
                 @endforeach
             </div>
-            @endif
-
-            @if($peticion->nota_devolucion || $peticion->nombre_devolucion || $peticion->email_devolucion)
-            <div class="border border-gray-200 p-2 mb-4">
-                <h3 class="text-lg font-semibold mb-2">Devolución:</h3>
-                @if($peticion->nota_devolucion)
-                    <h4><strong style="font-weight: 600;">Nota:</strong></h4>
-                    <p class="mb-2">{{ $peticion->nota_devolucion }}</p>
-                @endif
-
-                <h4><strong style="font-weight: 600;">Usuario que hizo la devolución:</strong></h4>
-                <p>{{ $peticion->nombre_devolucion }}</p>
-                <p>{{ $peticion->email_devolucion }}<p>
-            </div>
-            @endif
     
             <div class="border border-gray-200 p-2 mb-4">
                 <h3 class="text-lg font-semibold mb-2">Estatus:</h3>

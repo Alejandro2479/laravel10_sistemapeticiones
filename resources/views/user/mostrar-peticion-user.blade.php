@@ -1,11 +1,11 @@
 @extends('layouts.app-user')
 
-@section('title', 'Mostrar Petición')
+@section('title', 'Ver Petición')
 
 @section('contenido_principal')
     <div class="md:ml-64">
         <div class="p-4">
-            <h2 class="text-2xl font-semibold mb-4">Ver Petición</h2>
+            <h2 class="text-2xl font-semibold mb-4">Ver Derecho de Petición</h2>
             <div class="border border-gray-200 p-2 mb-4">
                 <h3 class="text-lg font-semibold mb-2">Número de Radicado:</h3>
                 <p class="text-gray-700">{{ $peticion->numero_radicado }}</p>
