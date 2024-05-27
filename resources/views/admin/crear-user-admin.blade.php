@@ -23,14 +23,6 @@
                         <p class="mt-1 text-sm text-red-600">El nombre de usuario es obligatorio o ya existe</p>
                     @enderror
                 </div>
-    
-                <div class="mb-4">
-                    <label for="email" class="block text-lg font-semibold">Correo Electrónico</label>
-                    <input class="mt-1 block w-full border border-gray-200" type="email" name="email" id="email" value="{{ $user->email ?? old('email') }}">
-                    @error('email')
-                        <p class="mt-1 text-sm text-red-600">El correo electrónico es obligatorio o ya existe</p>
-                    @enderror
-                </div>
 
                 <div class="mb-4">
                     <label for="cargo" class="block text-lg font-semibold">Cargo</label>
@@ -41,6 +33,14 @@
                     </select>
                     @error('cargo')
                         <p class="mt-1 text-sm text-red-600">El cargo es obligatorio</p>
+                    @enderror
+                </div>
+    
+                <div class="mb-4">
+                    <label for="email" class="block text-lg font-semibold">Correo Electrónico</label>
+                    <input class="mt-1 block w-full border border-gray-200" type="email" name="email" id="email" value="{{ $user->email ?? old('email') }}">
+                    @error('email')
+                        <p class="mt-1 text-sm text-red-600">El correo electrónico es obligatorio o ya existe</p>
                     @enderror
                 </div>
     

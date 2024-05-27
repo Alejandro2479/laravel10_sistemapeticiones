@@ -24,6 +24,18 @@
                         <p class="mt-1 text-sm text-red-600">El nombre de usuario es obligatorio o ya existe</p>
                     @enderror
                 </div>
+
+                <div class="mb-4">
+                    <label for="cargo" class="block text-lg font-semibold">Cargo</label>
+                    <select name="cargo" id="cargo" class="mt-1 w-full border border-gray-200">
+                        <option value="">Selecciona un cargo</option>
+                        <option value="gerente/coordinador">Gerente o Coordinador</option>
+                        <option value="profesional">Profesional</option>
+                    </select>
+                    @error('cargo')
+                        <p class="mt-1 text-sm text-red-600">El cargo es obligatorio</p>
+                    @enderror
+                </div>
     
                 <div class="mb-4">
                     <label for="email" class="block text-lg font-semibold">Correo Electrónico</label>
