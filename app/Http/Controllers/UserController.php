@@ -51,6 +51,11 @@ class UserController extends Controller
         return view('user.mostrar-peticion-user', ['peticion' => $peticion]);
     }
 
+    public function completarPeticion(Peticion $peticion)
+    {
+        return view('user.completar-peticion-user', ['peticion' => $peticion]);
+    }
+
     public function alternarEstatusPeticionUser(Peticion $peticion)
     {
         $user = Auth::user();

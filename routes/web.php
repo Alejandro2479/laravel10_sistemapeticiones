@@ -69,6 +69,8 @@ Route::get('/user/peticion/index-completas', [UserController::class, 'indexPetic
 
 Route::get('/user/peticion/{peticion}/mostrar', [UserController::class, 'mostrarPeticion'])->middleware('auth.user')->name('user.peticion-mostrar');
 
+Route::get('/user/peticion/{peticion}/completar', [UserController::class, 'completarPeticion'])->middleware('auth.user')->name('user.peticion-completar');
+
 Route::put('/user/peticion/{peticion}/alternar-estatus', [UserController::class, 'alternarEstatusPeticionUser'])->middleware('auth.user')->name('peticion.alternar-estatus-user');
 
 // RUTAS ADMINISTRADOR Y USUARIO
