@@ -17,7 +17,7 @@ class AddAdminUser extends Migration
             'username' => 'admin',
             'email' => 'admin@test.com',
             'password' => bcrypt('contraseña'),
-            'role' => 'admin',
+            'rol' => 'admin',
         ]);
 
         DB::table('users')->insert([
@@ -25,7 +25,7 @@ class AddAdminUser extends Migration
             'username' => 'usuario1',
             'email' => 'usuario1@test.com',
             'password' => bcrypt('contraseña'),
-            'role' => 'user',
+            'rol' => 'user',
         ]);
 
         DB::table('users')->insert([
@@ -33,7 +33,7 @@ class AddAdminUser extends Migration
             'username' => 'usuario2',
             'email' => 'usuario2@test.com',
             'password' => bcrypt('contraseña'),
-            'role' => 'user',
+            'rol' => 'user',
         ]);
 
         DB::table('users')->insert([
@@ -41,7 +41,7 @@ class AddAdminUser extends Migration
             'username' => 'usuario3',
             'email' => 'usuario3@test.com',
             'password' => bcrypt('contraseña'),
-            'role' => 'user',
+            'rol' => 'user',
         ]);
     }
 
@@ -52,7 +52,6 @@ class AddAdminUser extends Migration
      */
     public function down()
     {
-        // Eliminar el usuario administrador si es necesario revertir la migración
         DB::table('users')->where('email', 'admin@test.com')->delete();
     }
 }
