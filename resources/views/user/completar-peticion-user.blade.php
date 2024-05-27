@@ -13,7 +13,7 @@
                     <label for="descripcion" class="block text-lg font-semibold">Resumen</label>
                     <textarea class="mt-1 block w-full border border-gray-200" name="resumen" id="resumen" rows="5">{{ old('resumen') }}</textarea>
                     @error('resumen')
-                        <p class="mt-1 text-sm text-red-600">El resumen es obligatoria</p>
+                        <p class="mt-1 text-sm text-red-600">El resumen es obligatorio</p>
                     @enderror
                 </div>
 

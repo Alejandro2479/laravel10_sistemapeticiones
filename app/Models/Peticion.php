@@ -41,7 +41,7 @@ class Peticion extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('completado');
+        return $this->belongsToMany(User::class)->withPivot('completado', 'resumen');
     }
 
     public function calcularFechaVencimiento(Carbon $fechaInicio = null)
@@ -67,11 +67,15 @@ class Peticion extends Model
         $this->save();
     }
 
-    public function completarPeticionUser($userId)
+    public function completarPeticionUser($userId, $resumen)
     {
         $usuarioPeticion = $this->users()->find($userId);
         $nuevoEstatus = !$usuarioPeticion->pivot->completado;
-        $this->users()->updateExistingPivot($userId, ['completado' => $nuevoEstatus]);
+
+        $this->users()->updateExistingPivot($userId, [
+            'completado' => $nuevoEstatus,
+            'resumen' => $resumen
+        ]);
 
         $todosCompletos = $this->users()->wherePivot('completado', false)->doesntExist();
 

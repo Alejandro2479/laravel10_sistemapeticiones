@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Peticion;
 use App\Models\User;
+use App\Http\Requests\CompletarPeticionRequest;
 
 class UserController extends Controller
 {
@@ -56,11 +57,13 @@ class UserController extends Controller
         return view('user.completar-peticion-user', ['peticion' => $peticion]);
     }
 
-    public function alternarEstatusPeticionUser(Peticion $peticion)
+    public function alternarEstatusPeticionUser(CompletarPeticionRequest $completarPeticionRequest, Peticion $peticion)
     {
-        $user = Auth::user();
-        $peticion->completarPeticionUser($user->id);
+        $data = $completarPeticionRequest->validated();
 
-        return redirect()->back()->with('exito', 'Petición actualizada con exito');
+        $user = Auth::user();
+        $peticion->completarPeticionUser($user->id, $data['resumen']);
+
+        return redirect()->route('user.peticion-index')->with('exito', 'Petición completada con éxito');
     }
 }
