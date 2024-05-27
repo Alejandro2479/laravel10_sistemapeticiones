@@ -25,7 +25,8 @@ class UserRequest extends FormRequest
 
         $rules = [
             'name' => 'required',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'cargo' => 'required|in:gerente/coordinador,profesional',
         ];
 
         if ($user) {

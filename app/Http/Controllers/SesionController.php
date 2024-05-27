@@ -9,9 +9,9 @@ class SesionController extends Controller
     public function homeLogin()
     {
         if (Auth()->check()) {
-            if (auth()->user()->role === 'admin') {
+            if (auth()->user()->rol === 'admin') {
                 return redirect()->route('admin.peticion-index');
-            } elseif (auth()->user()->role === 'user') {
+            } elseif (auth()->user()->rol === 'user') {
                 return redirect()->route('user.peticion-index');
             }
         }
@@ -25,7 +25,7 @@ class SesionController extends Controller
                 'message' => 'El correo electrónico y/o la contraseña son incorrectos'
             ]);
         } else {
-            if (auth()->user()->role === 'admin') {
+            if (auth()->user()->rol === 'admin') {
                 return redirect()->route('admin.peticion-index')->with('exito', 'Administrador inicio sesión con exito');
             } else {
                 return redirect()->route('user.peticion-index')->with('exito', 'Usuario inicio sesión con exito');

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'cargo'
     ];
 
     /**
@@ -42,6 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+    ];
+
+    protected $cargo = [
+        'gerente/coordinador',
+        'profesional'
     ];
 
     public function peticions()

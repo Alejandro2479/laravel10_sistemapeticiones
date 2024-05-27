@@ -42,7 +42,7 @@
                         <option value="consulta">Derecho de Petición de Consulta - 30 días</option>
                     </select>
                     @error('categoria')
-                        <p class="mt-1 text-sm text-red-600">Debes seleccionar una categoría</p>
+                        <p class="mt-1 text-sm text-red-600">La categoría es obligatoria</p>
                     @enderror
                 </div>
 

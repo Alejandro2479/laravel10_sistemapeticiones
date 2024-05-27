@@ -22,7 +22,7 @@ class AdminController extends Controller
             fn ($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
         )->where('estatus', false)
             ->whereHas('users', function ($query) {
-                $query->where('role', '!=', 'admin');
+                $query->where('rol', '!=', 'admin');
             })
             ->oldest()->paginate(10);
 
@@ -38,7 +38,7 @@ class AdminController extends Controller
             fn ($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
         )->where('estatus', true)
             ->whereHas('users', function ($query) {
-                $query->where('role', '!=', 'admin');
+                $query->where('rol', '!=', 'admin');
             })
             ->oldest()->paginate(10);
 
@@ -60,7 +60,7 @@ class AdminController extends Controller
 
     public function crearPeticion()
     {
-        $users = User::where('role', 'user')->get();
+        $users = User::where('rol', 'user')->get();
 
         return view('admin.crear-peticion-admin', ['users' => $users]);
     }
@@ -72,7 +72,7 @@ class AdminController extends Controller
 
     public function editarPeticion(Peticion $peticion)
     {
-        $users = User::where('role', 'user')->get();
+        $users = User::where('rol', 'user')->get();
         $usuariosAsignados = $peticion->users->pluck('id')->toArray();
 
         return view('admin.editar-peticion-admin', ['peticion' => $peticion, 'users' => $users, 'usuariosAsignados' => $usuariosAsignados]);
@@ -119,7 +119,7 @@ class AdminController extends Controller
 
     public function indexUser()
     {
-        return view('admin.index-user-admin', ['users' => User::latest()->get()]);
+        return view('admin.index-user-admin', ['users' => User::oldest()->get()]);
     }
 
     public function crearUser()
@@ -148,7 +148,7 @@ class AdminController extends Controller
 
     public function eliminarUser(User $user)
     {
-        if ($user->role !== 'admin') {
+        if ($user->rol !== 'admin') {
             $user->delete();
             return redirect()->route('admin.user-index')->with('exito', 'Usuario eliminado con éxito');
         } else {
