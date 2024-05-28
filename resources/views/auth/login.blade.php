@@ -13,9 +13,9 @@
     <div class="flex items-center justify-center h-screen bg-sky-500">
         <!-- TARJETA -->
         <div class="bg-lime-600 p-2 mx-6 rounded-2xl">
-            <!-- IMAGEN -->
+            <!--
             <img class="object-fit rounded-xl h-80" src="images/logo.jpg" alt="image">
-            <!-- IMAGEN -->
+            -->
             
             <!-- CONTENIDO -->
             <div class="p-6">
