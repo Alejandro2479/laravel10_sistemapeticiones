@@ -80,14 +80,11 @@ class AdminController extends Controller
 
     public function guardarPeticion(PeticionRequest $peticionRequest)
     {
-        $data = $peticionRequest->validated();
+        $peticion = Peticion::create($peticionRequest->validated());
 
-        $peticion = new Peticion($data);
+        $peticion->users()->sync($peticionRequest->input('user_id', []));
         $peticion->calcularFechaVencimiento();
         $peticion->save();
-
-        $usuariosSeleccionados = $peticionRequest->input('user_id', []);
-        $peticion->users()->sync($usuariosSeleccionados);
 
         foreach ($peticion->users as $user) {
             $user->notify(new NuevoDerechoPeticion($peticion->numero_radicado, $peticion->fecha_vencimiento));
@@ -134,7 +131,7 @@ class AdminController extends Controller
 
     public function guardarUser(UserRequest $userRequest)
     {
-        $peticion = User::create($userRequest->validated());
+        User::create($userRequest->validated());
 
         return redirect()->route('admin.user-index')->with('exito', 'Usuario creado con exito');
     }
