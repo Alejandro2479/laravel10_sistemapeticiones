@@ -57,7 +57,7 @@ class UserController extends Controller
         return view('user.completar-peticion-user', ['peticion' => $peticion]);
     }
 
-    public function alternarEstatusPeticionUser(CompletarPeticionRequest $completarPeticionRequest, Peticion $peticion)
+    public function alternarEstatusPeticionUser(Peticion $peticion, CompletarPeticionRequest $completarPeticionRequest)
     {
         $data = $completarPeticionRequest->validated();
 

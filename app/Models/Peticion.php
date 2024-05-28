@@ -64,7 +64,6 @@ class Peticion extends Model
     public function completarPeticionAdmin()
     {
         $this->estatus = !$this->estatus;
-        $this->save();
     }
 
     public function completarPeticionUser($userId, $resumen)
