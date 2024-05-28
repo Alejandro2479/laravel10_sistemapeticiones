@@ -44,6 +44,11 @@ class Peticion extends Model
         return $this->belongsToMany(User::class)->withPivot('completado', 'resumen');
     }
 
+    public function devoluciones()
+    {
+        return $this->hasMany(Devolucion::class);
+    }
+
     public function calcularFechaVencimiento(Carbon $fechaInicio = null)
     {
         $fechaInicio = $fechaInicio ?? Carbon::now();
