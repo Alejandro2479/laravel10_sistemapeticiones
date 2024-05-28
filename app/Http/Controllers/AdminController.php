@@ -95,14 +95,11 @@ class AdminController extends Controller
 
     public function actualizarPeticion(Peticion $peticion, PeticionRequest $peticionRequest)
     {
-        $data = $peticionRequest->validated();
+        $peticion->update($peticionRequest->validated());
 
-        $peticion->update($data);
+        $peticion->users()->sync($peticionRequest->input('user_id', []));
         $peticion->calcularFechaVencimiento($peticion->created_at);
         $peticion->save();
-
-        $usuariosSeleccionados = $peticionRequest->input('user_id', []);
-        $peticion->users()->sync($usuariosSeleccionados);
 
         return redirect()->route('admin.peticion-index')->with('exito', 'Petición editada con éxito');
     }
