@@ -81,10 +81,10 @@
                 <a href="{{ route('user.peticion-completar', ['peticion' => $peticion]) }}">
                     <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500" type="submit">Completar Petición</button>
                 </a>
-                @endif
                 <a href="{{ route('user.peticion-devolver', ['peticion' => $peticion]) }}">
                     <button class="py-2 px-4 rounded bg-amber-400 text-white font-semibold hover:bg-amber-500 duration-500" type="submit">Devolver Petición</button>
                 </a>
+                @endif
             </div>
             @endif
         </div>
