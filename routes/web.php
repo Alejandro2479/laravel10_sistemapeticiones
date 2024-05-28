@@ -60,7 +60,7 @@ Route::put('/admin/user/{user}/editar/actualizar', [AdminController::class, 'act
 
 Route::delete('/admin/user/{user}/eliminar', [AdminController::class, 'eliminarUser'])->middleware('auth.admin')->name('admin.user-eliminar');
 
-Route::put('/admin/peticion/{peticion}/alternar-estatus', [AdminController::class, 'alternarEstatusPeticionAdmin'])->middleware('auth.admin')->name('peticion.alternar-estatus-admin');
+Route::put('/admin/peticion/{peticion}/alternar-estatus', [AdminController::class, 'alternarEstatusPeticion'])->middleware('auth.admin')->name('admin.peticion-alternar');
 
 // RUTAS USUARIO
 Route::get('/user/peticion/index', [UserController::class, 'indexPeticion'])->middleware('auth.user')->name('user.peticion-index');
@@ -71,11 +71,11 @@ Route::get('/user/peticion/{peticion}/mostrar', [UserController::class, 'mostrar
 
 Route::get('/user/peticion/{peticion}/completar', [UserController::class, 'completarPeticion'])->middleware('auth.user')->name('user.peticion-completar');
 
-Route::put('/user/peticion/{peticion}/alternar-estatus', [UserController::class, 'alternarEstatusPeticionUser'])->middleware('auth.user')->name('peticion.alternar-estatus-user');
+Route::put('/user/peticion/{peticion}/alternar-estatus', [UserController::class, 'alternarEstatusPeticion'])->middleware('auth.user')->name('user.peticion-alternar');
 
-Route::get('/user/peticion/{peticion}/devolver', [DevolucionController::class, 'crearDevolucion'])->middleware('auth.user')->name('user.peticion-devolver');
+Route::get('/user/peticion/{peticion}/devolver', [UserController::class, 'crearDevolucion'])->middleware('auth.user')->name('user.peticion-devolucion');
 
-Route::post('/user/peticion/{peticion}/devolver/guardar', [DevolucionController::class, 'guardarDevolucion'])->middleware('auth.user')->name('peticion.devolver');
+Route::post('/user/peticion/{peticion}/devolver/guardar', [UserController::class, 'guardarDevolucion'])->middleware('auth.user')->name('user.peticion-devolver');
 
 // RUTAS ADMINISTRADOR Y USUARIO
 Route::get("/", function () {

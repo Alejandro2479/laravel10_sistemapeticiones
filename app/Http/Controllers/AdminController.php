@@ -137,7 +137,7 @@ class AdminController extends Controller
         }
     }
 
-    public function alternarEstatusPeticionAdmin(Peticion $peticion)
+    public function alternarEstatusPeticion(Peticion $peticion)
     {
         $peticion->completarPeticionAdmin();
         $peticion->save();

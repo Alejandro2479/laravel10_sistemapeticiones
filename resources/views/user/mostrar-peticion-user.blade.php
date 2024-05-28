@@ -75,18 +75,18 @@
                 <p><strong>Actualizada el:</strong> {{ $peticion->updated_at->format('d/m/Y') }}</p>
             </div>   
 
-            @if (!$peticion->devoluciones->contains('user_id', auth()->user()->id))
+            @if ($peticion->estatus != 1 && !$peticion->devoluciones->contains('user_id', auth()->user()->id))
             <div class="flex mt-4 space-x-2">
                 @if (!$peticion->users()->where('user_id', auth()->user()->id)->wherePivot('completado', true)->exists())
-                <a href="{{ route('user.peticion-completar', ['peticion' => $peticion]) }}">
-                    <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500" type="submit">Completar Petición</button>
-                </a>
-                <a href="{{ route('user.peticion-devolver', ['peticion' => $peticion]) }}">
+                    <a href="{{ route('user.peticion-completar', ['peticion' => $peticion]) }}">
+                        <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500" type="submit">Completar Petición</button>
+                    </a>
+                @endif
+                <a href="{{ route('user.peticion-devolucion', ['peticion' => $peticion]) }}">
                     <button class="py-2 px-4 rounded bg-amber-400 text-white font-semibold hover:bg-amber-500 duration-500" type="submit">Devolver Petición</button>
                 </a>
-                @endif
             </div>
-            @endif
+        @endif
         </div>
     </div>
 @endsection

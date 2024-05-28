@@ -6,7 +6,7 @@
     <div class="md:ml-64">
         <div class="p-4">
             <h2 class="text-2xl font-semibold mb-4">Completar Derecho de Petición</h2>
-            <form action="{{ route('peticion.alternar-estatus-user', ['peticion' => $peticion]) }}" method="POST">
+            <form action="{{ route('user.peticion-alternar', ['peticion' => $peticion]) }}" method="POST">
                 @csrf
                 @method('PUT')    
                 <div class="mb-4">

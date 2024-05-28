@@ -95,7 +95,7 @@
                     <button class="py-2 px-4 rounded bg-red-500 text-white font-semibold hover:bg-red-600 duration-500">Eliminar</button>
                 </form>
 
-                <form action="{{ route('peticion.alternar-estatus-admin', ['peticion' => $peticion]) }}" method="POST">
+                <form action="{{ route('admin.peticion-alternar', ['peticion' => $peticion]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500">Cambiar Estatus</button>

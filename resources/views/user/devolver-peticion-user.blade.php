@@ -6,7 +6,7 @@
     <div class="md:ml-64">
         <div class="p-4">
             <h2 class="text-2xl font-semibold mb-4">Devolver Derecho de Petición</h2>
-            <form action="{{ route('peticion.devolver', ['peticion' => $peticion]) }}" method="POST">
+            <form action="{{ route('user.peticion-devolver', ['peticion' => $peticion]) }}" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="razon" class="block text-lg font-semibold">Razon</label>

@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Peticion;
-use App\Models\User;
+use App\Models\Devolucion;
 use App\Http\Requests\CompletarPeticionRequest;
+use App\Http\Requests\DevolucionRequest;
 
 class UserController extends Controller
 {
@@ -57,7 +58,7 @@ class UserController extends Controller
         return view('user.completar-peticion-user', ['peticion' => $peticion]);
     }
 
-    public function alternarEstatusPeticionUser(Peticion $peticion, CompletarPeticionRequest $completarPeticionRequest)
+    public function alternarEstatusPeticion(Peticion $peticion, CompletarPeticionRequest $completarPeticionRequest)
     {
         $user = Auth::user();
 
@@ -66,5 +67,21 @@ class UserController extends Controller
         $peticion->save();
 
         return redirect()->route('user.peticion-index')->with('exito', 'Petición completada con éxito');
+    }
+
+    public function crearDevolucion(Peticion $peticion)
+    {
+        return view('user.devolver-peticion-user', ['peticion' => $peticion]);
+    }
+
+    public function guardarDevolucion(Peticion $peticion, DevolucionRequest $devolucionRequest)
+    {
+        $data = $devolucionRequest->validated();
+        $data['peticion_id'] = $peticion->id;
+        $data['user_id'] = Auth::id();
+
+        Devolucion::create($data);
+
+        return redirect()->route('user.peticion-index')->with('exito', 'Petición devuelta con éxito');
     }
 }
