@@ -75,6 +75,7 @@
                 <p><strong>Actualizada el:</strong> {{ $peticion->updated_at->format('d/m/Y') }}</p>
             </div>   
 
+            @if (!$peticion->devoluciones->contains('user_id', auth()->user()->id))
             <div class="flex mt-4 space-x-2">
                 @if (!$peticion->users()->where('user_id', auth()->user()->id)->wherePivot('completado', true)->exists())
                 <a href="{{ route('user.peticion-completar', ['peticion' => $peticion]) }}">
@@ -85,6 +86,7 @@
                     <button class="py-2 px-4 rounded bg-amber-400 text-white font-semibold hover:bg-amber-500 duration-500" type="submit">Devolver Petición</button>
                 </a>
             </div>
+            @endif
         </div>
     </div>
 @endsection
