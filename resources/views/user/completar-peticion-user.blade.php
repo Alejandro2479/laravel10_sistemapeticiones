@@ -10,7 +10,7 @@
                 @csrf
                 @method('PUT')    
                 <div class="mb-4">
-                    <label for="descripcion" class="block text-lg font-semibold">Resumen</label>
+                    <label for="resumen" class="block text-lg font-semibold">Resumen</label>
                     <textarea class="mt-1 block w-full border border-gray-200" name="resumen" id="resumen" rows="5">{{ old('resumen') }}</textarea>
                     @error('resumen')
                         <p class="mt-1 text-sm text-red-600">El resumen es obligatorio</p>

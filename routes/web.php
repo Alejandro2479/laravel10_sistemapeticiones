@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\DevolucionController;
 use App\Http\Controllers\SesionController;
 
 /*
@@ -72,6 +72,10 @@ Route::get('/user/peticion/{peticion}/mostrar', [UserController::class, 'mostrar
 Route::get('/user/peticion/{peticion}/completar', [UserController::class, 'completarPeticion'])->middleware('auth.user')->name('user.peticion-completar');
 
 Route::put('/user/peticion/{peticion}/alternar-estatus', [UserController::class, 'alternarEstatusPeticionUser'])->middleware('auth.user')->name('peticion.alternar-estatus-user');
+
+Route::get('/user/peticion/{peticion}/devolver', [DevolucionController::class, 'crearDevolucion'])->middleware('auth.user')->name('user.peticion-devolver');
+
+Route::post('/user/peticion/{peticion}/devolver/guardar', [DevolucionController::class, 'guardarDevolucion'])->middleware('auth.user')->name('peticion.devolver');
 
 // RUTAS ADMINISTRADOR Y USUARIO
 Route::get("/", function () {

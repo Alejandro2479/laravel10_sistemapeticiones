@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('devoluciones', function (Blueprint $table) {
+        Schema::create('devolucions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('peticion_id')->constrained('peticiones')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->text('razon');
+            $table->unsignedBigInteger('peticion_id');
+            $table->unsignedBigInteger('user_id');
+            $table->text('razon')->nullable();
             $table->timestamps();
+
+            $table->foreign('peticion_id')->references('id')->on('peticions')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
