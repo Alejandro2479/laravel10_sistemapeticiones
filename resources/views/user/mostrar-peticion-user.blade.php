@@ -5,7 +5,7 @@
 @section('contenido_principal')
     <div class="md:ml-64">
         <div class="p-4">
-            <h2 class="text-2xl font-semibold mb-4">Ver Derecho de Petición</h2>
+            <h2 class="text-2xl font-semibold mb-4">Ver Derecho de Petición {{ $peticion->numero_radicado }}</h2>
             <div class="border border-gray-200 p-2 mb-4">
                 <h3 class="text-lg font-semibold mb-2">Número de Radicado:</h3>
                 <p class="text-gray-700">{{ $peticion->numero_radicado }}</p>
@@ -77,6 +77,9 @@
 
             @if ($peticion->estatus != 1 && !$peticion->devoluciones->contains('user_id', auth()->user()->id))
             <div class="flex mt-4 space-x-2">
+                <a href="{{ route('all.devoluciones-mostrar', ['peticion' => $peticion]) }}">
+                    <button class="py-2 px-4 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 duration-500" type="submit">Ver Devoluciones</button>
+                </a>
                 @if (!$peticion->users()->where('user_id', auth()->user()->id)->wherePivot('completado', true)->exists())
                     <a href="{{ route('user.peticion-completar', ['peticion' => $peticion]) }}">
                         <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500" type="submit">Completar Petición</button>

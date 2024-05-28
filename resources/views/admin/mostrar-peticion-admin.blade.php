@@ -5,7 +5,7 @@
 @section('contenido_principal')
     <div class="md:ml-64">
         <div class="p-4">
-            <h2 class="text-2xl font-semibold mb-4">Ver Derecho de Petición</h2>
+            <h2 class="text-2xl font-semibold mb-4">Ver Derecho de Petición {{ $peticion->numero_radicado }}</h2>
             <div class="border border-gray-800 p-2 mb-4">
                 <h3 class="text-lg font-semibold mb-2">Número de Radicado:</h3>
                 <p>{{ $peticion->numero_radicado }}</p>
@@ -89,11 +89,16 @@
                 <a href="{{ route('admin.peticion-editar', ['peticion' => $peticion]) }}">
                     <button class="py-2 px-4 rounded bg-amber-400 text-white font-semibold hover:bg-amber-500 duration-500" type="submit">Editar</button>
                 </a>
+
                 <form action="{{ route('admin.peticion-eliminar', ['peticion' => $peticion->id]) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="py-2 px-4 rounded bg-red-500 text-white font-semibold hover:bg-red-600 duration-500">Eliminar</button>
                 </form>
+
+                <a href="{{ route('all.devoluciones-mostrar', ['peticion' => $peticion]) }}">
+                    <button class="py-2 px-4 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 duration-500" type="submit">Ver Devoluciones</button>
+                </a>
 
                 <form action="{{ route('admin.peticion-alternar', ['peticion' => $peticion]) }}" method="POST">
                     @csrf

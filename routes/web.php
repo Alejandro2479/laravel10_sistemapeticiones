@@ -69,15 +69,17 @@ Route::get('/user/peticion/index-completas', [UserController::class, 'indexPetic
 
 Route::get('/user/peticion/{peticion}/mostrar', [UserController::class, 'mostrarPeticion'])->middleware('auth.user')->name('user.peticion-mostrar');
 
-Route::get('/user/peticion/{peticion}/completar', [UserController::class, 'completarPeticion'])->middleware('auth.user')->name('user.peticion-completar');
+Route::get('/user/peticion/{peticion}/mostrar/completar', [UserController::class, 'completarPeticion'])->middleware('auth.user')->name('user.peticion-completar');
 
-Route::put('/user/peticion/{peticion}/alternar-estatus', [UserController::class, 'alternarEstatusPeticion'])->middleware('auth.user')->name('user.peticion-alternar');
+Route::put('/user/peticion/{peticion}/mostrar/completar/alternar-estatus', [UserController::class, 'alternarEstatusPeticion'])->middleware('auth.user')->name('user.peticion-alternar');
 
-Route::get('/user/peticion/{peticion}/devolver', [UserController::class, 'crearDevolucion'])->middleware('auth.user')->name('user.peticion-devolucion');
+Route::get('/user/peticion/{peticion}/mostrar/devolver', [UserController::class, 'crearDevolucion'])->middleware('auth.user')->name('user.peticion-devolucion');
 
-Route::post('/user/peticion/{peticion}/devolver/guardar', [UserController::class, 'guardarDevolucion'])->middleware('auth.user')->name('user.peticion-devolver');
+Route::post('/user/peticion/{peticion}/mostrar/devolver/guardar', [UserController::class, 'guardarDevolucion'])->middleware('auth.user')->name('user.peticion-devolver');
 
 // RUTAS ADMINISTRADOR Y USUARIO
+Route::get('/all/peticion/{peticion}/mostrar/devoluciones', [DevolucionController::class, 'mostrarDevoluciones'])->middleware('auth')->name('all.devoluciones-mostrar');
+
 Route::get("/", function () {
     if (Auth()->check()) {
         if (auth()->user()->role === 'admin') {
