@@ -45,19 +45,6 @@ class AdminController extends Controller
         return view('admin.index-peticion-admin', ['peticiones' => $peticiones]);
     }
 
-    public function indexPeticionDevuelta(Request $request)
-    {
-        $userId = Auth::id();
-        $numeroRadicado = $request->input('numero_radicado');
-
-        $peticiones = Peticion::when(
-            $numeroRadicado,
-            fn ($query, $numeroRadicado) => $query->numeroRadicado($numeroRadicado)
-        )->where([['user_id', $userId], ['estatus', false]])->oldest()->paginate(10);
-
-        return view('admin.index-peticion-devuelta-admin', ['peticiones' => $peticiones]);
-    }
-
     public function crearPeticion()
     {
         $users = User::where('rol', 'user')->get();

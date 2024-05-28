@@ -59,10 +59,11 @@ class UserController extends Controller
 
     public function alternarEstatusPeticionUser(Peticion $peticion, CompletarPeticionRequest $completarPeticionRequest)
     {
-        $data = $completarPeticionRequest->validated();
-
         $user = Auth::user();
+
+        $data = $completarPeticionRequest->validated();
         $peticion->completarPeticionUser($user->id, $data['resumen']);
+        $peticion->save();
 
         return redirect()->route('user.peticion-index')->with('exito', 'Petición completada con éxito');
     }

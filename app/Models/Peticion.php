@@ -79,7 +79,6 @@ class Peticion extends Model
         $todosCompletos = $this->users()->wherePivot('completado', false)->doesntExist();
 
         $this->estatus = $todosCompletos;
-        $this->save();
     }
 
     public function scopeNumeroRadicado(Builder $query, string $numeroRadicado): Builder
