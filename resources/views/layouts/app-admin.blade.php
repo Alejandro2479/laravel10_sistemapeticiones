@@ -26,7 +26,7 @@
                     <a class="block px-4 py-2" href="{{ route('admin.peticion-completa-index') }}">Ver Peticiones Completas</a>
                 </li>
                 <li class="hover:bg-sky-600 duration-500">
-                    <a class="block px-4 py-2" href="{{ route('all.devoluciones-index') }}">Ver Devoluciones</a>
+                    <a class="block px-4 py-2" href="{{ route('all.devoluciones-index') }}">Ver Devoluciones Pendientes</a>
                 </li>
                 <li class="hover:bg-sky-600 duration-500">
                     <a class="block px-4 py-2" href="{{ route('admin.user-crear') }}">Crear Usuario</a>

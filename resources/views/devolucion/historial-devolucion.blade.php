@@ -18,7 +18,7 @@
                 <p>Razón: {{ $devolucion->razon }}</p>
             </div>
             @empty
-            <p>No hay devoluciones para esta petición.</p>
+            <p>No hay devoluciones en esta petición</p>
             @endforelse
             
         </div>
