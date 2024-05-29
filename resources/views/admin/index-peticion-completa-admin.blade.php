@@ -57,7 +57,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td class="border px-4 py-2" colspan="8">No hay derechos de peticion</td>
+                            <td class="border px-4 py-2" colspan="8">No hay derechos de peticion completos</td>
                         </tr>
                         @endforelse
                     </tbody>

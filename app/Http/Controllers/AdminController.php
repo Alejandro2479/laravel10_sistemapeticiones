@@ -42,7 +42,7 @@ class AdminController extends Controller
             })
             ->oldest()->paginate(10);
 
-        return view('admin.index-peticion-admin', ['peticiones' => $peticiones]);
+        return view('admin.index-peticion-completa-admin', ['peticiones' => $peticiones]);
     }
 
     public function crearPeticion()
