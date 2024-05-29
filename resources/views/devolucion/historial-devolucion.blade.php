@@ -12,10 +12,14 @@
             @forelse ($peticion->devoluciones as $devolucion)
             <div class="border border-gray-800 p-2 mb-4">
                 <h3 class="text-lg font-semibold mb-2">Devolución Número {{ $loop->iteration }}</h3>
-                <p>Usuario: {{ $devolucion->user->name }}</p>
-                <p>Correo Electrónico: {{ $devolucion->user->email }}</p>
                 <p>ID Devolución: {{ $devolucion->id }}</p>
+                <br>
+                <p>Usuario Original: {{ $devolucion->user->name }}</p>
+                <p>Correo Electrónico: {{ $devolucion->user->email }}</p>
                 <p>Razón: {{ $devolucion->razon }}</p>
+                <br>
+                <p>Reasignado a:</p>
+                <p>Correo Electrónico:</p>
             </div>
             @empty
             <p>No hay devoluciones en esta petición</p>

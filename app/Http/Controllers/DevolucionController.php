@@ -41,8 +41,8 @@ class DevolucionController extends Controller
         return redirect()->route('all.devoluciones-index')->with('exito', 'Petición reasignada con éxito');
     }
 
-    public function historialDevolucion(Peticion $peticion)
+    public function historialDevolucion(Peticion $peticion, Devolucion $devolucion)
     {
-        return view('devolucion.historial-devolucion', ['peticion' => $peticion]);
+        return view('devolucion.historial-devolucion', ['peticion' => $peticion,]);
     }
 }
