@@ -77,7 +77,7 @@
 
             @if ($peticion->estatus != 1 && !$peticion->devoluciones->contains('user_id', auth()->user()->id))
             <div class="flex mt-4 space-x-2">
-                <a href="{{ route('all.devoluciones-mostrar', ['peticion' => $peticion]) }}">
+                <a href="{{ route('all.devoluciones-historial', ['peticion' => $peticion]) }}">
                     <button class="py-2 px-4 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 duration-500" type="submit">Ver Devoluciones</button>
                 </a>
                 @if (!$peticion->users()->where('user_id', auth()->user()->id)->wherePivot('completado', true)->exists())

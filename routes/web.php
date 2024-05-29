@@ -78,7 +78,7 @@ Route::get('/user/peticion/{peticion}/mostrar/devolver', [UserController::class,
 Route::post('/user/peticion/{peticion}/mostrar/devolver/guardar', [UserController::class, 'guardarDevolucion'])->middleware('auth.user')->name('user.peticion-devolver');
 
 // RUTAS ADMINISTRADOR Y USUARIO
-Route::get('/all/peticion/{peticion}/mostrar/devoluciones', [DevolucionController::class, 'mostrarDevoluciones'])->middleware('auth')->name('all.devoluciones-mostrar');
+Route::get('/all/peticion/{peticion}/historial/devoluciones', [DevolucionController::class, 'historialDevoluciones'])->middleware('auth')->name('all.devoluciones-historial');
 
 Route::get("/", function () {
     if (Auth()->check()) {

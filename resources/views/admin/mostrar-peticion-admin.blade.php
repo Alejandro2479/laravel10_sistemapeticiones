@@ -96,7 +96,7 @@
                     <button class="py-2 px-4 rounded bg-red-500 text-white font-semibold hover:bg-red-600 duration-500">Eliminar</button>
                 </form>
 
-                <a href="{{ route('all.devoluciones-mostrar', ['peticion' => $peticion]) }}">
+                <a href="{{ route('all.devoluciones-historial', ['peticion' => $peticion]) }}">
                     <button class="py-2 px-4 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 duration-500" type="submit">Ver Devoluciones</button>
                 </a>
 
