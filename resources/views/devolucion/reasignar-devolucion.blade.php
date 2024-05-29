@@ -66,7 +66,7 @@
             </div>
 
             <div class="border border-gray-200 p-2 mb-4">
-                <h3 class="text-lg font-semibold mb-2">Días para Vencer:</h3>
+                <h3 class="text-lg font-semibold mb-2">Días Habiles para Vencer:</h3>
                 <p class="inline-block align-middle text-center font-semibold
                     @if ($devolucion->peticion->dias >= 1 && $devolucion->peticion->dias <= 5)
                         bg-red-500 text-white
