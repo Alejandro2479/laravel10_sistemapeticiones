@@ -37,8 +37,8 @@
                             <td class="px-4 py-2 text-center">{{ $devolucion->user->name }}</td>
                             <td class="px-4 py-2 text-center">{{ $devolucion->created_at->format('d/m/Y') }}</td>
                             <td class="flex flex-col px-4 py-2 items-center justify-center space-y-2 space-x-0 md:flex-row md:space-y-0 md:space-x-2">
-                                <a href='#' class="w-full">
-                                    <button class="py-2 px-4 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 duration-500 w-full">Ver</button>
+                                <a href='{{ route('all.devolucion-reasignar', ['devolucion' => $devolucion]) }}' class="w-full">
+                                    <button class="py-2 px-4 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 duration-500 w-full">Reasignar</button>
                                 </a>                                
                             </td>
                         </tr>
