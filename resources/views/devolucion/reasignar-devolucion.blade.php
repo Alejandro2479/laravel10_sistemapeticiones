@@ -80,13 +80,13 @@
                 </p>
             </div>
             
-            <form action="#" method="POST">
+            <form action="{{ route('all.peticion-actualizar', ['devolucion' => $devolucion->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mb-4">
                     <label for="user_id" class="block text-lg font-semibold">Usuario a Reasignar</label>
                     <select name="user_id" id="user_id" class="mt-1 block w-full border border-gray-200">
-                        <option>Selecciona un correo electrónico a reasignar</option>
+                        <option value="">Selecciona un correo electrónico a reasignar</option>
                         @foreach($users as $user)
                             <option value="{{ $user->id }}" {{ $devolucion->peticion->user_id == $user->id ? 'selected' : '' }}>{{ $user->email }}</option>
                         @endforeach

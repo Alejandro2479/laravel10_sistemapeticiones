@@ -84,6 +84,8 @@ Route::get('/all/devolucion/index', [DevolucionController::class, 'indexDevoluci
 
 Route::get('/all/devolucion/{devolucion}/reasignar', [DevolucionController::class, 'reasignarDevolucion'])->middleware('auth')->name('all.devolucion-reasignar');
 
+Route::put('/all/devolucion/{devolucion}/reasignar/actualizar', [DevolucionController::class, 'actualizarPeticion'])->middleware('auth')->name('all.peticion-actualizar');
+
 Route::get("/", function () {
     if (Auth()->check()) {
         if (auth()->user()->role === 'admin') {
