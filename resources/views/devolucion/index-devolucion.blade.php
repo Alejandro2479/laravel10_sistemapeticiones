@@ -10,7 +10,7 @@
     <div class="md:ml-64">
         <div class="p-4">
             <div class="flex flex-col md:flex-row md:justify-between">
-                <h2 class="text-2xl font-semibold mb-4">Lista de Devoluciones de Derechos de Petición</h2>
+                <h2 class="text-2xl font-semibold mb-4">Lista de Devoluciones Pendientes de Derechos de Petición</h2>
             
                 <form class="flex items-center space-x-2 mb-4 md:mb-0" method="GET" action="{{ route('admin.peticion-index') }}">
                     <input class="w-60 border rounded-md border-slate-300 py-1 px-2 leading-tight focus:outline-none" type="text" name="numero_radicado" placeholder="Buscar por número de radicado" value="{{ request('numero_radicado') }}">
@@ -44,7 +44,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td class="border px-4 py-2" colspan="8">No hay devoluciones de derechos de petición</td>
+                            <td class="border px-4 py-2" colspan="8">No hay devoluciones de derechos de petición pendientes</td>
                         </tr>
                         @endforelse
                     </tbody>

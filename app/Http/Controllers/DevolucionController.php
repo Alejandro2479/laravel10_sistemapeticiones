@@ -13,7 +13,9 @@ class DevolucionController extends Controller
 {
     public function indexDevolucion()
     {
-        return view('devolucion.index-devolucion', ['devoluciones' => Devolucion::oldest()->paginate(10)]);
+        $devoluciones = Devolucion::where('estatus', false)->oldest()->paginate(10);
+
+        return view('devolucion.index-devolucion', ['devoluciones' => $devoluciones]);
     }
 
     public function reasignarDevolucion(Devolucion $devolucion)
@@ -32,6 +34,9 @@ class DevolucionController extends Controller
 
         $peticion = $devolucion->peticion;
         $peticion->users()->updateExistingPivot($devolucion->user_id, ['user_id' => $nuevoUserId]);
+
+        $devolucion->estatus = true;
+        $devolucion->save();
 
         return redirect()->route('all.devoluciones-index')->with('exito', 'Petición reasignada con éxito');
     }

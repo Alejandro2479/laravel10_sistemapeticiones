@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('peticion_id');
             $table->unsignedBigInteger('user_id');
             $table->text('razon')->nullable();
+            $table->boolean('estatus')->default(false);
             $table->timestamps();
 
             $table->foreign('peticion_id')->references('id')->on('peticions')->onDelete('cascade');
