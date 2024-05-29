@@ -79,21 +79,30 @@
                     {{ $devolucion->peticion->dias }}
                 </p>
             </div>
-
-            <div class="text-sm">
-                <p><strong>Creada el:</strong> {{ $devolucion->peticion->created_at->format('d/m/Y') }}</p>
-                <p><strong>Actualizada el:</strong> {{ $devolucion->peticion->updated_at->format('d/m/Y') }}</p>
-            </div>
             
             <form action="#" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mb-4">
+                    <label for="user_id" class="block text-lg font-semibold">Usuario a Reasignar</label>
+                    <select name="user_id" id="user_id" class="mt-1 block w-full border border-gray-200">
+                        <option>Selecciona un correo electrónico a reasignar</option>
+                        @foreach($users as $user)
+                            <option value="{{ $user->id }}" {{ $devolucion->peticion->user_id == $user->id ? 'selected' : '' }}>{{ $user->email }}</option>
+                        @endforeach
+                    </select>
+                    @error('user_id')
+                        <p class="mt-1 text-sm text-red-600">Debes seleccionar un usuario a reasignar</p>
+                    @enderror
+                </div>
 
+                <div class="text-sm">
+                    <p><strong>Creada el:</strong> {{ $devolucion->peticion->created_at->format('d/m/Y') }}</p>
+                    <p><strong>Actualizada el:</strong> {{ $devolucion->peticion->updated_at->format('d/m/Y') }}</p>
                 </div>
     
                 <div class="mt-4">
-                    <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500" type="submit">Editar</button>
+                    <button class="py-2 px-4 rounded bg-emerald-500 text-white font-semibold hover:bg-emerald-600 duration-500" type="submit">Reasignar</button>
                 </div>
             </form>
         </div>
