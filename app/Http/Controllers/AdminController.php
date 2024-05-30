@@ -47,7 +47,7 @@ class AdminController extends Controller
 
     public function crearPeticion()
     {
-        $users = User::where('rol', 'user')->get();
+        $users = User::whereIn('rol', ['user', 'manager'])->get();
 
         return view('admin.crear-peticion-admin', ['users' => $users]);
     }
@@ -59,7 +59,7 @@ class AdminController extends Controller
 
     public function editarPeticion(Peticion $peticion)
     {
-        $users = User::where('rol', 'user')->get();
+        $users = User::whereIn('rol', ['user', 'manager'])->get();
         $usuariosAsignados = $peticion->users->pluck('id')->toArray();
 
         return view('admin.editar-peticion-admin', ['peticion' => $peticion, 'users' => $users, 'usuariosAsignados' => $usuariosAsignados]);
