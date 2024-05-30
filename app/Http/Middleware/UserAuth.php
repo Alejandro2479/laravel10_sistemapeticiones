@@ -16,9 +16,11 @@ class UserAuth
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->check()) {
-            if (auth()->user()->rol === 'user')
+            $userRole = auth()->user()->rol;
+            if ($userRole === 'user' || $userRole === 'manager') {
                 return $next($request);
+            }
         }
-        return redirect(abort(404));
+        return abort(404);
     }
 }
