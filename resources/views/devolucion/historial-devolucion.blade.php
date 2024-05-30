@@ -24,6 +24,7 @@
                     @if ($devolucion->nombre_reasignado && $devolucion->email_reasignado)
                         <p>Reasignado a: {{ $devolucion->nombre_reasignado }}</p>
                         <p>Correo Electrónico: {{ $devolucion->email_reasignado }}</p>
+                        <p>Fecha de Reasignación: {{ $devolucion->updated_at->format('d/m/Y') }}</p>
                     @else
                         Esta devolución no ha sido reasignada
                     @endif
