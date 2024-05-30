@@ -88,7 +88,7 @@
                     <select name="user_id" id="user_id" class="mt-1 block w-full border border-gray-200">
                         <option value="">Selecciona un correo electrónico a reasignar</option>
                         @foreach($users as $user)
-                            <option value="{{ $user->id }}" {{ $devolucion->peticion->user_id == $user->id ? 'selected' : '' }}>{{ $user->email }}</option>
+                            <option value="{{ $user->id }}" {{ $devolucion->peticion->user_id == $user->id ? 'selected' : '' }}>{{ $user->name }} - {{ $user->email }}</option>
                         @endforeach
                     </select>
                     @error('user_id')

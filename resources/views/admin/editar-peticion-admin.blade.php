@@ -51,7 +51,7 @@
                     <label for="user_id" class="block text-lg font-semibold">Usuarios</label>
                     <select name="user_id[]" id="user_id" class="mt-1 w-96 border border-gray-200" multiple>
                         @foreach($users as $user)
-                            <option value="{{ $user->id }}" {{ in_array($user->id, $usuariosAsignados) ? 'selected' : '' }}>{{ $user->email }}</option>
+                            <option value="{{ $user->id }}" {{ in_array($user->id, $usuariosAsignados) ? 'selected' : '' }}>{{ $user->name }} - {{ $user->email }}</option>
                         @endforeach
                     </select>
                     @error('user_id')
