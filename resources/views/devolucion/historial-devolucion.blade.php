@@ -4,6 +4,8 @@
 
 @extends($layout)
 
+@section('title', 'Historial Devoluciones')
+
 @section('contenido_principal')
     <div class="md:ml-64">
         <div class="p-4">
