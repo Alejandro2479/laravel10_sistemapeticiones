@@ -24,13 +24,13 @@
                             <td class="px-4 py-2 text-center">{{ $user->username }}</td>
                             <td class="px-4 py-2 text-center">{{ $user->email }}</td>
                             <td class="px-4 py-2 text-center">
-                                @if($user->cargo === 'gerente/coordinador')
+                                @if($user->rol === 'manager')
                                     Gerente o Coordinador
-                                @elseif($user->cargo === null)
-                                    No aplica
-                                @else
+                                @elseif($user->rol === 'user')
                                     Profesional
-                                @endif
+                                @elseif($user->rol === 'admin')
+                                Administrador
+                            @endif
                             </td>
                             <td class="flex flex-col px-4 py-2 items-center justify-center space-y-2 space-x-0 md:flex-row md:space-y-0 md:space-x-2">                            
                                 <a href="{{ route('admin.user-editar', ['user' => $user]) }}">

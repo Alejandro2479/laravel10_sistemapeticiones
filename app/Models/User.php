@@ -22,7 +22,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'cargo'
+        'rol'
     ];
 
     /**
@@ -45,9 +45,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected $cargo = [
-        'gerente/coordinador',
-        'profesional'
+    protected $rol = [
+        'admin',
+        'manager',
+        'user'
     ];
 
     public function peticions()

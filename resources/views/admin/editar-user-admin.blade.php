@@ -26,13 +26,13 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="cargo" class="block text-lg font-semibold">Cargo</label>
-                    <select name="cargo" id="cargo" class="mt-1 w-full border border-gray-200">
+                    <label for="rol" class="block text-lg font-semibold">Cargo</label>
+                    <select name="rol" id="rol" class="mt-1 w-full border border-gray-200">
                         <option value="">Selecciona un cargo</option>
-                        <option value="gerente/coordinador">Gerente o Coordinador</option>
-                        <option value="profesional">Profesional</option>
+                        <option value="manager">Gerente o Coordinador</option>
+                        <option value="user">Profesional</option>
                     </select>
-                    @error('cargo')
+                    @error('rol')
                         <p class="mt-1 text-sm text-red-600">El cargo es obligatorio</p>
                     @enderror
                 </div>
