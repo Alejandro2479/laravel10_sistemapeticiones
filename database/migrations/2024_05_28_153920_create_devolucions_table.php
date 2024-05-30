@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('razon')->nullable();
             $table->boolean('estatus')->default(false);
             $table->timestamps();
+            $table->text('nombre_reasignado')->nullable();
+            $table->text('email_reasignado')->nullable();
 
             $table->foreign('peticion_id')->references('id')->on('peticions')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

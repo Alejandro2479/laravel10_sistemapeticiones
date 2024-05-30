@@ -27,14 +27,18 @@ class DevolucionController extends Controller
         return view('devolucion.reasignar-devolucion', ['devolucion' => $devolucion, 'users' => $users]);
     }
 
-    public function actualizarPeticion(ReasignarPeticionRequest $reasignarPeticionRequestrequest, Devolucion $devolucion)
+    public function actualizarPeticion(ReasignarPeticionRequest $request, Devolucion $devolucion)
     {
-        $data = $reasignarPeticionRequestrequest->validated();
+        $data = $request->validated();
         $nuevoUserId = $data['user_id'];
 
         $peticion = $devolucion->peticion;
         $peticion->users()->updateExistingPivot($devolucion->user_id, ['user_id' => $nuevoUserId]);
 
+        $nuevoUsuario = User::findOrFail($nuevoUserId);
+
+        $devolucion->nombre_reasignado = $nuevoUsuario->name;
+        $devolucion->email_reasignado = $nuevoUsuario->email;
         $devolucion->estatus = true;
         $devolucion->save();
 

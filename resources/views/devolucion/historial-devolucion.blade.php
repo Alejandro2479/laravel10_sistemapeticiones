@@ -20,12 +20,18 @@
                 <p>Correo Electrónico: {{ $devolucion->user->email }}</p>
                 <p>Razón: {{ $devolucion->razon }}</p>
                 <br>
-                <p>Reasignado a:</p>
-                <p>Correo Electrónico:</p>
+                <p>
+                    @if ($devolucion->nombre_reasignado && $devolucion->email_reasignado)
+                        <p>Reasignado a: {{ $devolucion->nombre_reasignado }}</p>
+                        <p>Correo Electrónico: {{ $devolucion->email_reasignado }}</p>
+                    @else
+                        Esta devolución no ha sido reasignada
+                    @endif
+                </p>
             </div>
-            @empty
+        @empty
             <p>No hay devoluciones en esta petición</p>
-            @endforelse
+        @endforelse
             
         </div>
     </div>
