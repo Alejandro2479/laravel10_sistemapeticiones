@@ -80,11 +80,11 @@ Route::post('/user/peticion/{peticion}/mostrar/devolver/guardar', [UserControlle
 // RUTAS ADMINISTRADOR Y USUARIO
 Route::get('/all/peticion/{peticion}/historial/devoluciones', [DevolucionController::class, 'historialDevolucion'])->middleware('auth')->name('all.devoluciones-historial');
 
-Route::get('/all/devolucion/index', [DevolucionController::class, 'indexDevolucion'])->middleware('auth')->name('all.devoluciones-index');
+Route::get('/all/devolucion/index', [DevolucionController::class, 'indexDevolucion'])->middleware('auth.admin')->name('all.devoluciones-index');
 
-Route::get('/all/devolucion/{devolucion}/reasignar', [DevolucionController::class, 'reasignarDevolucion'])->middleware('auth')->name('all.devolucion-reasignar');
+Route::get('/all/devolucion/{devolucion}/reasignar', [DevolucionController::class, 'reasignarDevolucion'])->middleware('auth.admin')->name('all.devolucion-reasignar');
 
-Route::put('/all/devolucion/{devolucion}/reasignar/actualizar', [DevolucionController::class, 'actualizarPeticion'])->middleware('auth')->name('all.peticion-actualizar');
+Route::put('/all/devolucion/{devolucion}/reasignar/actualizar', [DevolucionController::class, 'actualizarPeticion'])->middleware('auth.admin')->name('all.peticion-actualizar');
 
 Route::get("/", function () {
     if (Auth()->check()) {
