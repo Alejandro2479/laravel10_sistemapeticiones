@@ -22,6 +22,11 @@
                 <li class="hover:bg-sky-600 duration-500">
                     <a class="block px-4 py-2" href="{{ route('user.peticion-completa-index') }}">Ver Peticiones Completas</a>
                 </li>
+                @if(auth()->user()->rol === 'manager')
+                <li class="hover:bg-sky-600 duration-500">
+                    <a class="block px-4 py-2" href="#">Asignar Petición</a>
+                </li>
+                @endif
                 <li class="hover:bg-sky-600 duration-500">
                     <a class="block px-4 py-2" href="{{ route('login.eliminar') }}">Cerrar Sesión</a>
                 </li>    
